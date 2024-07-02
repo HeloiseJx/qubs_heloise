@@ -1,0 +1,462 @@
+Embranchement,Sous-embranchement,Classe,Ordre,Sous-ordre,Famille,Rang 1 Clé,Rang 2 Clé,Rang 3 Clé,Rang 4 Clé,Nom français V2,Nom latin V2,Type taxon,id_thesaurus_final,id_thesaurus_bdd
+Arthropoda,Crustacea,Malacostraca,Amphipoda,,,L'Amphipode des pelouses (Arcitalitrus dorrieni),,,,L'Amphipode des pelouses,Arcitalitrus dorrieni,taxon terminal,162,198
+Arthropoda,Chelicerata,Arachnida,NA,,,Les Acariens (Acari),,,,Les Acariens,Acari,taxon intermédiaire,272,323
+Arthropoda,Chelicerata,Arachnida,Trombidioformes,,,Les Acariens (Acari),,,,Les Acariens à long nez,"Bdellidae, Cunaxidae",taxon terminal,6,NA
+Arthropoda,Chelicerata,Arachnida,Sarcoptiformes,,,Les Acariens (Acari),,,,Les Oribates,Oribatida,taxon terminal,5,NA
+Arthropoda,Chelicerata,Arachnida,Trombidioformes,,,Les Acariens (Acari),,,,Les Trombidions rouge velours,Trombidiidae,taxon terminal,41,324
+Arthropoda,Chelicerata,Arachnida,Araneae,Araneomorphae,Sparassidae,Les Araignées (Araneae),,,,L'Araignée chasseuse Olios,Olios argelasius,taxon terminal,276,328
+Arthropoda,Chelicerata,Arachnida,Araneae,Araneomorphae,Thomisidae,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,L'Araignée crabe Ebrechtella,Ebrechtella tricuspidata,taxon terminal,319,376
+Arthropoda,Chelicerata,Arachnida,Araneae,Araneomorphae,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,L'Araignée crabe Napoléon,Synema globosum,taxon terminal,320,377
+Arthropoda,Chelicerata,Arachnida,Araneae,Araneomorphae,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,L'Araignée crabe Runcinia,Runcinia grammica,taxon terminal,321,378
+Arthropoda,Chelicerata,Arachnida,Araneae,Araneomorphae,,Les Araignées (Araneae),Les Araignées loups (Lycosidae),,,L'Aulonie mains-blanches,Aulonia albimana,taxon terminal,333,390
+Arthropoda,Chelicerata,Arachnida,Araneae,Araneomorphae,,Les Araignées (Araneae),Les Epeires et autres Araneidae (Araneidae),,,L'Epeire alsine,Araneus alsine,taxon terminal,293,348
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Epeires et autres Araneidae (Araneidae),,,L'Épeire des fissures,Nuctenea umbratica,taxon terminal,290,345
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Epeires et autres Araneidae (Araneidae),,,L'Epeire diadème,Araneus diadematus,taxon terminal,294,349
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Epeires et autres Araneidae (Araneidae),,,L'Epeire frelon,Argiope bruennichi,taxon terminal,291,346
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Petites Araignées (Linyphiidae, Theridiidae et autres familles)",,,L'Erigone cul-noir,Ostearius melanopygius,taxon terminal,300,357
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Dysderides (Dysdera et Harpactea),Les Harpactées (Harpactea),,L'Harpactée pattes-rayées,Harpactea hombergi,taxon terminal,328,385
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Epeires et autres Araneidae (Araneidae),,,La Diodie tête de mort,Zilla diodia,taxon terminal,292,347
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées sauteuses (Salticidae),,,Le Saltique aux pieds barbus,Saitis barbipes,taxon terminal,310,367
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées sauteuses (Salticidae),,,Le Saltique marqué,Aelurillus v-insignitus,taxon terminal,7,NA
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées sauteuses (Salticidae),,,Le Saltique orangé,Carrhotus xanthogramma,taxon terminal,311,368
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées sauteuses (Salticidae),,,Le Saltique sanguinolent,Philaeus chrysops,taxon terminal,308,365
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Agélènes labyrinthe,"Agelena labyrinthica, Allagelena graciliens",taxon terminal,43,335
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Amaurobes,Amaurobius,taxon terminal,286,341
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Araignées,Araneae,taxon intermédiaire,274,326
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Araignées chasseuses Micrommata,Micrommata,taxon terminal,275,327
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Araignées crabes,"Thomisidae, Philodromidae",taxon intermédiaire,313,370
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Araignées crabes Diaea,Diaea,taxon terminal,322,379
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Araignées crabes minces,"Tibellus, Thanatus",taxon terminal,318,375
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Araignées crabes Philodromus,Philodromus,taxon terminal,316,373
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Araignées crabes Thanatus,Thanatus,taxon terminal,317,374
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Araignées crabes velues,Heriaeus,taxon terminal,325,382
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Petites Araignées (Linyphiidae, Theridiidae et autres familles)",,,Les Araignées cracheuses,Scytodes,taxon terminal,297,354
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées loups (Lycosidae),,,Les Araignées loups,Lycosidae,taxon intermédiaire,330,387
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Araignées lynx,Oxyopes,taxon terminal,280,333
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées sauteuses (Salticidae),,,Les Araignées sauteuses,Salticidae,taxon intermédiaire,305,362
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Clubiones,Clubionidae,taxon terminal,284,339
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Coelotes,Coelotinae,taxon terminal,287,342
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Dolomèdes,Dolomedes,taxon terminal,279,331
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Dysderides (Dysdera et Harpactea),,,Les Dysdères,Dysdera,taxon terminal,329,386
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Dysderides (Dysdera et Harpactea),,,Les Dysderides,Dysdera et Harpactea,taxon intermédiaire,326,383
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Epeires et autres Araneidae (Araneidae),,,Les Epeires à dessin de feuille de Chêne,"Aculepeira, Neoscona",taxon terminal,295,350
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Epeires et autres Araneidae (Araneidae),,,Les Epeires concombre,Araniella,taxon terminal,296,351
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Epeires et autres Araneidae (Araneidae),,,Les Epeires et autres Araneidae,Araneidae,taxon intermédiaire,289,352
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Gnaphoses (Gnaphosidae),,,Les Gnaphoses,Gnaphosidae,taxon intermédiaire,282,336
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Gnaphoses (Gnaphosidae),,,Les Gnaphoses Nomisia,Nomisia,taxon terminal,283,338
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Gnaphoses (Gnaphosidae),,,Les Gnaphoses sombres à tâches claires,"Aphantaulax, Callilepis et autres genres",taxon terminal,44,337
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Dysderides (Dysdera et Harpactea),Les Harpactées (Harpactea),,Les Harpactées,Harpactea,taxon terminal,327,384
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées sauteuses (Salticidae),,,Les Heliophanes,Heliophanus,taxon terminal,312,369
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Petites Araignées (Linyphiidae, Theridiidae et autres familles)",,,Les Linyphies groupe triangularis,"Linyphia triangularis, tenuipalpis et maura",taxon terminal,299,356
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Liocranides,Liocranidae,taxon terminal,285,340
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées loups (Lycosidae),,,Les Lycoses pirates,"Pirata, Piratula",taxon terminal,332,389
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées loups (Lycosidae),,,Les Lycoses renards,Alopecosa,taxon terminal,331,388
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Petites Araignées (Linyphiidae, Theridiidae et autres familles)",,,Les Lyniphiides,Linyphiidae,taxon terminal,298,355
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Misumènes,Misumena,taxon terminal,323,380
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Mygales (Mygalomorphae),,,Les Mygales,Mygalomorphae,taxon intermédiaire,302,359
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Mygales (Mygalomorphae),,,Les Mygales à chausettes,Atypus,taxon terminal,303,360
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Mygales (Mygalomorphae),,,Les Mygales Nemesia,Nemesia,taxon terminal,304,361
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Ozyptiles,Ozyptila,taxon terminal,315,372
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées loups (Lycosidae),,,Les Pardoses,Pardosa,taxon terminal,334,391
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Petites Araignées (Linyphiidae, Theridiidae et autres familles)",,,Les Petites Araignées,"Linyphiidae, Theridiidae et autres familles",taxon intermédiaire,46,353
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Pisaures,Pisaura,taxon terminal,42,332
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées sauteuses (Salticidae),,,Les Saltiques à chevrons,Salticus scenicus et autres espèces,taxon terminal,306,363
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées sauteuses (Salticidae),,,Les Saltiques myrmécomorphes,"Leptorchestes, Myrmarachne, Synageles",taxon terminal,307,364
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées sauteuses (Salticidae),,,Les Saltiques Phlegra,Phlegra,taxon terminal,309,366
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Segestries,Segestriidae,taxon terminal,288,343
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Tégénaires,"Tegenaria, Eratigena",taxon terminal,45,344
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Thomises,Thomisus,taxon terminal,324,381
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),Les Araignées loups (Lycosidae),,,Les Trochoses,Trochosa,taxon terminal,335,392
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Araignées crabes (Thomisidae, Philodromidae)",,,Les Xystiques,Xysticus,taxon terminal,314,371
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),"Les Petites Araignées (Linyphiidae, Theridiidae et autres familles)",,,Les Zodarions,Zodarion,taxon terminal,301,358
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Zora,Zora spinimana et autres espèces,taxon terminal,278,330
+Arthropoda,Chelicerata,Arachnida,Araneae,,,Les Araignées (Araneae),,,,Les Zoropses,Zoropsis spinimana et media,taxon terminal,281,334
+Arthropoda,Pancrustacea,Insecta,Blattodea,,,"Les Blattes (Ectobiidae, Blattidae, Blaberidae)",,,,"La Blatte de Vinzi, larve",Planuncus vinzi,taxon terminal,168,205
+Arthropoda,Pancrustacea,Insecta,Blattodea,,,"Les Blattes (Ectobiidae, Blattidae, Blaberidae)",,,,Les Blattes,"Ectobiidae, Blattidae, Blaberidae",taxon intermédiaire,163,200
+Arthropoda,Pancrustacea,Insecta,Blattodea,,,"Les Blattes (Ectobiidae, Blattidae, Blaberidae)",,,,Les Blattes ailées champêtres,"Ectobius, Planuncus et autres genres",taxon terminal,165,202
+Arthropoda,Pancrustacea,Insecta,Blattodea,,,"Les Blattes (Ectobiidae, Blattidae, Blaberidae)",,,,Les Grands Cafards,"Blatta, Periplaneta",taxon terminal,166,203
+Arthropoda,Pancrustacea,Insecta,Blattodea,,,"Les Blattes (Ectobiidae, Blattidae, Blaberidae)",,,,Les Loboptères,Loboptera decipiens et canariensis,taxon terminal,164,201
+Arthropoda,Pancrustacea,Insecta,Blattodea,,,"Les Blattes (Ectobiidae, Blattidae, Blaberidae)",,,,Les Petits Cafards,"Blattella, Supella",taxon terminal,167,204
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",Les Armadilles (Armadillidium),,L'Armadille à long museau,Armadillidium nasatum,taxon terminal,265,316
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",Les Armadilles (Armadillidium),,L'Armadille commune,Armadillidium vulgare,taxon terminal,264,315
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",Les Armadilles (Armadillidium),,L'Armadille déprimée,Armadillidium depressum,taxon terminal,266,317
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",Les Armadilles (Armadillidium),,L'Armadille granulée,Armadillidium granulatum,taxon terminal,267,318
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",Les Armadilles (Armadillidium),,L'Armadille zébrée,Armadillidium maculatum,taxon terminal,269,320
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",,,L'Armadillo officinal,Armadillo officinalis,taxon terminal,271,322
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes larges (Porcellio, Oniscus et autres genres)",,,L'Aselle des murs,Oniscus asellus,taxon terminal,258,309
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",,,L'Elume veloutée,Eluma caelatum,taxon terminal,270,321
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)","Les Chaetophiloscies (Chaetophiloscia sicula, elongata et cellaria)",,La Chaetophiloscie allongée,Chaetophiloscia elongata,taxon terminal,250,301
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)","Les Chaetophiloscies (Chaetophiloscia sicula, elongata et cellaria)",,La Chaetophiloscie cellaire,Chaetophiloscia cellaria,taxon terminal,252,303
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)","Les Chaetophiloscies (Chaetophiloscia sicula, elongata et cellaria)",,La Chaetophiloscie fuseau,Chaetophiloscia sicula,taxon terminal,251,302
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)",,,La Lygie des Hypnes,Ligidium hypnorum,taxon terminal,243,293
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)",Les Philoscies (Philoscia muscorum et affinis),,La Philoscie apparente,Philoscia affinis,taxon terminal,248,299
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)",Les Philoscies (Philoscia muscorum et affinis),,La Philoscie des mousses,Philoscia muscorum,taxon terminal,247,298
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)",,,La Tiroloscie pyrénéenne,Tiroloscia pyrenaica,taxon terminal,242,292
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),,,,Le Cloporte d'Heller,Helleria brevicornis,taxon terminal,240,290
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes larges (Porcellio, Oniscus et autres genres)",,,Le Cloporte de Rathke,Trachelipus rathkii,taxon terminal,254,305
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)",,,Le Cloporte des platanes,Acaeroplastes melanurus,taxon terminal,244,294
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes larges (Porcellio, Oniscus et autres genres)",,,Le Cylistice convexe,Cylisticus convexus,taxon terminal,255,306
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes larges (Porcellio, Oniscus et autres genres)",,,Le Porcellio dilaté,Porcellio dilatatus,taxon terminal,261,312
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes larges (Porcellio, Oniscus et autres genres)",,,Le Porcellio lisse,Porcellio laevis,taxon terminal,257,308
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes larges (Porcellio, Oniscus et autres genres)",,,Le Porcellio monticole,Porcellio monticola,taxon terminal,260,311
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes larges (Porcellio, Oniscus et autres genres)",,,Le Porcellio rugueux,Porcellio scaber,taxon terminal,256,307
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes larges (Porcellio, Oniscus et autres genres)",,,Le Porcellio spinicorne,Porcellio spinicornis,taxon terminal,259,310
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)",,,Le Porcellionide pruineux,Porcellionides pruinosus,taxon terminal,245,296
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",Les Armadilles (Armadillidium),,Les Armadilles,Armadillidium,taxon intermédiaire,263,314
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",Les Armadilles (Armadillidium),,Les Armadilles colorées,Armadillidium pictum et pulchellum,taxon terminal,268,319
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)","Les Chaetophiloscies (Chaetophiloscia sicula, elongata et cellaria)",,Les Chaetophiloscies,"Chaetophiloscia sicula, elongata et cellaria",taxon intermédiaire,249,300
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),,,,Les Cloportes,Oniscidea,taxon intermédiaire,235,284
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma)",,,Les Cloportes Armadillomorphes,"Armadillidium, Armadillo, Eluma",taxon intermédiaire,262,313
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)",,,Les Cloportes ceinturés,"Porcellionides, Orthometopon planum",taxon terminal,39,295
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)",,,Les Cloportes échancrés,"Philoscia, Porcellionides et autres genres",taxon intermédiaire,241,291
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes larges (Porcellio, Oniscus et autres genres)",,,Les Cloportes larges,"Porcellio, Oniscus et autres genres",taxon intermédiaire,253,304
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),,,,Les Cloportes myrmécophiles,Platyarthrus,taxon terminal,38,289
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),,,,Les Cloportes pygmées blancs,Trichoniscidae,taxon terminal,236,285
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),,,,Les Cloportes pygmées marron violacé,"Trichoniscus, Hyloniscus",taxon terminal,237,286
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),,,,Les Cloportes pygmées roses,Androniscus dentiger et roseus,taxon terminal,238,287
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),,,,Les Haplophthalmes,Haplophthalmus,taxon terminal,239,288
+Arthropoda,Crustacea,Malacostraca,Isopoda,Oniscidea,,Les Cloportes (Oniscidea),"Les Cloportes échancrés (Philoscia, Porcellionides et autres genres)",Les Philoscies (Philoscia muscorum et affinis),,Les Philoscies,Philoscia muscorum et affinis,taxon intermédiaire,246,297
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,Carabidae,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,L'Anchomène des champs,Anchomenus dorsalis,taxon terminal,423,502
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,L'Oxypore roux,Oxyporus rufus,taxon terminal,446,510
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Coccinelles (Coccinellidae),,,La Coccinelle à 14 Points,Propylea quatuordecimpunctata,taxon terminal,407,466
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Coccinelles (Coccinellidae),,,La Coccinelle à 16 Points,Tytthaspis sedecimpunctata,taxon terminal,408,467
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Coccinelles (Coccinellidae),,,La Coccinelle à 22 Points,Psyllobora vigintiduopunctata,taxon terminal,406,465
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Coccinelles (Coccinellidae),,,La Coccinelle à 7 points,Coccinella septempunctata,taxon terminal,403,462
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Coccinelles (Coccinellidae),,,La Coccinelle asiatique,Harmonia axyridis,taxon terminal,404,463
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,La Drypte dentée,Drypta dentata,taxon terminal,422,501
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe à collier,Carabus monilis,taxon terminal,437,498
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe à reflets cuivrés,Carabus auronitens,taxon terminal,430,490
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe chagriné,Carabus coriaceus,taxon terminal,436,497
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe chancelé,Carabus cancellatus,taxon terminal,431,491
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe des bois,Carabus nemoralis,taxon terminal,53,493
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe doré,Carabus auratus,taxon terminal,429,489
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe embrouillé,Carabus intricatus,taxon terminal,434,495
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe espagnol,Carabus hispanus,taxon terminal,438,499
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe granuleux,Carabus granulatus,taxon terminal,435,496
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe problématique,Carabus problematicus,taxon terminal,433,494
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Le Carabe violacé,Carabus violaceus,taxon terminal,432,492
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,Le Diachrome allemand,Diachromus germanus,taxon terminal,421,500
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Chrysomèles (Chrysomelidae),,,Le Doryphore,Leptinotarsa decemlineata,taxon terminal,50,471
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Le Scaphidium à 4 tâches,Scaphidium quadrimaculatum,taxon terminal,440,455
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Le Staphylin bourdon,Emus hirtus,taxon terminal,447,511
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Taupins (Elateridae),,,Le Taupin à deux tâches,Calambus bipustulatus,taxon terminal,399,458
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,Les Amaras,Amara,taxon terminal,418,484
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Scarabées (Scarabaeoidea),,,Les Aphodiens,Aphodiinae,taxon terminal,453,521
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Charançons (Curculionidae et autres familles),,,Les Apions,Apioninae,taxon terminal,51,473
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Charançons (Curculionidae et autres familles),,,Les Balanins,"Curculio, Anthonomus",taxon terminal,412,474
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Petits Carabes (Bembidion et autres genres),,Les Bembidions,Bembidion,taxon terminal,425,481
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,Les Bombardiers,Brachinus,taxon terminal,8,NA
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Chrysomèles (Chrysomelidae),,,Les Bruches,Bruchinae et Urodontinae,taxon terminal,410,470
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Buprestes,Buprestidae,taxon terminal,395,454
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Petits Coléoptères à antennes en massue (Coleoptera),,,Les Byrrhides,Byrrhidae,taxon terminal,462,532
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,Les Calosomes,Calosoma,taxon terminal,419,486
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Cantharides,Cantharidae et Lampyridae,taxon terminal,387,446
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,Les Carabes,Carabidae,taxon intermédiaire,415,477
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Carabus (Carabus),,Les Carabus,Carabus,taxon intermédiaire,428,488
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Scarabées (Scarabaeoidea),,,Les Cétoines,Cetoniinae,taxon terminal,455,525
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Charançons (Curculionidae et autres familles),,,Les Charançons,Curculionidae et autres familles,taxon intermédiaire,411,472
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Charançons (Curculionidae et autres familles),,,Les Charançons longs,Lixus et autres,taxon terminal,413,475
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Charançons (Curculionidae et autres familles),,,Les Charançons verts,"Phyllobius, Polydrusus",taxon terminal,414,476
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Chrysomèles (Chrysomelidae),,,Les Chrysomèles,Chrysomelidae,taxon intermédiaire,409,468
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,Les Cicindèles,Cicindelinae,taxon terminal,52,485
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Clairons,Cleridae,taxon terminal,392,451
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Coccinelles (Coccinellidae),,,Les Coccinelles,Coccinellidae,taxon intermédiaire,402,461
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Coccinelles (Coccinellidae),,,Les Coccinelles jaunes à points noirs,Psyllobora et autres genres,taxon terminal,405,464
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Coléoptères,Coleoptera,taxon intermédiaire,386,445
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Chrysomèles (Chrysomelidae),,,Les Crache-sang,Timarcha,taxon terminal,49,469
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,Les Cychres,Cychrus,taxon terminal,420,487
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Dasytines,Dasytinae,taxon terminal,389,448
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Dermestes,Dermestidae,taxon terminal,394,453
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Scarabées (Scarabaeoidea),,,Les Dynastides,Dynastidae,taxon terminal,454,523
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Petits Carabes (Bembidion et autres genres),,Les Elaphres et Asaphidions,"Elaphrus, Asaphidion",taxon terminal,427,483
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Scarabées (Scarabaeoidea),,,Les Géotrupes,Geotrupidae,taxon terminal,457,518
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Scarabées (Scarabaeoidea),,,Les Hannetons,"Rutelinae, Melolonthinae",taxon terminal,61,522
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Histerides (Histeridae),,,Les Histerides,Histeridae,taxon intermédiaire,449,514
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Histerides (Histeridae),,,Les Histers à tâches rouges,Hister,taxon terminal,450,515
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Petits Coléoptères à antennes en massue (Coleoptera),,,Les Latridiides,Latridiidae,taxon terminal,460,530
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Longicornes,Cerambycidae,taxon terminal,391,450
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Scarabées (Scarabaeoidea),,,Les Lucanes,Lucanidae,taxon terminal,451,516
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Malachites,Malachiinae,taxon terminal,388,447
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Méloïdes,Meloidae,taxon terminal,393,452
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Mordelles,Mordellidae,taxon terminal,390,449
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,Les Nebrinies,"Nebria, Leistus",taxon terminal,417,482
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Petits Coléoptères à antennes en massue (Coleoptera),,,Les Nitidulides,Nitidulidae,taxon terminal,459,529
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Petits Carabes (Bembidion et autres genres),,Les Notiophiles,Notiophilus,taxon terminal,426,479
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Oedemerides,Oedemeridae,taxon terminal,396,456
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Scarabées (Scarabaeoidea),,,Les Onthophages,Onthophagus,taxon terminal,452,520
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),Les Petits Carabes (Bembidion et autres genres),,Les Petits Carabes,Bembidion et autres genres,taxon terminal,424,478
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Petits Coléoptères à antennes en massue (Coleoptera),,,Les Petits Coléoptères à antennes en massue,Coleoptera,taxon terminal,458,528
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Petits Coléoptères à antennes en massue (Coleoptera),,,Les Phalacrides,Phalacridae,taxon terminal,461,531
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Scarabées (Scarabaeoidea),,,Les Scarabées,Scarabaeoidea,taxon intermédiaire,58,519
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Carabes (Carabidae),,,Les Scaritines,Scaritinae,taxon terminal,416,480
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Silphides (Silphidae),,,Les Silphes noirs,Phosphuga et Silpha,taxon terminal,57,527
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Silphides (Silphidae),,,Les Silphides,Silphidae,taxon terminal,56,526
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Les Staphylins,Staphylinidae,taxon intermédiaire,439,503
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Les Staphylins à gros yeux,Stenus,taxon terminal,442,505
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Les Staphylins à raies d'or,"Platydracus, Staphylinus",taxon terminal,445,508
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Les Staphylins à thorax étranglé,"Rugilus, Astenus",taxon terminal,443,506
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Les Staphylins Ocypus,Ocypus,taxon terminal,54,509
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Les Staphylins Ontholestes,Ontholestes,taxon terminal,444,507
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Les Staphylins Paederus,Paederus,taxon terminal,55,512
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Les Tachyporines,Tachyporinae,taxon terminal,441,504
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Taupins (Elateridae),,,Les Taupins,Elateridae,taxon intermédiaire,398,457
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Taupins (Elateridae),,,Les Taupins mouchetés,Elateridae,taxon terminal,400,459
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Taupins (Elateridae),,,Les Taupins rouges,Ampedus et autres genres,taxon terminal,401,460
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),,,,Les Tenebrions,Tenebrionidae,taxon terminal,397,533
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Scarabées (Scarabaeoidea),,,Les Trogides,Trogidae,taxon terminal,456,517
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Coléoptères (Coleoptera),Les Staphylins (Staphylinidae),,,Les Xantholines,Xantholinini,taxon terminal,448,513
+Arthropoda,Pancrustacea,Entognatha,Collembola,Symphypleona,,Les Collemboles (Collembola),Les Collemboles Symphypléones (Symphypleona),,,L'Allacma sombre,Allacma fusca,taxon terminal,175,213
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),Les Entomobryides (Entomobryidae),Les Orcheselles (Orchesella),L'Orcheselle ceinturée,Orchesella cincta,taxon terminal,188,226
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),Les Entomobryides (Entomobryidae),Les Orcheselles (Orchesella),L'Orcheselle jaune,Orchesella flavescens,taxon terminal,189,227
+Arthropoda,Pancrustacea,Entognatha,Collembola,Poduromorpha,,Les Collemboles (Collembola),Les Collemboles Poduromorphes (Poduromorpha),,,Le Podure aquatique,Podura aquatica,taxon terminal,178,216
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),Les Tomocerides (Tomoceridae),,Le Tomoceride longicorne,Pogonognathellus longicornis,taxon terminal,184,222
+Arthropoda,Pancrustacea,Entognatha,Collembola,,,Les Collemboles (Collembola),,,,Les Collemboles,Collembola,taxon intermédiaire,173,211
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),,,Les Collemboles Entomobryomorphes,Entomobryomorpha,taxon intermédiaire,182,220
+Arthropoda,Pancrustacea,Entognatha,Collembola,Poduromorpha,,Les Collemboles (Collembola),Les Collemboles Poduromorphes (Poduromorpha),,,Les Collemboles Poduromorphes,Poduromorpha,taxon intermédiaire,177,215
+Arthropoda,Pancrustacea,Entognatha,Collembola,Symphypleona,,Les Collemboles (Collembola),Les Collemboles Symphypléones (Symphypleona),,,Les Collemboles Symphypléones,Symphypleona,taxon intermédiaire,174,212
+Arthropoda,Pancrustacea,Entognatha,Collembola,Symphypleona,,Les Collemboles (Collembola),Les Collemboles Symphypléones (Symphypleona),,,Les Dicyrtomines à dessins pourpres,Dicyrtomina,taxon terminal,176,214
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),Les Entomobryides (Entomobryidae),,Les Entomobryides,Entomobryidae,taxon intermédiaire,186,224
+Arthropoda,Pancrustacea,Entognatha,Collembola,Poduromorpha,,Les Collemboles (Collembola),Les Collemboles Poduromorphes (Poduromorpha),,,Les Hypogastrurides,Hypogastruridae,taxon terminal,181,219
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),,,Les Isotomides,Isotomidae,taxon terminal,185,223
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),Les Entomobryides (Entomobryidae),,Les Lépidocyrtes à reflets métalliques,Lepidocyrtus,taxon terminal,190,228
+Arthropoda,Pancrustacea,Entognatha,Collembola,Poduromorpha,,Les Collemboles (Collembola),Les Collemboles Poduromorphes (Poduromorpha),,,Les Néanurines,Neanurinae,taxon terminal,179,217
+Arthropoda,Pancrustacea,Entognatha,Collembola,Poduromorpha,,Les Collemboles (Collembola),Les Collemboles Poduromorphes (Poduromorpha),,,Les Onychiurides,Onychiuridae,taxon terminal,180,218
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),Les Entomobryides (Entomobryidae),Les Orcheselles (Orchesella),Les Orcheselles,Orchesella,taxon intermédiaire,187,225
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),Les Entomobryides (Entomobryidae),,Les Pseudosinelles nacrées,Pseudosinella,taxon terminal,191,229
+Arthropoda,Pancrustacea,Entognatha,Collembola,Entomobryomorpha,,Les Collemboles (Collembola),Les Collemboles Entomobryomorphes (Entomobryomorpha),Les Tomocerides (Tomoceridae),,Les Tomocerides,Tomoceridae,taxon terminal,183,221
+Arthropoda,Pancrustacea,Insecta,Orthoptera,,,"Les Criquets, Grillons et Sauterelles (Orthoptera)",,,,Les Courtilières,Gryllotalpa,taxon terminal,29,207
+Arthropoda,Pancrustacea,Insecta,Orthoptera,,,"Les Criquets, Grillons et Sauterelles (Orthoptera)",,,,Les Criquets,Caelifera,taxon terminal,172,210
+Arthropoda,Pancrustacea,Insecta,Orthoptera,,,"Les Criquets, Grillons et Sauterelles (Orthoptera)",,,,"Les Criquets, Grillons et Sauterelles",Orthoptera,taxon intermédiaire,169,206
+Arthropoda,Pancrustacea,Insecta,Orthoptera,,,"Les Criquets, Grillons et Sauterelles (Orthoptera)",,,,Les Grillons,Gryllidae,taxon terminal,170,208
+Arthropoda,Pancrustacea,Insecta,Orthoptera,,,"Les Criquets, Grillons et Sauterelles (Orthoptera)",,,,Les Sauterelles,Tettigoniidae,taxon terminal,171,209
+Arthropoda,Pancrustacea,Entognatha,Diplura,,,Les Diploures (Diplura),,,,Les Diploures,Diplura,taxon intermédiaire,3,NA
+Arthropoda,Pancrustacea,Entognatha,Diplura,,,Les Diploures (Diplura),,,,Les Diploures Campodéides,Campodeidae,taxon terminal,158,194
+Arthropoda,Pancrustacea,Entognatha,Diplura,,,Les Diploures (Diplura),,,,Les Diploures Japygides,Japygidae,taxon terminal,159,195
+Arthropoda,Pancrustacea,Insecta,Embioptera,,,Les Embioptères (Embioptera),,,,Les Embioptères,Embioptera,taxon terminal,157,193
+Annelida,NA,Clitellata,Enchytraeida,,,Les Enchytréides (Enchytraeidae),,,,Les Enchytréides,Enchytraeidae,taxon terminal,62,74
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,L' Hélice carénée,Hygromia cinctella,taxon terminal,11,597
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,L'Elégante striée,Pomatias elegans,taxon terminal,106,129
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,L'Escargot de Bourgogne,Helix pomatia,taxon terminal,121,150
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,L'Escargot de Quimper,Elona quimperiana,taxon terminal,112,136
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,L'Escargot Mourguéta,Eobania vermiculata,taxon terminal,20,146
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,L'Escargot turc,Helix lucorum,taxon terminal,22,153
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,L'Hélice des bois,Arianta arbustorum,taxon terminal,120,149
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,L'Hélice grimace,Isognomostoma isognomostomos,taxon terminal,124,154
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,L'Hélice tapada,Helix melanostoma,taxon terminal,119,148
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,La Caragouille rosée,Theba pisana,taxon terminal,122,151
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,La Soucoupe commune,Helicigona lapicida,taxon terminal,117,141
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,La Troque élégante,Trochoidea elegans,taxon terminal,115,139
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,La Veloutée plane,Helicodonta obvoluta,taxon terminal,114,138
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Le Bulime inverse,Jaminia quadridens,taxon terminal,111,135
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Le Bulime tronqué,Rumina decollata,taxon terminal,108,132
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Le Bulime zébré,Zebrina detrita,taxon terminal,110,134
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Le Petit-gris,Cornu aspersum,taxon terminal,123,152
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Le Zonite peson,Zonites algirus,taxon terminal,118,142
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Les Ambrettes,Succineidae,taxon terminal,109,133
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Les Boutons,Discus rotundatus et ruderatus,taxon terminal,113,137
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Les Clausilies,Clausiliidae,taxon terminal,116,140
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Les Cochlostomes,Cochlostoma,taxon terminal,12,130
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Les Escargots,Gastropoda,taxon intermédiaire,10,NA
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,"Les Escargots des haies, jardins, forêts","Cepaea nemoralis et hortensis, Macularia sylvatica",taxon terminal,21,147
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Les Hélicelles,Helicella,taxon terminal,13,143
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Les Luisants,"Oxychilus, Morlina glabra, Mediterranea depressa",taxon terminal,59,144
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Les Maillots,"Chondrinidae, Lauriidae",taxon terminal,107,131
+Mollusca,,Gastropoda,,,,Les Escargots (Gastropoda),,,,Les Veloutées,Trochulus,taxon terminal,14,145
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines colorées (Formicinae),,La Camponote à tête rouge,Camponotus lateralis,taxon terminal,151,186
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines colorées (Formicinae),,La Camponote ensanglantée,Camponotus cruentatus,taxon terminal,153,189
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines noires (Formicinae),,La Camponote trompeuse,Camponotus fallax,taxon terminal,146,181
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Petites Myrmicines claires ou colorées (Myrmicinae),,La Fourmi Acrobate à tête rouge,Crematogaster scutellaris,taxon terminal,134,164
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines colorées (Formicinae),,La Fourmi amazone,Polyergus rufescens,taxon terminal,155,191
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)","Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae)",,La Fourmi d' Argentine,Linepithema humile,taxon terminal,142,174
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Petites Myrmicines noires ou brun foncé (Myrmicinae),,La Fourmi des pelouses,Myrmecina graminicola,taxon terminal,132,162
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Grandes Myrmicines rousses (Myrmicinae),,La Grosse Fourmi rousse,Manica rubida,taxon terminal,137,167
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)","Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae)",,La Lasius fuligineuse,Lasius fuliginosus,taxon terminal,143,177
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Petites Myrmicines claires ou colorées (Myrmicinae),,La Pheidole,Pheidole pallidula,taxon terminal,135,165
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Grandes Myrmicines noires ou brun foncé (Myrmicinae),,Les Aphaenogaster poilues,Aphaenogaster senilis et spinosa,taxon terminal,139,170
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines colorées (Formicinae),,Les Camponotes à tâches marron orangé,Camponotus ligniperda et herculeanus,taxon terminal,28,187
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines colorées (Formicinae),,Les Camponotes de garrigues,Camponotus sylvaticus et pilicornis,taxon terminal,152,188
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines noires (Formicinae),,Les Camponotes noires,Camponotus,taxon terminal,147,182
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines colorées (Formicinae),,Les Formica bicolores,Formica,taxon terminal,154,190
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines noires (Formicinae),,Les Formica noires,Formica,taxon terminal,148,183
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",,,Les Formicines et Dolichoderines,"Formicinae, Dolichoderinae",taxon intermédiaire,2,NA
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)","Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae)",,Les Fourmies odorantes,Tapinoma,taxon terminal,141,173
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),,,,Les Fourmis,Formicidae,taxon intermédiaire,127,157
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Petites Myrmicines noires ou brun foncé (Myrmicinae),,Les Fourmis Acrobates à tête noire,Crematogaster sordidula et auberti,taxon terminal,131,161
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines noires (Formicinae),,Les Fourmis du Sahara,Cataglyphis piliscapa et cursor,taxon terminal,149,184
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)","Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae)",,Les Fourmis infatiguables,Plagiolepis,taxon terminal,26,176
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Grandes Myrmicines noires ou brun foncé (Myrmicinae),,Les Fourmis moissonneuses,Messor,taxon terminal,24,171
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Grandes Myrmicines rousses (Myrmicinae),,Les Fourmis Myrmica,Myrmica,taxon terminal,23,168
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),,,,"Les Fourmis, reines et princesses",Formicidae,taxon terminal,128,158
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines colorées (Formicinae),,Les Grandes Formicines colorées,Formicinae,taxon intermédiaire,150,185
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)",Les Grandes Formicines noires (Formicinae),,Les Grandes Formicines noires,Formicinae,taxon intermédiaire,145,180
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Grandes Myrmicines noires ou brun foncé (Myrmicinae),,Les Grandes Myrmicines noires ou brun foncé,Myrmicinae,taxon intermédiaire,138,169
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Grandes Myrmicines rousses (Myrmicinae),,Les Grandes Myrmicines rousses,Myrmicinae,taxon intermédiaire,136,166
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)","Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae)",,Les Lasius bicolores,Lasius emarginatus et brunneus,taxon terminal,144,178
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)","Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae)",,Les Lasius jaunes,Lasius,taxon terminal,27,179
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)","Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae)",,Les Lasius brunes et noires,Lasius,taxon terminal,25,175
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),,,Les Myrmicines,Myrmicinae,taxon intermédiaire,1,NA
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),"Les Formicines et Dolichoderines (Formicinae, Dolichoderinae)","Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae)",,Les Petites Fourmis à pétiole court,"Formicinae, Dolichoderinae",taxon intermédiaire,140,172
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Petites Myrmicines claires ou colorées (Myrmicinae),,Les Petites Myrmicines claires ou colorées,Myrmicinae,taxon intermédiaire,133,163
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),Les Myrmicines (Myrmicinae),Les Petites Myrmicines noires ou brun foncé (Myrmicinae),,Les Petites Myrmicines noires ou brun foncé,Myrmicinae,taxon intermédiaire,130,160
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,Les Fourmis (Formicidae),,,,Les Ponérines,Ponerinae,taxon terminal,129,159
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,"Les Guêpes aptères, femelles (Tiphiidae, Cryptinae)",,,,"Les Guêpes aptères, femelles","Tiphiidae, Cryptinae",taxon terminal,126,156
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Larves et chenilles (Insecta),,,,"Le Ver luisant, larve et femelle",Lampyris noctiluca,taxon terminal,66,78
+Arthropoda,Pancrustacea,Insecta,Lepidoptera,,,Les Larves et chenilles (Insecta),,,,Les Chenilles de Noctuelles terricoles,Noctuidae,taxon terminal,15,83
+Arthropoda,Pancrustacea,Insecta,?,,,Les Larves et chenilles (Insecta),,,,Les Chenilles et Fausses chenilles,"Lepidoptera, Symphyta",taxon terminal,70,82
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Larves et chenilles (Insecta),,,,"Les Driles, larves et femelles",Drilus,taxon terminal,65,77
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Larves et chenilles (Insecta),,,,Les Larves de Cétoines,Cetoniinae,taxon terminal,68,80
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Larves et chenilles (Insecta),,,,Les Larves de Hannetons,"Rutelinae, Melolonthinae",taxon terminal,69,81
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Larves et chenilles (Insecta),,,,Les Larves de Staphylins et Carabes,"Staphylinidae, Carabidae",taxon terminal,64,76
+Arthropoda,Pancrustacea,Insecta,Diptera,,,Les Larves et chenilles (Insecta),,,,Les Larves de Stratiomyides,Stratiomyidae,taxon terminal,72,85
+Arthropoda,Pancrustacea,Insecta,Coleoptera,,,Les Larves et chenilles (Insecta),,,,Les Larves de Taupins,Elateridae,taxon terminal,67,79
+Arthropoda,Pancrustacea,Insecta,Diptera,,,Les Larves et chenilles (Insecta),,,,Les Larves de Tipules,Tipulidae,taxon terminal,71,84
+Arthropoda,Pancrustacea,Insecta,NA,,,Les Larves et chenilles (Insecta),,,,Les Larves et chenilles,Insecta,taxon intermédiaire,63,75
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Larves et chenilles (Insecta),,,,Les Nymphes de Cigales,Cicadidae,taxon terminal,73,86
+Arthropoda,Pancrustacea,Insecta,Zygentoma,,,Les Lépismes (Lepismatidae),,,,Les Lépismes,Lepismatidae,taxon terminal,160,196
+Mollusca,,Gastropoda,,,,Les Limaces (Gastropoda),,,,La Limace des caves,Limacus flavus,taxon terminal,103,123
+Mollusca,,Gastropoda,,,,Les Limaces (Gastropoda),,,,La Limace des jardins,Arion hortensis,taxon terminal,102,122
+Mollusca,,Gastropoda,,,,Les Limaces (Gastropoda),,,,La Pseudolimace chagrinée,Tandonia rustica,taxon terminal,104,125
+Mollusca,,Gastropoda,,,,Les Limaces (Gastropoda),,,,La Pseudolimace jayet,Milax gagates,taxon terminal,105,126
+Mollusca,,Gastropoda,,,,Les Limaces (Gastropoda),,,,Les Grandes Limaces,Limax cinereoniger et maximus,taxon terminal,60,119
+Mollusca,,Gastropoda,,,,Les Limaces (Gastropoda),,,,"Les Grandes Loches, formes noires",Arion rufus,taxon terminal,18,120
+Mollusca,,Gastropoda,,,,Les Limaces (Gastropoda),,,,"Les Grandes Loches, formes rouges",Arion rufus,taxon terminal,19,121
+Mollusca,,Gastropoda,,,,Les Limaces (Gastropoda),,,,Les Limaces,Gastropoda,taxon intermédiaire,9,NA
+Mollusca,,Gastropoda,,,,Les Limaces (Gastropoda),,,,Les Testacelles,Testacellidae,taxon terminal,101,118
+Arthropoda,,Insecta,,,,Les Machilides (Machilidae),,,,Les Machilides,Machilidae,taxon terminal,161,197
+Arthropoda,Myriapoda,Chilopoda,Scolopendromorpha,,,Les Mille-pattes (Myriapoda),Les Chilopodes (Chilopoda),Les Scolopendromorphes (Scolopendromorpha),,La Scolopendre annelée,Scolopendra cingulata,taxon terminal,211,255
+Arthropoda,Myriapoda,Chilopoda,Scutigeromorpha,,,Les Mille-pattes (Myriapoda),Les Chilopodes (Chilopoda),,,La Scutigère véloce,Scutigera coleoptrata,taxon terminal,209,252
+Arthropoda,Myriapoda,Diplopoda,Callipodida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),,,Le Callipus fétide,Callipus foetidissimus,taxon terminal,217,271
+Arthropoda,Myriapoda,Diplopoda,Glomerida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Glomérides (Glomerida),,Le Gloméris annelé,Glomeris annulata,taxon terminal,232,279
+Arthropoda,Myriapoda,Diplopoda,Glomerida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Glomérides (Glomerida),,Le Gloméris intermédiaire,Glomeris intermedia,taxon terminal,234,281
+Arthropoda,Myriapoda,Diplopoda,Glomerida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Glomérides (Glomerida),,Le Gloméris marginé,Glomeris marginata,taxon terminal,231,278
+Arthropoda,Myriapoda,Diplopoda,Glomerida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Glomérides (Glomerida),,Le Gloméris transalpin,Glomeris transalpina,taxon terminal,233,280
+Arthropoda,Myriapoda,Diplopoda,Julida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Iules (Julida),,Le Iule à tête rousse,Cylindroiulus broti,taxon terminal,225,269
+Arthropoda,Myriapoda,Diplopoda,Julida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Iules (Julida),,Le Iule des sables,Ommatoiulus sabulosus,taxon terminal,222,266
+Arthropoda,Myriapoda,Diplopoda,Julida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Iules (Julida),,Le Iule incarnat,Ommatoiulus sabulosus aimtopodus,taxon terminal,223,267
+Arthropoda,Myriapoda,Diplopoda,Julida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Iules (Julida),,Le Iule noir,Tachypodoiulus niger,taxon terminal,221,265
+Arthropoda,Myriapoda,Diplopoda,Julida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Iules (Julida),,Le Iule ponctué,Cylindroiulus punctatus,taxon terminal,220,264
+Arthropoda,Myriapoda,Diplopoda,Julida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Iules (Julida),,Le Iule rutilant,Ommatoiulus rutilans,taxon terminal,224,268
+Arthropoda,Myriapoda,Diplopoda,Polyzoniida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),,,Le Polyzonium allemand,Polyzonium germanicum,taxon terminal,215,272
+Arthropoda,Myriapoda,Diplopoda,Julida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Iules (Julida),,Les Blaniules mouchetées,Blaniulidae,taxon terminal,219,263
+Arthropoda,Myriapoda,Diplopoda,Julida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Iules (Julida),,Les Brachyiules à bande jaune,Brachyiulus pusillus et lusitanus,taxon terminal,226,270
+Arthropoda,Myriapoda,Chilopoda,,,,Les Mille-pattes (Myriapoda),Les Chilopodes (Chilopoda),,,Les Chilopodes,Chilopoda,taxon intermédiaire,208,251
+Arthropoda,Myriapoda,Diplopoda,Chordeumatida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Chordeumatides (Chordeumatida),,Les Chordeumatides,Chordeumatida,taxon intermédiaire,228,275
+Arthropoda,Myriapoda,Chilopoda,Scolopendromorpha,,,Les Mille-pattes (Myriapoda),Les Chilopodes (Chilopoda),Les Scolopendromorphes (Scolopendromorpha),,Les Cryptops,Cryptops,taxon terminal,34,256
+Arthropoda,Myriapoda,Diplopoda,,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),,,Les Diplopodes,Diplopoda,taxon intermédiaire,214,259
+Arthropoda,Myriapoda,Diplopoda,Chordeumatida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Chordeumatides (Chordeumatida),,Les Faux Polydesmes,Nanogona,taxon terminal,229,276
+Arthropoda,Myriapoda,Chilopoda,Geophilomorpha,,,Les Mille-pattes (Myriapoda),Les Chilopodes (Chilopoda),Les Géophilomorphes (Geophilomorpha),,Les Géophilomorphes,Geophilomorpha,taxon intermédiaire,212,257
+Arthropoda,Myriapoda,Diplopoda,Glomerida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Glomérides (Glomerida),,Les Glomérides,Glomerida,taxon intermédiaire,230,277
+Arthropoda,Myriapoda,Diplopoda,Glomerida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Glomérides (Glomerida),,Les Gloméris à motifs irréguliers,Glomeris,taxon terminal,37,283
+Arthropoda,Myriapoda,Diplopoda,Glomerida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Glomérides (Glomerida),,Les Gloméris à tâches jaunes ou orangées,Glomeris,taxon terminal,36,282
+Arthropoda,Myriapoda,Chilopoda,Geophilomorpha,,,Les Mille-pattes (Myriapoda),Les Chilopodes (Chilopoda),Les Géophilomorphes (Geophilomorpha),,Les Himantarides,Himantariidae,taxon terminal,213,258
+Arthropoda,Myriapoda,Diplopoda,Julida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Iules (Julida),,Les Iules,Julida,taxon intermédiaire,218,262
+Arthropoda,Myriapoda,Chilopoda,Lithobiomorpha,,,Les Mille-pattes (Myriapoda),Les Chilopodes (Chilopoda),,,Les Lithobiomorphes,Lithobiomorpha,taxon terminal,33,253
+Arthropoda,Myriapoda,NA,NA,,,Les Mille-pattes (Myriapoda),,,,Les Mille-pattes,Myriapoda,taxon intermédiaire,4,NA
+Arthropoda,Myriapoda,Diplopoda,Polydesmida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Polydesmes (Polydesmida),,Les Paradoxosomes,"Oxidus gracilis, Stosatea italica",taxon terminal,35,273
+Arthropoda,Myriapoda,Pauropoda,NA,,,Les Mille-pattes (Myriapoda),,,,Les Pauropodes,Pauropoda,taxon terminal,207,250
+Arthropoda,Myriapoda,Diplopoda,Polydesmida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),Les Polydesmes (Polydesmida),,Les Polydesmes,Polydesmida,taxon intermédiaire,227,274
+Arthropoda,Myriapoda,Diplopoda,Polyxenida,,,Les Mille-pattes (Myriapoda),Les Diplopodes (Diplopoda),,,Les Polyxènes,Polyxenida,taxon terminal,216,260
+Arthropoda,Myriapoda,Chilopoda,Scolopendromorpha,,,Les Mille-pattes (Myriapoda),Les Chilopodes (Chilopoda),Les Scolopendromorphes (Scolopendromorpha),,Les Scolopendromorphes,Scolopendromorpha,taxon intermédiaire,210,254
+Arthropoda,Myriapoda,Symphyla,Symphyla,,,Les Mille-pattes (Myriapoda),,,,Les Symphyles,Symphyla,taxon terminal,32,249
+Arthropoda,Pancrustacea,Insecta,Hymenoptera,,,"Les Mutilles, femelles (Mutillidae)",,,,"Les Mutilles, femelles",Mutillidae,taxon terminal,125,155
+Arthropoda,Chelicerata,Arachnida,Opiliones,,,Les Opilions (Opiliones),,,,Les Opilions,Opiliones,taxon terminal,273,325
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,La Forficule commune,Forficula auricularia,taxon terminal,192,232
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,La Forficule de Lesne,Forficula lesnei,taxon terminal,202,242
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,La Forficule moyenne,Apterygida albipennis,taxon terminal,200,240
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,La Forficule pubescente,Guanchia pubescens,taxon terminal,203,243
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,La Forficule trompeuse,Forficula decipiens,taxon terminal,201,241
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Le Perce-oreille à deux points,Anechura bipunctata,taxon terminal,195,235
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Le Perce-oreille annelé,Euborellia annulipes,taxon terminal,198,238
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Le Perce-oreille des rivages,Labidura riparia,taxon terminal,194,234
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Le Perce-oreille triste,Euborellia moesta,taxon terminal,197,237
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Le Petit Perce-oreille,Labia minor,taxon terminal,193,233
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Les Chélidoures,"Chelidura, Chelidurella",taxon terminal,204,244
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Les Perce-oreilles,Dermaptera,taxon intermédiaire,30,230
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Les Perce-oreilles à ailes visibles,"Forficula, Labiduria et autres genres",taxon intermédiaire,31,231
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Les Perce-oreilles aux ailes cachées,"Forficula, Chelidura et autres genres",taxon intermédiaire,199,239
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Les Perce-oreilles sans élytres,Anisolabidinae,taxon intermédiaire,196,236
+Arthropoda,Pancrustacea,Insecta,Dermaptera,,,Les Perces-oreilles (Dermaptera),,,,Les Pseudochélidoures,Pseudochelidura,taxon terminal,205,245
+Platyhelminthes,,Rhabditophora,Tricladida,,,Les Plathelminthes (Geoplanidae),,,,Le Plathelminthe à bande jaune,Caenoplana variegata,taxon terminal,98,114
+Platyhelminthes,,Rhabditophora,Tricladida,,,Les Plathelminthes (Geoplanidae),,,,Le Plathelminthe feuille,Obama nungara,taxon terminal,99,115
+Platyhelminthes,,Rhabditophora,Tricladida,,,Les Plathelminthes (Geoplanidae),,,,Le Plathelminthe noir,Parakontikia ventrolineata,taxon terminal,100,116
+Platyhelminthes,,Rhabditophora,Tricladida,,,Les Plathelminthes (Geoplanidae),,,,Les Plathelminthes,Geoplanidae,taxon intermédiaire,96,112
+Platyhelminthes,,Rhabditophora,Tricladida,,,Les Plathelminthes (Geoplanidae),,,,Les Plathelminthes à tête en marteau,Bipalium,taxon terminal,97,113
+Arthropoda,Chelicerata,Arachnida,Pseudoscorpiones,,,Les Pseudoscorpions (Pseudoscorpiones),,,,Les Pseudoscorpions,Pseudoscorpiones,taxon terminal,40,199
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,La Corise de la Jusquiame,Corizus hyoscyami,taxon terminal,373,432
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Cydnides (Cydnidae),,,La Cydnide à deux points,Adomerus biguttatus,taxon terminal,349,407
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Cydnides (Cydnidae),,,La Cydnide de l'Euphorbe,Cydnus aterrimus,taxon terminal,348,406
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,La Lygée familière,Tropidothorax leucopterus,taxon terminal,366,425
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,La Lygée superbe,Horvathiolus superbus,taxon terminal,372,431
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,La Punaise à damier,Spilostethus saxatilis,taxon terminal,369,428
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",Les Coréides (Coreidae),,La Punaise américaine,Leptoglossus occidentalis,taxon terminal,382,441
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à ailes non visibles (Scutelleridae et autres familles),,,La Punaise Ancyrosoma,Ancyrosoma leucogrammes,taxon terminal,354,412
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,La Punaise des boîtes aux lettres,Melanocoryphus albomaculatus,taxon terminal,371,430
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à bouclier (Pentatomidae et Acanthosomatidae),,,La Punaise du chou,Eurydema oleracea,taxon terminal,360,419
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",Les Réduves (Reduviidae),,La Punaise guitare,Phymata crassipes,taxon terminal,385,444
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,La Punaise rouge méditerrannéenne,Scantius aegyptius,taxon terminal,365,424
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à bouclier (Pentatomidae et Acanthosomatidae),,,La Punaise verte bleuâtre,Zicrona caerulea,taxon terminal,47,418
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à bouclier (Pentatomidae et Acanthosomatidae),,,La Punaise verte ponctuée,Nezara viridula,taxon terminal,362,421
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,La Viole rouge,Spilostethus pandurus,taxon terminal,370,429
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",Les Punaises inodores (Rhopalidae),,Le Chorosome,Chorosoma schillingii,taxon terminal,376,435
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à ailes non visibles (Scutelleridae et autres familles),,,Le Coptosoma,Coptosoma scutellatum,taxon terminal,358,416
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Le Gendarme,Pyrrhocoris apterus,taxon terminal,364,423
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),,,,Le Géocore à tête rouge,Geocoris erythrocephalus,taxon terminal,339,396
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",Les Punaises inodores (Rhopalidae),,Le Myrmus,Myrmus miriformis,taxon terminal,377,436
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à ailes non visibles (Scutelleridae et autres familles),,,Le Pentatome ponctué,Graphosoma semipunctatum,taxon terminal,353,411
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à ailes non visibles (Scutelleridae et autres familles),,,Le Pentatome rayé,Graphosoma italicum,taxon terminal,352,410
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Le Rhyparochrome commun,Rhyparochromus vulgaris,taxon terminal,374,433
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",Les Coréides (Coreidae),,Les Coréides,Coreidae,taxon intermédiaire,381,440
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Cydnides (Cydnidae),,,Les Cydnides,Cydnidae,taxon intermédiaire,344,402
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Cydnides (Cydnidae),,,Les Cydnides à bord blanc,Cydnidae,taxon terminal,345,403
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Cydnides (Cydnidae),,,Les Cydnides noires,Cydnidae,taxon terminal,346,404
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Les Dicranocéphales,Dicranocephalus,taxon terminal,380,439
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),,,,Les Larves de Punaises,Heteroptera,taxon terminal,337,394
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Les Lygées rouge terne,Arocatus roeselii et autres espèces,taxon terminal,368,427
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Les Lygées rouges à points blancs,Lygaeus equestris et simulans,taxon terminal,367,426
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Les Mirides,Miridae,taxon terminal,363,401
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à ailes non visibles (Scutelleridae et autres familles),,,Les Podops,Podops inunctus et curvidens,taxon terminal,351,409
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),,,,Les Punaises,Heteroptera,taxon intermédiaire,336,393
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à ailes non visibles (Scutelleridae et autres familles),,,Les Punaises à ailes non visibles,Scutelleridae et autres familles,taxon intermédiaire,350,408
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à bouclier (Pentatomidae et Acanthosomatidae),,,Les Punaises à bouclier,Pentatomidae et Acanthosomatidae,taxon intermédiaire,359,417
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Les Punaises à échasses,Berytidae,taxon terminal,379,438
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),,,,Les Punaises à gros yeux,Geocoridae,taxon terminal,338,395
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Les Punaises à tête large,Alydidae,taxon terminal,378,437
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Les Punaises allongées,"Lygaeidae, Miridae et autres familles",taxon intermédiaire,48,422
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),,,,Les Punaises cendrées,Piesmatidae,taxon terminal,343,400
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",,,Les Punaises demoiselles,Nabidae,taxon terminal,383,442
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),,,,Les Punaises dentellières,Tingidae,taxon terminal,342,399
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à bouclier (Pentatomidae et Acanthosomatidae),,,Les Punaises Eurydema,Eurydema ornata et autres espèces,taxon terminal,361,420
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à ailes non visibles (Scutelleridae et autres familles),,,Les Punaises Eurygaster,Eurygaster maura et autres espèces,taxon terminal,355,413
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",Les Punaises inodores (Rhopalidae),,Les Punaises inodores,Rhopalidae,taxon intermédiaire,375,434
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à ailes non visibles (Scutelleridae et autres familles),,,Les Punaises noires velues,Odontoscelis,taxon terminal,356,414
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Cydnides (Cydnidae),,,Les Punaises pies,Tritomegas,taxon terminal,347,405
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),,,,Les Punaises plates,Aradidae,taxon terminal,341,398
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),Les Punaises à ailes non visibles (Scutelleridae et autres familles),,,Les Punaises Scarabées,Thyreocoris scarabaeoides et fulvipennis,taxon terminal,357,415
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),"Les Punaises allongées (Lygaeidae, Miridae et autres familles)",Les Réduves (Reduviidae),,Les Réduves,Reduviidae,taxon intermédiaire,384,443
+Arthropoda,Pancrustacea,Insecta,Hemiptera,,,Les Punaises (Heteroptera),,,,Les Saldides et Leptopodides,"Saldidae, Leptopodidae",taxon terminal,340,397
+Arthropoda,Chelicerata,Arachnida,Scorpiones,,,Les Scorpions (Scorpiones),,,,Les Scorpions,Scorpiones,taxon terminal,206,246
+Arthropoda,Pancrustacea,Insecta,Blattodea,,,Les Termites (Termitidae et autres familles),,,,Les Termites,Termitidae et autres familles,taxon terminal,156,192
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers anéciques (Lumbricus, Aporrectodea et autres genres)",,,L'Octodrile aplani,Octodrilus complanatus,taxon terminal,94,110
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers anéciques (Lumbricus, Aporrectodea et autres genres)","Les Anéciques à tête rouge (Lumbricus terrestris, rubellus et centralis)",,Le Lombric central,Lumbricus centralis,taxon terminal,92,108
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers épigés (Lumbricus, Dendrobaena et autres genres)",,,Le Lombric châtain,Lumbricus castaneus,taxon terminal,78,91
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers anéciques (Lumbricus, Aporrectodea et autres genres)","Les Anéciques à tête rouge (Lumbricus terrestris, rubellus et centralis)",,Le Lombric commun,Lumbricus terrestris,taxon terminal,90,106
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers épigés (Lumbricus, Dendrobaena et autres genres)",,,Le Lombric festif,Lumbricus festivus,taxon terminal,79,92
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers anéciques (Lumbricus, Aporrectodea et autres genres)","Les Anéciques à tête rouge (Lumbricus terrestris, rubellus et centralis)",,Le Lombric rougeâtre,Lumbricus rubellus,taxon terminal,91,107
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Acanthodrillidae,Les Vers de terre (Lumbricina),"Les Vers endogés (Aporrectodea, Allolobophora et autres genres)",,,Le Microscolex équivoque,Microscolex dubius,taxon terminal,85,98
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Acanthodrillidae,Les Vers de terre (Lumbricina),"Les Vers endogés (Aporrectodea, Allolobophora et autres genres)",,,Le Microscolex phosphorescent,Microscolex phosphoreus,taxon terminal,84,97
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers endogés (Aporrectodea, Allolobophora et autres genres)",,,Le Ver endogé gris,Aporrectodea caliginosa,taxon terminal,86,99
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers endogés (Aporrectodea, Allolobophora et autres genres)",,,Le Ver endogé rose,Aporrectodea rosea,taxon terminal,87,100
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers endogés (Aporrectodea, Allolobophora et autres genres)",,,Le Ver marbré,Aporrectodea icterica,taxon terminal,83,96
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),Les Vers tigrés (Eisenia),,,Le Ver tigré fétide,Eisenia fetida,taxon terminal,76,89
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers endogés (Aporrectodea, Allolobophora et autres genres)",,,"Le Ver verdâtre, forme pâle",Allolobophora chlorotica,taxon terminal,82,95
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers endogés (Aporrectodea, Allolobophora et autres genres)",,,"Le Ver verdâtre, forme verte",Allolobophora chlorotica,taxon terminal,81,94
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Hormogastridae,Les Vers de terre (Lumbricina),"Les Vers anéciques (Lumbricus, Aporrectodea et autres genres)",,,Le Vignysa,Vignysa teres,taxon terminal,95,111
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers anéciques (Lumbricus, Aporrectodea et autres genres)",,,Les Anéciques à tête noire,"Aporrectodea longa, nocturna et giardi",taxon terminal,89,104
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers anéciques (Lumbricus, Aporrectodea et autres genres)","Les Anéciques à tête rouge (Lumbricus terrestris, rubellus et centralis)",,Les Anéciques à tête rouge,"Lumbricus terrestris, rubellus et centralis",taxon intermédiaire,17,105
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),"Les Vers anéciques (Lumbricus, Aporrectodea et autres genres)",,,Les Scherothecas,Scherotheca,taxon terminal,93,109
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,,Les Vers de terre (Lumbricina),"Les Vers anéciques (Lumbricus, Aporrectodea et autres genres)",,,Les Vers anéciques,"Lumbricus, Aporrectodea et autres genres",taxon intermédiaire,88,103
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,,Les Vers de terre (Lumbricina),,,,Les Vers de terre,Lumbricina,taxon intermédiaire,16,87
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,,Les Vers de terre (Lumbricina),"Les Vers endogés (Aporrectodea, Allolobophora et autres genres)",,,Les Vers endogés,"Aporrectodea, Allolobophora et autres genres",taxon intermédiaire,80,93
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,,Les Vers de terre (Lumbricina),"Les Vers épigés (Lumbricus, Dendrobaena et autres genres)",,,Les Vers épigés,"Lumbricus, Dendrobaena et autres genres",taxon intermédiaire,77,90
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),,,,Les Vers Octolasion,Octolasion,taxon terminal,74,101
+Annelida,,Clitellata,Crassiclitellata,Lumbricina,Lumbricidae ,Les Vers de terre (Lumbricina),Les Vers tigrés (Eisenia),,,Les Vers tigrés,Eisenia,taxon intermédiaire,75,88

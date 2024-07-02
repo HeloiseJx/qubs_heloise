@@ -1,0 +1,470 @@
+﻿Nom français V1;Nom latin V1;Type modification;Nom français V2;Nom latin V2;Rang 1;Rang 2;Rang 3;Rang 4;Type taxon;Protocole Aspifaune;Protocole Noctambules;Protocole Escargot;Protocole vers
+Les Enchytréides;Enchytraeidae;;Les Enchytréides;Enchytraeidae;;;;;taxon terminal;1;1;0;1
+Les Larves et chenilles;Insecta;;Les Larves et chenilles;Insecta;Les Larves et chenilles (Insecta);;;;taxon intermédiaire;1;1;0;0
+Les Larves de Staphylins et Carabes;Staphylinidae, Carabidae;;Les Larves de Staphylins et Carabes;Staphylinidae, Carabidae;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Driles, larves et femelles;Drilus;;Les Driles, larves et femelles;Drilus;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Le Ver luisant, larve et femelle;Lampyris noctiluca;;Le Ver luisant, larve et femelle;Lampyris noctiluca;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Larves de Taupins;Elateridae;;Les Larves de Taupins;Elateridae;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Larves de Cétoines;Cetoniinae;;Les Larves de Cétoines;Cetoniinae;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Larves de Hannetons;Rutelinae, Melolonthinae;;Les Larves de Hannetons;Rutelinae, Melolonthinae;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Chenilles et Fausses chenilles;Lepidoptera, Symphyta;;Les Chenilles et Fausses chenilles;Lepidoptera, Symphyta;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Chenilles de Noctuelles terricoles;Agrotis, Euxoa et autres genres;modifié (correction appelation);Les Chenilles de Noctuelles terricoles;Noctuidae;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Larves de Tipules;Tipulidae;;Les Larves de Tipules;Tipulidae;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Larves de Stratiomyides;Stratiomyidae;;Les Larves de Stratiomyides;Stratiomyidae;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Nymphes de Cigales;Cicadidae;;Les Nymphes de Cigales;Cicadidae;Les Larves et chenilles (Insecta);;;;taxon terminal;1;1;0;0
+Les Vers de terre;Lumbricidae;modifié (correction appelation);Les Vers de terre;Lumbricina;Les Vers de terre (Lumbricina);;;;taxon intermédiaire;1;1;0;1
+Les Vers Octolasion;Octolasion;;Les Vers Octolasion;Octolasion;Les Vers de terre (Lumbricina);;;;taxon terminal;1;1;0;1
+L'Octolasion bleu;Octolasion cyaneum;suppression;;;;;;;;0;0;0;0
+Les Vers tigrés;Eisenia;;Les Vers tigrés;Eisenia;Les Vers de terre (Lumbricina);Les Vers tigrés (Eisenia);;;taxon intermédiaire;1;1;0;1
+Le Ver tigré fétide;Eisenia fetida;;Le Ver tigré fétide;Eisenia fetida;Les Vers de terre (Lumbricina);Les Vers tigrés (Eisenia);;;taxon terminal;1;1;0;1
+Les Vers épigés;Lumbricus, Dendrobaena et autres genres;;Les Vers épigés;Lumbricus, Dendrobaena et autres genres;Les Vers de terre (Lumbricina);Les Vers épigés (Lumbricus, Dendrobaena et autres genres);;;taxon intermédiaire;1;1;0;1
+Le Lombric châtain;Lumbricus castaneus;;Le Lombric châtain;Lumbricus castaneus;Les Vers de terre (Lumbricina);Les Vers épigés (Lumbricus, Dendrobaena et autres genres);;;taxon terminal;1;1;0;1
+Le Lombric festif;Lumbricus festivus;;Le Lombric festif;Lumbricus festivus;Les Vers de terre (Lumbricina);Les Vers épigés (Lumbricus, Dendrobaena et autres genres);;;taxon terminal;1;1;0;1
+Les Vers endogés;Aporrectodea, Allolobophora et autres genres;;Les Vers endogés;Aporrectodea, Allolobophora et autres genres;Les Vers de terre (Lumbricina);Les Vers endogés (Aporrectodea, Allolobophora et autres genres);;;taxon intermédiaire;1;1;0;1
+Le Ver verdâtre, forme verte;Allolobophora chlorotica;;Le Ver verdâtre, forme verte;Allolobophora chlorotica;Les Vers de terre (Lumbricina);Les Vers endogés (Aporrectodea, Allolobophora et autres genres);;;taxon terminal;1;1;0;1
+Le Ver verdâtre, forme pâle;Allolobophora chlorotica;;Le Ver verdâtre, forme pâle;Allolobophora chlorotica;Les Vers de terre (Lumbricina);Les Vers endogés (Aporrectodea, Allolobophora et autres genres);;;taxon terminal;1;1;0;1
+Le Ver marbré;Aporrectodea icterica;;Le Ver marbré;Aporrectodea icterica;Les Vers de terre (Lumbricina);Les Vers endogés (Aporrectodea, Allolobophora et autres genres);;;taxon terminal;1;1;0;1
+Le Microscolex phosphorescent;Microscolex phosphoreus;;Le Microscolex phosphorescent;Microscolex phosphoreus;Les Vers de terre (Lumbricina);Les Vers endogés (Aporrectodea, Allolobophora et autres genres);;;taxon terminal;1;1;0;1
+Le Microscolex équivoque;Microscolex dubius;;Le Microscolex équivoque;Microscolex dubius;Les Vers de terre (Lumbricina);Les Vers endogés (Aporrectodea, Allolobophora et autres genres);;;taxon terminal;1;1;0;1
+Le Ver endogé gris;Aporrectodea caliginosa;;Le Ver endogé gris;Aporrectodea caliginosa;Les Vers de terre (Lumbricina);Les Vers endogés (Aporrectodea, Allolobophora et autres genres);;;taxon terminal;1;1;0;1
+Le Ver endogé rose;Aporrectodea rosea;;Le Ver endogé rose;Aporrectodea rosea;Les Vers de terre (Lumbricina);Les Vers endogés (Aporrectodea, Allolobophora et autres genres);;;taxon terminal;1;1;0;1
+Les Vers anéciques;Lumbricus, Aporrectodea et autres genres;;Les Vers anéciques;Lumbricus, Aporrectodea et autres genres;Les Vers de terre (Lumbricina);Les Vers anéciques (Lumbricus, Aporrectodea et autres genres);;;taxon intermédiaire;1;1;0;1
+Les Anéciques à tête noire;Aporrectodea longa, nocturna et giardi;;Les Anéciques à tête noire;Aporrectodea longa, nocturna et giardi;Les Vers de terre (Lumbricina);Les Vers anéciques (Lumbricus, Aporrectodea et autres genres);;;taxon terminal;1;1;0;1
+Les Lombrics anéciques;Lumbricus terrestris, rubellus et centralis;modifié (correction appelation);Les Anéciques à tête rouge;Lumbricus terrestris, rubellus et centralis;Les Vers de terre (Lumbricina);Les Vers anéciques (Lumbricus, Aporrectodea et autres genres);Les Anéciques à tête rouge (Lumbricus terrestris, rubellus et centralis);;taxon intermédiaire;1;1;0;1
+Le Lombric commun;Lumbricus terrestris;;Le Lombric commun;Lumbricus terrestris;Les Vers de terre (Lumbricina);Les Vers anéciques (Lumbricus, Aporrectodea et autres genres);Les Anéciques à tête rouge (Lumbricus terrestris, rubellus et centralis);;taxon terminal;1;1;0;1
+Le Lombric rougeâtre;Lumbricus rubellus;;Le Lombric rougeâtre;Lumbricus rubellus;Les Vers de terre (Lumbricina);Les Vers anéciques (Lumbricus, Aporrectodea et autres genres);Les Anéciques à tête rouge (Lumbricus terrestris, rubellus et centralis);;taxon terminal;1;1;0;1
+Le Lombric central;Lumbricus centralis;;Le Lombric central;Lumbricus centralis;Les Vers de terre (Lumbricina);Les Vers anéciques (Lumbricus, Aporrectodea et autres genres);Les Anéciques à tête rouge (Lumbricus terrestris, rubellus et centralis);;taxon terminal;1;1;0;1
+Les Scherothecas;Scherotheca;;Les Scherothecas;Scherotheca;Les Vers de terre (Lumbricina);Les Vers anéciques (Lumbricus, Aporrectodea et autres genres);;;taxon terminal;1;1;0;1
+L'Octodrile aplani;Octodrilus complanatus;;L'Octodrile aplani;Octodrilus complanatus;Les Vers de terre (Lumbricina);Les Vers anéciques (Lumbricus, Aporrectodea et autres genres);;;taxon terminal;1;1;0;1
+Le Vignysa;Vignysa teres;;Le Vignysa;Vignysa teres;Les Vers de terre (Lumbricina);Les Vers anéciques (Lumbricus, Aporrectodea et autres genres);;;taxon terminal;1;1;0;1
+Les Plathelminthes;Geoplanidae;;Les Plathelminthes;Geoplanidae;Les Plathelminthes (Geoplanidae);;;;taxon intermédiaire;1;1;0;1
+Les Plathelminthes à tête en marteau;Bipalium;;Les Plathelminthes à tête en marteau;Bipalium;Les Plathelminthes (Geoplanidae);;;;taxon terminal;1;1;0;1
+Le Plathelminthe à bande jaune;Caenoplana variegata;;Le Plathelminthe à bande jaune;Caenoplana variegata;Les Plathelminthes (Geoplanidae);;;;taxon terminal;1;1;0;1
+Le Plathelminthe feuille;Obama nungara;;Le Plathelminthe feuille;Obama nungara;Les Plathelminthes (Geoplanidae);;;;taxon terminal;1;1;0;1
+Le Plathelminthe noir;Parakontikia ventrolineata;;Le Plathelminthe noir;Parakontikia ventrolineata;Les Plathelminthes (Geoplanidae);;;;taxon terminal;1;1;0;1
+Les Limaces;Gastropoda;ajout pour Escargots;Les Limaces;Gastropoda;Les Limaces (Gastropoda);;;;taxon intermédiaire;1;1;1;0
+Les Testacelles;Testacellidae;;Les Testacelles;Testacellidae;Les Limaces (Gastropoda);;;;taxon terminal;1;1;0;0
+La Limace léopard;Limax maximus;modifié (regroupement);Les Grandes Limaces;Limax cinereoniger et maximus;Les Limaces (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Grandes Loches, formes noires;Arion rufus et ater;modifié (correction appelation);Les Grandes Loches, formes noires;Arion rufus;Les Limaces (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Grandes Loches, formes rouges;Arion rufus et ater;modifié (correction appelation);Les Grandes Loches, formes rouges;Arion rufus;Les Limaces (Gastropoda);;;;taxon terminal;1;1;1;0
+La Limace des jardins;Arion hortensis;;La Limace des jardins;Arion hortensis;Les Limaces (Gastropoda);;;;taxon terminal;1;1;0;0
+La Limace des caves;Limacus flavus;;La Limace des caves;Limacus flavus;Les Limaces (Gastropoda);;;;taxon terminal;1;1;1;0
+La Grande Limace;Limax cinereoniger;suppression;;;;;;;;0;0;0;0
+La Pseudolimace chagrinée;Tandonia rustica;;La Pseudolimace chagrinée;Tandonia rustica;Les Limaces (Gastropoda);;;;taxon terminal;1;1;0;0
+La Pseudolimace jayet;Milax gagates;;La Pseudolimace jayet;Milax gagates;Les Limaces (Gastropoda);;;;taxon terminal;1;1;0;0
+La Loche laiteuse;Deroceras reticulatum;suppression;;;;;;;;0;0;0;0
+Les Escargots;Gastropoda;ajout pour Escargots;Les Escargots;Gastropoda;Les Escargots (Gastropoda);;;;taxon intermédiaire;1;1;1;0
+L'Elégante striée;Pomatias Elegans;;L'Elégante striée;Pomatias elegans;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Cochlostomes;Cochlostoma;modif appelation comparaison à Escargot;Les Cochlostomes;Cochlostoma;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Maillots;Chondrinidae, Lauriidae;;Les Maillots;Chondrinidae, Lauriidae;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Le Bulime tronqué;Rumina decollata;;Le Bulime tronqué;Rumina decollata;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Ambrettes;Succineidae;;Les Ambrettes;Succineidae;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Le Bulime zébré;Zebrina detrita;;Le Bulime zébré;Zebrina detrita;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Le Bulime inverse;Jaminia quadridens;;Le Bulime inverse;Jaminia quadridens;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+L'Escargot de Quimper;Elona quimperiana;;L'Escargot de Quimper;Elona quimperiana;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Boutons;Discus rotundatus et ruderatus;;Les Boutons;Discus rotundatus et ruderatus;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+La Veloutée plane;Helicodonta obvoluta;;La Veloutée plane;Helicodonta obvoluta;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+La Troque élégante;Trochoidea elegans;;La Troque élégante;Trochoidea elegans;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Clausilies;Clausiliidae;;Les Clausilies;Clausiliidae;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+La Soucoupe commune;Helicigona lapicida;;La Soucoupe commune;Helicigona lapicida;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Le Zonite peson;Zonites algirus;;Le Zonite peson;Zonites algirus;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Hélicelles;Helicella;modif appelation comparaison à Escargot;Les Hélicelles;Helicella;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Luisants;Oxychilus, Morlina, Mediterranea;modifié (correction appelation);Les Luisants;Oxychilus, Morlina glabra, Mediterranea depressa;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Veloutées;Trochulus;modif appelation comparaison à Escargot;Les Veloutées;Trochulus;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+L'Escargot Mourguéta;Massylaea vermiculata;modifié (correction appelation);L'Escargot Mourguéta;Eobania vermiculata;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Escargots des haies;Cepaea nemoralis, hortensis et sylvatica;modifié (correction appelation);Les Escargots des haies, jardins, forêts;Cepaea nemoralis et hortensis, Macularia sylvatica;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+L'Hélice tapada;Helix melanostoma;;L'Hélice tapada;Helix melanostoma;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+L'Hélice des bois;Arianta arbustorum;;L'Hélice des bois;Arianta arbustorum;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+L'Escargot de Bourgogne;Helix pomatia;;L'Escargot de Bourgogne;Helix pomatia;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+La Caragouille rosée;Theba pisana;;La Caragouille rosée;Theba pisana;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Le Petit-gris;Cornu aspersum;;Le Petit-gris;Cornu aspersum;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+L'Hélice turque;Helix lucorum;modifié (correction appelation);L'Escargot turc;Helix lucorum;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+L'Hélice grimace;Isognomostoma isognomostomos;;L'Hélice grimace;Isognomostoma isognomostomos;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+;;ajout pour tous les protocoles;L'Hélice carénée;Hygromia cinctella;Les Escargots (Gastropoda);;;;taxon terminal;1;1;1;0
+Les Mutilles, femelles;Mutillidae;;Les Mutilles, femelles;Mutillidae;;;;;taxon terminal;1;1;0;0
+Les Guêpes aptères, femelles;Tiphiidae, Cryptinae;;Les Guêpes aptères, femelles;Tiphiidae, Cryptinae;;;;;taxon terminal;1;1;0;0
+Les Fourmis;Formicidae;;Les Fourmis;Formicidae;Les Fourmis (Formicidae);;;;taxon intermédiaire;1;1;0;0
+Les Fourmis, reines et princesses;Formicidae;;Les Fourmis, reines et princesses;Formicidae;Les Fourmis (Formicidae);;;;taxon terminal;1;1;0;0
+Les Ponérines;Ponerinae;;Les Ponérines;Ponerinae;Les Fourmis (Formicidae);;;;taxon terminal;1;1;0;0
+;;ajout;Les Myrmicines;Myrmicinae;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);;;taxon intermédiaire;1;1;0;0
+Les Petites Myrmicines noires ou brun foncé;Myrmicinae;;Les Petites Myrmicines noires ou brun foncé;Myrmicinae;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Petites Myrmicines noires ou brun foncé (Myrmicinae);;taxon intermédiaire;1;1;0;0
+Les Fourmis Acrobates à tête noire;Crematogaster sordidula et auberti;;Les Fourmis Acrobates à tête noire;Crematogaster sordidula et auberti;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Petites Myrmicines noires ou brun foncé (Myrmicinae);;taxon terminal;1;1;0;0
+La Fourmi des pelouses;Myrmecina graminicola;;La Fourmi des pelouses;Myrmecina graminicola;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Petites Myrmicines noires ou brun foncé (Myrmicinae);;taxon terminal;1;1;0;0
+Les Petites Myrmicines claires ou colorées;Myrmicinae;;Les Petites Myrmicines claires ou colorées;Myrmicinae;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Petites Myrmicines claires ou colorées (Myrmicinae);;taxon intermédiaire;1;1;0;0
+La Fourmi Acrobate à tête rouge;Crematogaster scutellaris;;La Fourmi Acrobate à tête rouge;Crematogaster scutellaris;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Petites Myrmicines claires ou colorées (Myrmicinae);;taxon terminal;1;1;0;0
+La Pheidole;Pheidole pallidula;;La Pheidole;Pheidole pallidula;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Petites Myrmicines claires ou colorées (Myrmicinae);;taxon terminal;1;1;0;0
+Les Grandes Myrmicines rousses;Myrmicinae;;Les Grandes Myrmicines rousses;Myrmicinae;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Grandes Myrmicines rousses (Myrmicinae);;taxon intermédiaire;1;1;0;0
+La Grosse Fourmi rousse;Manica rubida;;La Grosse Fourmi rousse;Manica rubida;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Grandes Myrmicines rousses (Myrmicinae);;taxon terminal;1;1;0;0
+Les Fourmis rouges;Myrmica;modifié (correction appelation);Les Fourmis Myrmica;Myrmica;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Grandes Myrmicines rousses (Myrmicinae);;taxon terminal;1;1;0;0
+Les Grandes Myrmicines noires ou brun foncé;Myrmicinae;;Les Grandes Myrmicines noires ou brun foncé;Myrmicinae;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Grandes Myrmicines noires ou brun foncé (Myrmicinae);;taxon intermédiaire;1;1;0;0
+Les Aphaenogaster poilues;Aphaenogaster senilis et spinosa;;Les Aphaenogaster poilues;Aphaenogaster senilis et spinosa;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Grandes Myrmicines noires ou brun foncé (Myrmicinae);;taxon terminal;1;1;0;0
+Les Fourmis moissonneuses;Messor barbarus et autres espèces;modifié (correction appelation);Les Fourmis moissonneuses;Messor;Les Fourmis (Formicidae);Les Myrmicines (Myrmicinae);Les Grandes Myrmicines noires ou brun foncé (Myrmicinae);;taxon terminal;1;1;0;0
+;;ajout;Les Formicines et Dolichoderines;Formicinae, Dolichoderinae;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);;;taxon intermédiaire;1;1;0;0
+Les Petites Fourmis à pétiole court;Formicinae, Dolichoderinae;;Les Petites Fourmis à pétiole court;Formicinae, Dolichoderinae;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae);;taxon intermédiaire;1;1;0;0
+Les Fourmies odorantes;Tapinoma;;Les Fourmies odorantes;Tapinoma;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae);;taxon terminal;1;1;0;0
+La Fourmi d' Argentine;Linepithema humile;;La Fourmi d' Argentine;Linepithema humile;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae);;taxon terminal;1;1;0;0
+Les Lasius noires à petite tête;Lasius niger et autres espèces;modifié (correction appelation);Les Lasius noires à petite tête;Lasius;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae);;taxon terminal;1;1;0;0
+Les Fourmis infatiguables;Plagiolepis pygmaea et autres espèces;modifié (correction appelation);Les Fourmis infatiguables;Plagiolepis;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae);;taxon terminal;1;1;0;0
+La Lasius fuligineuse;Lasius fuliginosus;;La Lasius fuligineuse;Lasius fuliginosus;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae);;taxon terminal;1;1;0;0
+Les Lasius bicolores;Lasius emarginatus et brunneus;;Les Lasius bicolores;Lasius emarginatus et brunneus;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae);;taxon terminal;1;1;0;0
+Les Lasius jaunes;Lasius flavus et autres espèces;modifié (correction appelation);Les Lasius jaunes;Lasius;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Petites Fourmis à pétiole court (Formicinae, Dolichoderinae);;taxon terminal;1;1;0;0
+Les Grandes Formicines noires;Formicinae;;Les Grandes Formicines noires;Formicinae;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines noires (Formicinae);;taxon intermédiaire;1;1;0;0
+La Camponote trompeuse;Camponotus fallax;;La Camponote trompeuse;Camponotus fallax;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines noires (Formicinae);;taxon terminal;1;1;0;0
+Les Camponotes noires;Camponotus;;Les Camponotes noires;Camponotus;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines noires (Formicinae);;taxon terminal;1;1;0;0
+Les Formica noires;Formica;;Les Formica noires;Formica;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines noires (Formicinae);;taxon terminal;1;1;0;0
+Les Fourmis du Sahara;Cataglyphis piliscapa et cursor;;Les Fourmis du Sahara;Cataglyphis piliscapa et cursor;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines noires (Formicinae);;taxon terminal;1;1;0;0
+Les Grandes Formicines colorées;Formicinae;;Les Grandes Formicines colorées;Formicinae;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines colorées (Formicinae);;taxon intermédiaire;1;1;0;0
+La Camponote à tête rouge;Camponotus lateralis;;La Camponote à tête rouge;Camponotus lateralis;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines colorées (Formicinae);;taxon terminal;1;1;0;0
+Les Camponotes à tâches marron orangé;Camponotus ligniperda et herculaneus;modifié (correction appelation);Les Camponotes à tâches marron orangé;Camponotus ligniperda et herculeanus;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines colorées (Formicinae);;taxon terminal;1;1;0;0
+Les Camponotes de garrigues;Camponotus sylvaticus et pilicornis;;Les Camponotes de garrigues;Camponotus sylvaticus et pilicornis;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines colorées (Formicinae);;taxon terminal;1;1;0;0
+La Camponote ensanglantée;Camponotus cruentatus;;La Camponote ensanglantée;Camponotus cruentatus;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines colorées (Formicinae);;taxon terminal;1;1;0;0
+Les Formica bicolores;Formica;;Les Formica bicolores;Formica;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines colorées (Formicinae);;taxon terminal;1;1;0;0
+La Fourmi amazone;Polyergus rufescens;;La Fourmi amazone;Polyergus rufescens;Les Fourmis (Formicidae);Les Formicines et Dolichoderines (Formicinae, Dolichoderinae);Les Grandes Formicines colorées (Formicinae);;taxon terminal;1;1;0;0
+Les Termites;Termitidae et autres familles;;Les Termites;Termitidae et autres familles;;;;;taxon terminal;1;1;0;0
+Les Embioptères;Embioptera;;Les Embioptères;Embioptera;;;;;taxon terminal;1;1;0;0
+;;ajout;Les Diploures;Diplura;Les Diploures (Diplura);;;;taxon intermédiaire;1;1;0;0
+Les Diploures Campodéides;Campodeidae;;Les Diploures Campodéides;Campodeidae;Les Diploures (Diplura);;;;taxon terminal;1;1;0;0
+Les Diploures Japygides;Japygidae;;Les Diploures Japygides;Japygidae;Les Diploures (Diplura);;;;taxon terminal;1;1;0;0
+Les Lépismes;Lepismatidae;;Les Lépismes;Lepismatidae;;;;;taxon terminal;1;1;0;0
+Les Machilides;Machilidae;;Les Machilides;Machilidae;;;;;taxon terminal;1;1;0;0
+L'Amphipode des pelouses;Arcitalitrus dorrieni;;L'Amphipode des pelouses;Arcitalitrus dorrieni;;;;;taxon terminal;1;1;0;0
+Les Blattes;Ectobiidae, Blattidae, Blaberidae;;Les Blattes;Ectobiidae, Blattidae, Blaberidae;Les Blattes (Ectobiidae, Blattidae, Blaberidae);;;;taxon intermédiaire;1;1;0;0
+Les Loboptères;Loboptera decipiens et canariensis;;Les Loboptères;Loboptera decipiens et canariensis;Les Blattes (Ectobiidae, Blattidae, Blaberidae);;;;taxon terminal;1;1;0;0
+Les Blattes ailées champêtres;Ectobius, Planuncus et autres genres;;Les Blattes ailées champêtres;Ectobius, Planuncus et autres genres;Les Blattes (Ectobiidae, Blattidae, Blaberidae);;;;taxon terminal;1;1;0;0
+Les Grands Cafards;Blatta, Periplaneta;;Les Grands Cafards;Blatta, Periplaneta;Les Blattes (Ectobiidae, Blattidae, Blaberidae);;;;taxon terminal;1;1;0;0
+Les Petits Cafards;Blattella, Supella;;Les Petits Cafards;Blattella, Supella;Les Blattes (Ectobiidae, Blattidae, Blaberidae);;;;taxon terminal;1;1;0;0
+La Blatte de Vinzi, larve;Planuncus vinzi;;La Blatte de Vinzi, larve;Planuncus vinzi;Les Blattes (Ectobiidae, Blattidae, Blaberidae);;;;taxon terminal;1;1;0;0
+Les Criquets, Grillons et Sauterelles;Orthoptera;;Les Criquets, Grillons et Sauterelles;Orthoptera;Les Criquets, Grillons et Sauterelles (Orthoptera);;;;taxon intermédiaire;1;1;0;0
+Les Courtilières;Gryllotalpa gryllotalpa et autres espèces;modifié (correction appelation);Les Courtilières;Gryllotalpa;Les Criquets, Grillons et Sauterelles (Orthoptera);;;;taxon terminal;1;1;0;0
+Les Grillons;Gryllidae;;Les Grillons;Gryllidae;Les Criquets, Grillons et Sauterelles (Orthoptera);;;;taxon terminal;1;1;0;0
+Les Sauterelles;Tettigoniidae;;Les Sauterelles;Tettigoniidae;Les Criquets, Grillons et Sauterelles (Orthoptera);;;;taxon terminal;1;1;0;0
+Les Criquets;Caelifera;;Les Criquets;Caelifera;Les Criquets, Grillons et Sauterelles (Orthoptera);;;;taxon terminal;1;1;0;0
+Les Collemboles;Collembola;;Les Collemboles;Collembola;Les Collemboles (Collembola);;;;taxon intermédiaire;1;1;0;0
+Les Collemboles Symphypléones;Symphypleona;;Les Collemboles Symphypléones;Symphypleona;Les Collemboles (Collembola);Les Collemboles Symphypléones (Symphypleona);;;taxon intermédiaire;1;1;0;0
+L'Allacma sombre;Allacma fusca;;L'Allacma sombre;Allacma fusca;Les Collemboles (Collembola);Les Collemboles Symphypléones (Symphypleona);;;taxon terminal;1;1;0;0
+Les Dicyrtomines à dessins pourpres;Dicyrtomina;;Les Dicyrtomines à dessins pourpres;Dicyrtomina;Les Collemboles (Collembola);Les Collemboles Symphypléones (Symphypleona);;;taxon terminal;1;1;0;0
+Les Collemboles Poduromorphes;Poduromorpha;;Les Collemboles Poduromorphes;Poduromorpha;Les Collemboles (Collembola);Les Collemboles Poduromorphes (Poduromorpha);;;taxon intermédiaire;1;1;0;0
+Le Podure aquatique;Podura aquatica;;Le Podure aquatique;Podura aquatica;Les Collemboles (Collembola);Les Collemboles Poduromorphes (Poduromorpha);;;taxon terminal;1;1;0;0
+Les Néanurines;Neanurinae;;Les Néanurines;Neanurinae;Les Collemboles (Collembola);Les Collemboles Poduromorphes (Poduromorpha);;;taxon terminal;1;1;0;0
+Les Onychiurides;Onychiuridae;;Les Onychiurides;Onychiuridae;Les Collemboles (Collembola);Les Collemboles Poduromorphes (Poduromorpha);;;taxon terminal;1;1;0;0
+Les Hypogastrurides;Hypogastruridae;;Les Hypogastrurides;Hypogastruridae;Les Collemboles (Collembola);Les Collemboles Poduromorphes (Poduromorpha);;;taxon terminal;1;1;0;0
+Les Collemboles Entomobryomorphes;Entomobryomorpha;;Les Collemboles Entomobryomorphes;Entomobryomorpha;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);;;taxon intermédiaire;1;1;0;0
+Les Tomocerides;Tomoceridae;;Les Tomocerides;Tomoceridae;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);Les Tomocerides (Tomoceridae);;taxon terminal;1;1;0;0
+Le Tomoceride longicorne;Pogonognathellus longicornis;;Le Tomoceride longicorne;Pogonognathellus longicornis;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);Les Tomocerides (Tomoceridae);;taxon terminal;1;1;0;0
+Les Isotomides;Isotomidae;;Les Isotomides;Isotomidae;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);;;taxon terminal;1;1;0;0
+Les Entomobryides;Entomobryidae;;Les Entomobryides;Entomobryidae;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);Les Entomobryides (Entomobryidae);;taxon intermédiaire;1;1;0;0
+Les Orcheselles;Orchesella;;Les Orcheselles;Orchesella;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);Les Entomobryides (Entomobryidae);Les Orcheselles (Orchesella);taxon intermédiaire;1;1;0;0
+L'Orcheselle ceinturée;Orchesella cincta;;L'Orcheselle ceinturée;Orchesella cincta;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);Les Entomobryides (Entomobryidae);Les Orcheselles (Orchesella);taxon terminal;1;1;0;0
+L'Orcheselle jaune;Orchesella flavescens;;L'Orcheselle jaune;Orchesella flavescens;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);Les Entomobryides (Entomobryidae);Les Orcheselles (Orchesella);taxon terminal;1;1;0;0
+Les Lépidocyrtes à reflets métalliques;Lepidocyrtus;;Les Lépidocyrtes à reflets métalliques;Lepidocyrtus;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);Les Entomobryides (Entomobryidae);;taxon terminal;1;1;0;0
+Les Pseudosinelles nacrées;Pseudosinella;;Les Pseudosinelles nacrées;Pseudosinella;Les Collemboles (Collembola);Les Collemboles Entomobryomorphes (Entomobryomorpha);Les Entomobryides (Entomobryidae);;taxon terminal;1;1;0;0
+Les Perces-oreilles;Dermaptera;modifié (correction appelation);Les Perce-oreilles;Dermaptera;Les Perces-oreilles (Dermaptera);;;;taxon intermédiaire;1;1;0;0
+Les Perces-oreilles à ailes visibles;Forficula et autres genres;modifié (correction appelation);Les Perce-oreilles à ailes visibles;Forficula, Labiduria et autres genres;Les Perces-oreilles (Dermaptera);;;;taxon intermédiaire;1;1;0;0
+La Forficule commune;Forficula auricularia;;La Forficule commune;Forficula auricularia;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+Le Petit Perce-oreille;Labia minor;;Le Petit Perce-oreille;Labia minor;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+Le Perce-oreille des rivages;Labidura riparia;;Le Perce-oreille des rivages;Labidura riparia;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+Le Perce-oreille à deux points;Anechura bipunctata;;Le Perce-oreille à deux points;Anechura bipunctata;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+Les Perce-oreilles sans élytres;Anisolabidinae;;Les Perce-oreilles sans élytres;Anisolabidinae;Les Perces-oreilles (Dermaptera);;;;taxon intermédiaire;1;1;0;0
+Le Perce-oreille triste;Euborellia moesta;;Le Perce-oreille triste;Euborellia moesta;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+Le Perce-oreille annelé;Euborellia annulipes;;Le Perce-oreille annelé;Euborellia annulipes;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+Les Perce-oreilles aux ailes cachées;Forficula, Chelidura et autres genres;;Les Perce-oreilles aux ailes cachées;Forficula, Chelidura et autres genres;Les Perces-oreilles (Dermaptera);;;;taxon intermédiaire;1;1;0;0
+La Forficule moyenne;Apterygida albipennis;;La Forficule moyenne;Apterygida albipennis;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+La Forficule trompeuse;Forficula decipiens;;La Forficule trompeuse;Forficula decipiens;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+La Forficule de Lesne;Forficula lesnei;;La Forficule de Lesne;Forficula lesnei;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+La Forficule pubescente;Guanchia pubescens;;La Forficule pubescente;Guanchia pubescens;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+Les Chélidoures;Chelidura, Chelidurella;;Les Chélidoures;Chelidura, Chelidurella;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+Les Pseudochélidoures;Pseudochelidura;;Les Pseudochélidoures;Pseudochelidura;Les Perces-oreilles (Dermaptera);;;;taxon terminal;1;1;0;0
+Les Scorpions;Scorpiones;;Les Scorpions;Scorpiones;;;;;taxon terminal;1;1;0;0
+Le Scorpion languedocien;Buthus occitanus;suppression;;;;;;;;1;1;0;0
+Le Scorpion à queue jaune;Euscorpius flavicaudis;suppression;;;;;;;;1;1;0;0
+;;ajout;Les Mille-pattes;Myriapoda;Les Mille-pattes (Myriapoda);;;;taxon intermédiaire;1;1;0;0
+Les Symphiles;Symphyla;modifié (correction appelation);Les Symphyles;Symphyla;Les Mille-pattes (Myriapoda);;;;taxon terminal;1;1;0;0
+Les Pauropodes;Pauropoda;;Les Pauropodes;Pauropoda;Les Mille-pattes (Myriapoda);;;;taxon terminal;1;1;0;0
+Les Chilopodes;Chilopoda;;Les Chilopodes;Chilopoda;Les Mille-pattes (Myriapoda);Les Chilopodes (Chilopoda);;;taxon intermédiaire;1;1;0;0
+La Scutigère véloce;Scutigera coleoptrata;;La Scutigère véloce;Scutigera coleoptrata;Les Mille-pattes (Myriapoda);Les Chilopodes (Chilopoda);;;taxon terminal;1;1;0;0
+Les Litobiomorphes;Lithobiomorpha;modifié (correction appelation);Les Lithobiomorphes;Lithobiomorpha;Les Mille-pattes (Myriapoda);Les Chilopodes (Chilopoda);;;taxon terminal;1;1;0;0
+Les Scolopendromorphes;Scolopendromorpha;;Les Scolopendromorphes;Scolopendromorpha;Les Mille-pattes (Myriapoda);Les Chilopodes (Chilopoda);Les Scolopendromorphes (Scolopendromorpha);;taxon intermédiaire;1;1;0;0
+La Scolopendre annelée;Scolopendra cingulata;;La Scolopendre annelée;Scolopendra cingulata;Les Mille-pattes (Myriapoda);Les Chilopodes (Chilopoda);Les Scolopendromorphes (Scolopendromorpha);;taxon terminal;1;1;0;0
+Les Cryptops;Cryptops hortensis et autres espèces;modifié (correction appelation);Les Cryptops;Cryptops;Les Mille-pattes (Myriapoda);Les Chilopodes (Chilopoda);Les Scolopendromorphes (Scolopendromorpha);;taxon terminal;1;1;0;0
+Les Géophilomorphes;Geophilomorpha;;Les Géophilomorphes;Geophilomorpha;Les Mille-pattes (Myriapoda);Les Chilopodes (Chilopoda);Les Géophilomorphes (Geophilomorpha);;taxon intermédiaire;1;1;0;0
+Les Himantarides;Himantariidae;;Les Himantarides;Himantariidae;Les Mille-pattes (Myriapoda);Les Chilopodes (Chilopoda);Les Géophilomorphes (Geophilomorpha);;taxon terminal;1;1;0;0
+Les Diplopodes;Diplopoda;;Les Diplopodes;Diplopoda;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);;;taxon intermédiaire;1;1;0;0
+Le Polyzonium allemand;Polyzonium germanicum;;Le Polyzonium allemand;Polyzonium germanicum;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);;;taxon terminal;1;1;0;0
+Les Polyxènes;Polyxenida;;Les Polyxènes;Polyxenida;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);;;taxon terminal;1;1;0;0
+Les Iulomorphes;Julida, Chordeumatida, Callopodida;supprimé;;;;;;;taxon intermédiaire;1;1;0;0
+Le Callipus fétide;Callipus foetidissimus;;Le Callipus fétide;Callipus foetidissimus;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);;;taxon terminal;1;1;0;0
+Les Iules;Julida;;Les Iules;Julida;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Iules (Julida);;taxon intermédiaire;1;1;0;0
+Les Blaniules mouchetées;Blaniulidae;;Les Blaniules mouchetées;Blaniulidae;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Iules (Julida);;taxon terminal;1;1;0;0
+Le Iule ponctué;Cylindroiulus punctatus;;Le Iule ponctué;Cylindroiulus punctatus;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Iules (Julida);;taxon terminal;1;1;0;0
+Le Iule noir;Tachypodoiulus niger;;Le Iule noir;Tachypodoiulus niger;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Iules (Julida);;taxon terminal;1;1;0;0
+Le Iule des sables;Ommatoiulus sabulosus;;Le Iule des sables;Ommatoiulus sabulosus;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Iules (Julida);;taxon terminal;1;1;0;0
+Le Iule incarnat;Ommatoiulus sabulosus aimtopodus;;Le Iule incarnat;Ommatoiulus sabulosus aimtopodus;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Iules (Julida);;taxon terminal;1;1;0;0
+Le Iule rutilant;Ommatoiulus rutilans;;Le Iule rutilant;Ommatoiulus rutilans;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Iules (Julida);;taxon terminal;1;1;0;0
+Le Iule à tête rousse;Cylindroiulus broti;;Le Iule à tête rousse;Cylindroiulus broti;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Iules (Julida);;taxon terminal;1;1;0;0
+Les Brachyiules à bande jaune;Brachyiulus pusillus et lusitanus;;Les Brachyiules à bande jaune;Brachyiulus pusillus et lusitanus;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Iules (Julida);;taxon terminal;1;1;0;0
+Les Polydesmes;Polydesmida;;Les Polydesmes;Polydesmida;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Polydesmes (Polydesmida);;taxon intermédiaire;1;1;0;0
+Les Paradoxosomes;Paradoxosomatidae;modifié (correction appelation);Les Paradoxosomes;Oxidus gracilis, Stosatea italica;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Polydesmes (Polydesmida);;taxon terminal;1;1;0;0
+Les Chordeumatides;Chordeumatida;;Les Chordeumatides;Chordeumatida;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Chordeumatides (Chordeumatida);;taxon intermédiaire;1;1;0;0
+Les Faux Polydesmes;Nanogona;;Les Faux Polydesmes;Nanogona;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Chordeumatides (Chordeumatida);;taxon terminal;1;1;0;0
+Les Glomérides;Glomerida;;Les Glomérides;Glomerida;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Glomérides (Glomerida);;taxon intermédiaire;1;1;0;0
+Le Gloméris marginé;Glomeris marginata;;Le Gloméris marginé;Glomeris marginata;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Glomérides (Glomerida);;taxon terminal;1;1;0;0
+Le Gloméris annelé;Glomeris annulata;;Le Gloméris annelé;Glomeris annulata;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Glomérides (Glomerida);;taxon terminal;1;1;0;0
+Le Gloméris transalpin;Glomeris transalpina;;Le Gloméris transalpin;Glomeris transalpina;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Glomérides (Glomerida);;taxon terminal;1;1;0;0
+Le Gloméris intermédiaire;Glomeris intermedia;;Le Gloméris intermédiaire;Glomeris intermedia;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Glomérides (Glomerida);;taxon terminal;1;1;0;0
+Les Gloméris à tâches jaunes ou orangées;Glomeris esterelana et autres espèces;modifié (correction appelation);Les Gloméris à tâches jaunes ou orangées;Glomeris;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Glomérides (Glomerida);;taxon terminal;1;1;0;0
+Les Gloméris à motifs irréguliers;Glomeris ligurica et autres espèces;modifié (correction appelation);Les Gloméris à motifs irréguliers;Glomeris;Les Mille-pattes (Myriapoda);Les Diplopodes (Diplopoda);Les Glomérides (Glomerida);;taxon terminal;1;1;0;0
+Les Cloportes;Oniscidea;;Les Cloportes;Oniscidea;Les Cloportes (Oniscidea);;;;taxon intermédiaire;1;1;0;0
+Les Cloportes pygmées blancs;Trichoniscidae;;Les Cloportes pygmées blancs;Trichoniscidae;Les Cloportes (Oniscidea);;;;taxon terminal;1;1;0;0
+Les Cloportes pygmées marron violacé;Trichoniscus, Hyloniscus;;Les Cloportes pygmées marron violacé;Trichoniscus, Hyloniscus;Les Cloportes (Oniscidea);;;;taxon terminal;1;1;0;0
+Les Cloportes pygmées roses;Androniscus dentiger et roseus;;Les Cloportes pygmées roses;Androniscus dentiger et roseus;Les Cloportes (Oniscidea);;;;taxon terminal;1;1;0;0
+Les Haplophthalmes;Haplophthalmus;;Les Haplophthalmes;Haplophthalmus;Les Cloportes (Oniscidea);;;;taxon terminal;1;1;0;0
+Les Cloportes myrmécophiles;Platyarthrus hoffmannseggii et autres espèces;modifié (correction appelation);Les Cloportes myrmécophiles;Platyarthrus;Les Cloportes (Oniscidea);;;;taxon terminal;1;1;0;0
+Le Cloporte d'Heller;Helleria brevicornis;;Le Cloporte d'Heller;Helleria brevicornis;Les Cloportes (Oniscidea);;;;taxon terminal;1;1;0;0
+Les Cloportes échancrés;Philoscia, Porcellionides et autres genres;;Les Cloportes échancrés;Philoscia, Porcellionides et autres genres;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);;;taxon intermédiaire;1;1;0;0
+La Tiroloscie pyrénéenne;Tiroloscia pyrenaica;;La Tiroloscie pyrénéenne;Tiroloscia pyrenaica;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);;;taxon terminal;1;1;0;0
+La Lygie des Hypnes;Ligidium hypnorum;;La Lygie des Hypnes;Ligidium hypnorum;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);;;taxon terminal;1;1;0;0
+Le Cloporte des platanes;Acaeroplastes melanurus;;Le Cloporte des platanes;Acaeroplastes melanurus;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);;;taxon terminal;1;1;0;0
+Les Cloportes ceinturés;Porcellionides, Orthometopon;modifié (correction appelation);Les Cloportes ceinturés;Porcellionides, Orthometopon planum;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);;;taxon terminal;1;1;0;0
+Le Porcellionide pruineux;Porcellionides pruinosus;;Le Porcellionide pruineux;Porcellionides pruinosus;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);;;taxon terminal;1;1;0;0
+Les Philoscies;Philoscia muscorum et affinis;;Les Philoscies;Philoscia muscorum et affinis;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);Les Philoscies (Philoscia muscorum et affinis);;taxon intermédiaire;1;1;0;0
+La Philoscie des mousses;Philoscia muscorum;;La Philoscie des mousses;Philoscia muscorum;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);Les Philoscies (Philoscia muscorum et affinis);;taxon terminal;1;1;0;0
+La Philoscie apparente;Philoscia affinis;;La Philoscie apparente;Philoscia affinis;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);Les Philoscies (Philoscia muscorum et affinis);;taxon terminal;1;1;0;0
+Les Chaetophiloscies;Chaetophiloscia sicula, elongata et cellaria;;Les Chaetophiloscies;Chaetophiloscia sicula, elongata et cellaria;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);Les Chaetophiloscies (Chaetophiloscia sicula, elongata et cellaria);;taxon intermédiaire;1;1;0;0
+La Chaetophiloscie allongée;Chaetophiloscia elongata;;La Chaetophiloscie allongée;Chaetophiloscia elongata;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);Les Chaetophiloscies (Chaetophiloscia sicula, elongata et cellaria);;taxon terminal;1;1;0;0
+La Chaetophiloscie fuseau;Chaetophiloscia sicula;;La Chaetophiloscie fuseau;Chaetophiloscia sicula;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);Les Chaetophiloscies (Chaetophiloscia sicula, elongata et cellaria);;taxon terminal;1;1;0;0
+La Chaetophiloscie cellaire;Chaetophiloscia cellaria;;La Chaetophiloscie cellaire;Chaetophiloscia cellaria;Les Cloportes (Oniscidea);Les Cloportes échancrés (Philoscia, Porcellionides et autres genres);Les Chaetophiloscies (Chaetophiloscia sicula, elongata et cellaria);;taxon terminal;1;1;0;0
+Les Cloportes larges;Porcellio, Oniscus et autres genres;;Les Cloportes larges;Porcellio, Oniscus et autres genres;Les Cloportes (Oniscidea);Les Cloportes larges (Porcellio, Oniscus et autres genres);;;taxon intermédiaire;1;1;0;0
+Le Cloporte de Rathke;Trachelipus rathkii;;Le Cloporte de Rathke;Trachelipus rathkii;Les Cloportes (Oniscidea);Les Cloportes larges (Porcellio, Oniscus et autres genres);;;taxon terminal;1;1;0;0
+Le Cylistice convexe;Cylisticus convexus;;Le Cylistice convexe;Cylisticus convexus;Les Cloportes (Oniscidea);Les Cloportes larges (Porcellio, Oniscus et autres genres);;;taxon terminal;1;1;0;0
+Le Porcellio rugueux;Porcellio scaber;;Le Porcellio rugueux;Porcellio scaber;Les Cloportes (Oniscidea);Les Cloportes larges (Porcellio, Oniscus et autres genres);;;taxon terminal;1;1;0;0
+Le Porcellio lisse;Porcellio laevis;;Le Porcellio lisse;Porcellio laevis;Les Cloportes (Oniscidea);Les Cloportes larges (Porcellio, Oniscus et autres genres);;;taxon terminal;1;1;0;0
+L'Aselle des murs;Oniscus asellus;;L'Aselle des murs;Oniscus asellus;Les Cloportes (Oniscidea);Les Cloportes larges (Porcellio, Oniscus et autres genres);;;taxon terminal;1;1;0;0
+Le Porcellio spinicorne;Porcellio spinicornis;;Le Porcellio spinicorne;Porcellio spinicornis;Les Cloportes (Oniscidea);Les Cloportes larges (Porcellio, Oniscus et autres genres);;;taxon terminal;1;1;0;0
+Le Porcellio monticole;Porcellio monticola;;Le Porcellio monticole;Porcellio monticola;Les Cloportes (Oniscidea);Les Cloportes larges (Porcellio, Oniscus et autres genres);;;taxon terminal;1;1;0;0
+Le Porcellio dilaté;Porcellio dilatatus;;Le Porcellio dilaté;Porcellio dilatatus;Les Cloportes (Oniscidea);Les Cloportes larges (Porcellio, Oniscus et autres genres);;;taxon terminal;1;1;0;0
+Les Cloportes Armadillomorphes;Armadillidium, Armadillo, Eluma;;Les Cloportes Armadillomorphes;Armadillidium, Armadillo, Eluma;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);;;taxon intermédiaire;1;1;0;0
+Les Armadilles;Armadillidium;;Les Armadilles;Armadillidium;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);Les Armadilles (Armadillidium);;taxon intermédiaire;1;1;0;0
+L'Armadille commune;Armadillidium vulgare;;L'Armadille commune;Armadillidium vulgare;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);Les Armadilles (Armadillidium);;taxon terminal;1;1;0;0
+L'Armadille à long museau;Armadillidium nasatum;;L'Armadille à long museau;Armadillidium nasatum;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);Les Armadilles (Armadillidium);;taxon terminal;1;1;0;0
+L'Armadille déprimée;Armadillidium depressum;;L'Armadille déprimée;Armadillidium depressum;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);Les Armadilles (Armadillidium);;taxon terminal;1;1;0;0
+L'Armadille granulée;Armadillidium granulatum;;L'Armadille granulée;Armadillidium granulatum;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);Les Armadilles (Armadillidium);;taxon terminal;1;1;0;0
+Les Armadilles colorées;Armadillidium pictum et pulchellum;;Les Armadilles colorées;Armadillidium pictum et pulchellum;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);Les Armadilles (Armadillidium);;taxon terminal;1;1;0;0
+L'Armadille zébrée;Armadillidium maculatum;;L'Armadille zébrée;Armadillidium maculatum;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);Les Armadilles (Armadillidium);;taxon terminal;1;1;0;0
+L'Elume veloutée;Eluma caelatum;;L'Elume veloutée;Eluma caelatum;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);;;taxon terminal;1;1;0;0
+L'Armadillo officinal;Armadillo officinalis;;L'Armadillo officinal;Armadillo officinalis;Les Cloportes (Oniscidea);Les Cloportes Armadillomorphes (Armadillidium, Armadillo, Eluma);;;taxon terminal;1;1;0;0
+Les Pseudo-scorpions;Pseudoscorpiones;modifié (correction appelation);Les Pseudoscorpions;Pseudoscorpiones;;;;;taxon terminal;1;1;0;0
+Les Acariens;Acari;;Les Acariens;Acari;Les Acariens (Acari);;;;taxon intermédiaire;1;1;0;0
+Les Acariens rouges;Tetranychidae et Trombidiidae;modifié (correction appelation);Les Trombidions rouge velours;Trombidiidae;Les Acariens (Acari);;;;taxon terminal;1;1;0;0
+;;ajout;Les Oribates;Oribatida;Les Acariens (Acari);;;;taxon terminal;1;1;0;0
+;;ajout;Les Acariens à long nez;Bdellidae, Cunaxidae;Les Acariens (Acari);;;;taxon terminal;1;1;0;0
+Les Opilions;Opiliones;;Les Opilions;Opiliones;;;;;taxon terminal;1;1;0;0
+Les Araignées;Araneae;;Les Araignées;Araneae;Les Araignées (Araneae);;;;taxon intermédiaire;1;1;0;0
+Les Araignées chasseuses Micrommata;Micrommata;;Les Araignées chasseuses Micrommata;Micrommata;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+L'Araignée chasseuse Olios;Olios argelasius;;L'Araignée chasseuse Olios;Olios argelasius;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Erèses coccinelles;Eresus kollari et sandaliatus;;Les Erèses coccinelles;Eresus kollari et sandaliatus;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Zora;Zora spinimana et autres espèces;;Les Zora;Zora spinimana et autres espèces;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Dolomèdes;Dolomedes;;Les Dolomèdes;Dolomedes;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+La Pisaure admirable;Pisaura mirabilis;modifié (correction appelation);Les Pisaures;Pisaura;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Araignées lynx;Oxyopes;;Les Araignées lynx;Oxyopes;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Zoropses;Zoropsis spinimana et media;;Les Zoropses;Zoropsis spinimana et media;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+L'Agélène à labyrinthe;Agelena labyrinthica;modifié (correction appelation);Les Agélènes labyrinthe;Agelena labyrinthica, Allagelena graciliens;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Gnaphoses;Gnaphosidae;;Les Gnaphoses;Gnaphosidae;Les Araignées (Araneae);Les Gnaphoses (Gnaphosidae);;;taxon intermédiaire;1;1;0;0
+Les Gnaphoses sombres à tâches claires;Aphantaulax et autres genres;modifié (correction appelation);Les Gnaphoses sombres à tâches claires;Aphantaulax, Callilepis et autres genres;Les Araignées (Araneae);Les Gnaphoses (Gnaphosidae);;;taxon terminal;1;1;0;0
+Les Gnaphoses Nomisia;Nomisia;;Les Gnaphoses Nomisia;Nomisia;Les Araignées (Araneae);Les Gnaphoses (Gnaphosidae);;;taxon terminal;1;1;0;0
+Les Clubiones;Clubionidae;;Les Clubiones;Clubionidae;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Liocranides;Liocranidae;;Les Liocranides;Liocranidae;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Amaurobes;Amaurobius;;Les Amaurobes;Amaurobius;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Coelotes;Coelotinae;;Les Coelotes;Coelotinae;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Segestries;Segestriidae;;Les Segestries;Segestriidae;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Tégénaires;Tegenaria;modifié (correction appelation);Les Tégénaires;Tegenaria, Eratigena;Les Araignées (Araneae);;;;taxon terminal;1;1;0;0
+Les Epeires et autres Araneidae;Araneidae;;Les Epeires et autres Araneidae;Araneidae;Les Araignées (Araneae);Les Epeires et autres Araneidae (Araneidae);;;taxon intermédiaire;1;1;0;0
+L'Épeire des fissures;Nuctenea umbratica;;L'Épeire des fissures;Nuctenea umbratica;Les Araignées (Araneae);Les Epeires et autres Araneidae (Araneidae);;;taxon terminal;1;1;0;0
+L'Epeire frelon;Argiope bruennichi;;L'Epeire frelon;Argiope bruennichi;Les Araignées (Araneae);Les Epeires et autres Araneidae (Araneidae);;;taxon terminal;1;1;0;0
+La Diodie tête de mort;Zilla diodia;;La Diodie tête de mort;Zilla diodia;Les Araignées (Araneae);Les Epeires et autres Araneidae (Araneidae);;;taxon terminal;1;1;0;0
+L'Epeire alsine;Araneus alsine;;L'Epeire alsine;Araneus alsine;Les Araignées (Araneae);Les Epeires et autres Araneidae (Araneidae);;;taxon terminal;1;1;0;0
+L'Epeire diadème;Araneus diadematus;;L'Epeire diadème;Araneus diadematus;Les Araignées (Araneae);Les Epeires et autres Araneidae (Araneidae);;;taxon terminal;1;1;0;0
+Les Epeires à dessin de feuille de Chêne;Aculepeira, Neoscona;;Les Epeires à dessin de feuille de Chêne;Aculepeira, Neoscona;Les Araignées (Araneae);Les Epeires et autres Araneidae (Araneidae);;;taxon terminal;1;1;0;0
+Les Epeires concombre;Araniella;;Les Epeires concombre;Araniella;Les Araignées (Araneae);Les Epeires et autres Araneidae (Araneidae);;;taxon terminal;1;1;0;0
+Les Petites Araignées;Linyphiidae et autres familles;modifié (correction appelation);Les Petites Araignées;Linyphiidae, Theridiidae et autres familles;Les Araignées (Araneae);Les Petites Araignées (Linyphiidae, Theridiidae et autres familles);;;taxon intermédiaire;1;1;0;0
+Les Araignées cracheuses;Scytodes;;Les Araignées cracheuses;Scytodes;Les Araignées (Araneae);Les Petites Araignées (Linyphiidae, Theridiidae et autres familles);;;taxon terminal;1;1;0;0
+Les Lyniphiides;Linyphiidae;;Les Lyniphiides;Linyphiidae;Les Araignées (Araneae);Les Petites Araignées (Linyphiidae, Theridiidae et autres familles);;;taxon terminal;1;1;0;0
+Les Linyphies groupe triangularis;Linyphia triangularis, tenuipalpis et maura;;Les Linyphies groupe triangularis;Linyphia triangularis, tenuipalpis et maura;Les Araignées (Araneae);Les Petites Araignées (Linyphiidae, Theridiidae et autres familles);;;taxon terminal;1;1;0;0
+L'Erigone cul-noir;Ostearius melanopygius;;L'Erigone cul-noir;Ostearius melanopygius;Les Araignées (Araneae);Les Petites Araignées (Linyphiidae, Theridiidae et autres familles);;;taxon terminal;1;1;0;0
+Les Zodarions;Zodarion;;Les Zodarions;Zodarion;Les Araignées (Araneae);Les Petites Araignées (Linyphiidae, Theridiidae et autres familles);;;taxon terminal;1;1;0;0
+Les Mygales;Mygalomorphae;;Les Mygales;Mygalomorphae;Les Araignées (Araneae);Les Mygales (Mygalomorphae);;;taxon intermédiaire;1;1;0;0
+Les Mygales à chausettes;Atypus;;Les Mygales à chausettes;Atypus;Les Araignées (Araneae);Les Mygales (Mygalomorphae);;;taxon terminal;1;1;0;0
+Les Mygales Nemesia;Nemesia;;Les Mygales Nemesia;Nemesia;Les Araignées (Araneae);Les Mygales (Mygalomorphae);;;taxon terminal;1;1;0;0
+Les Araignées sauteuses;Salticidae;;Les Araignées sauteuses;Salticidae;Les Araignées (Araneae);Les Araignées sauteuses (Salticidae);;;taxon intermédiaire;1;1;0;0
+Les Saltiques à chevrons;Salticus scenicus et autres espèces;;Les Saltiques à chevrons;Salticus scenicus et autres espèces;Les Araignées (Araneae);Les Araignées sauteuses (Salticidae);;;taxon terminal;1;1;0;0
+Les Saltiques myrmécomorphes;Leptorchestes, Myrmarachne, Synageles;;Les Saltiques myrmécomorphes;Leptorchestes, Myrmarachne, Synageles;Les Araignées (Araneae);Les Araignées sauteuses (Salticidae);;;taxon terminal;1;1;0;0
+Le Saltique sanguinolent;Philaeus chrysops;;Le Saltique sanguinolent;Philaeus chrysops;Les Araignées (Araneae);Les Araignées sauteuses (Salticidae);;;taxon terminal;1;1;0;0
+Les Saltiques Phlegra;Phlegra;;Les Saltiques Phlegra;Phlegra;Les Araignées (Araneae);Les Araignées sauteuses (Salticidae);;;taxon terminal;1;1;0;0
+Le Saltique aux pieds barbus;Saitis barbipes;;Le Saltique aux pieds barbus;Saitis barbipes;Les Araignées (Araneae);Les Araignées sauteuses (Salticidae);;;taxon terminal;1;1;0;0
+Le Saltique orangé;Carrhotus xanthogramma;;Le Saltique orangé;Carrhotus xanthogramma;Les Araignées (Araneae);Les Araignées sauteuses (Salticidae);;;taxon terminal;1;1;0;0
+;;ajout;Le Saltique marqué;Aelurillus v-insignitus;Les Araignées (Araneae);Les Araignées sauteuses (Salticidae);;;taxon terminal;1;1;0;0
+Les Heliophanes;Heliophanus;;Les Heliophanes;Heliophanus;Les Araignées (Araneae);Les Araignées sauteuses (Salticidae);;;taxon terminal;1;1;0;0
+Les Araignées crabes;Thomisidae, Philodromidae;;Les Araignées crabes;Thomisidae, Philodromidae;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon intermédiaire;1;1;0;0
+Les Xystiques;Xysticus;;Les Xystiques;Xysticus;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+Les Ozyptiles;Ozyptila;;Les Ozyptiles;Ozyptila;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+Les Araignées crabes Philodromus;Philodromus;;Les Araignées crabes Philodromus;Philodromus;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+Les Araignées crabes Thanatus;Thanatus;;Les Araignées crabes Thanatus;Thanatus;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+Les Araignées crabes minces;Tibellus, Thanatus;;Les Araignées crabes minces;Tibellus, Thanatus;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+L'Araignée crabe Ebrechtella;Ebrechtella tricuspidata;;L'Araignée crabe Ebrechtella;Ebrechtella tricuspidata;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+L'Araignée crabe Napoléon;Synema globosum;;L'Araignée crabe Napoléon;Synema globosum;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+L'Araignée crabe Runcinia;Runcinia grammica;;L'Araignée crabe Runcinia;Runcinia grammica;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+Les Araignées crabes Diaea;Diaea;;Les Araignées crabes Diaea;Diaea;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+Les Misumènes;Misumena;;Les Misumènes;Misumena;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+Les Thomises;Thomisus;;Les Thomises;Thomisus;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+Les Araignées crabes velues;Heriaeus;;Les Araignées crabes velues;Heriaeus;Les Araignées (Araneae);Les Araignées crabes (Thomisidae, Philodromidae);;;taxon terminal;1;1;0;0
+Les Dysderides;Dysdera et Harpactea;;Les Dysderides;Dysdera et Harpactea;Les Araignées (Araneae);Les Dysderides (Dysdera et Harpactea);;;taxon intermédiaire;1;1;0;0
+Les Harpactées;Harpactea;;Les Harpactées;Harpactea;Les Araignées (Araneae);Les Dysderides (Dysdera et Harpactea);Les Harpactées (Harpactea);;taxon terminal;1;1;0;0
+L'Harpactée pattes-rayées;Harpactea hombergi;;L'Harpactée pattes-rayées;Harpactea hombergi;Les Araignées (Araneae);Les Dysderides (Dysdera et Harpactea);Les Harpactées (Harpactea);;;1;1;0;0
+Les Dysdères;Dysdera;;Les Dysdères;Dysdera;Les Araignées (Araneae);Les Dysderides (Dysdera et Harpactea);;;taxon terminal;1;1;0;0
+Les Araignées loups;Lycosidae;;Les Araignées loups;Lycosidae;Les Araignées (Araneae);Les Araignées loups (Lycosidae);;;taxon intermédiaire;1;1;0;0
+Les Lycoses renards;Alopecosa;;Les Lycoses renards;Alopecosa;Les Araignées (Araneae);Les Araignées loups (Lycosidae);;;taxon terminal;1;1;0;0
+Les Lycoses pirates;Pirata, Piratula;;Les Lycoses pirates;Pirata, Piratula;Les Araignées (Araneae);Les Araignées loups (Lycosidae);;;taxon terminal;1;1;0;0
+L'Aulonie mains-blanches;Aulonia albimana;;L'Aulonie mains-blanches;Aulonia albimana;Les Araignées (Araneae);Les Araignées loups (Lycosidae);;;taxon terminal;1;1;0;0
+Les Pardoses;Pardosa;;Les Pardoses;Pardosa;Les Araignées (Araneae);Les Araignées loups (Lycosidae);;;taxon terminal;1;1;0;0
+Les Trochoses;Trochosa;;Les Trochoses;Trochosa;Les Araignées (Araneae);Les Araignées loups (Lycosidae);;;taxon terminal;1;1;0;0
+Les Punaises;Heteroptera;;Les Punaises;Heteroptera;Les Punaises (Heteroptera);;;;taxon intermédiaire;1;1;0;0
+Les Larves de Punaises;Heteroptera;;Les Larves de Punaises;Heteroptera;Les Punaises (Heteroptera);;;;taxon terminal;1;1;0;0
+Les Punaises à gros yeux;Geocoridae;;Les Punaises à gros yeux;Geocoridae;Les Punaises (Heteroptera);;;;taxon terminal;1;1;0;0
+Le Géocore à tête rouge;Geocoris erythrocephalus;;Le Géocore à tête rouge;Geocoris erythrocephalus;Les Punaises (Heteroptera);;;;taxon terminal;1;1;0;0
+Les Saldides et Leptopodides;Saldidae, Leptopodidae;;Les Saldides et Leptopodides;Saldidae, Leptopodidae;Les Punaises (Heteroptera);;;;taxon terminal;1;1;0;0
+Les Punaises plates;Aradidae;;Les Punaises plates;Aradidae;Les Punaises (Heteroptera);;;;taxon terminal;1;1;0;0
+Les Punaises dentellières;Tingidae;;Les Punaises dentellières;Tingidae;Les Punaises (Heteroptera);;;;taxon terminal;1;1;0;0
+Les Punaises cendrées;Piesmatidae;;Les Punaises cendrées;Piesmatidae;Les Punaises (Heteroptera);;;;taxon terminal;1;1;0;0
+Les Cydnides;Cydnidae;;Les Cydnides;Cydnidae;Les Punaises (Heteroptera);Les Cydnides (Cydnidae);;;taxon intermédiaire;1;1;0;0
+Les Cydnides à bord blanc;Cydnidae;;Les Cydnides à bord blanc;Cydnidae;Les Punaises (Heteroptera);Les Cydnides (Cydnidae);;;taxon terminal;1;1;0;0
+Les Cydnides noires;Cydnidae;;Les Cydnides noires;Cydnidae;Les Punaises (Heteroptera);Les Cydnides (Cydnidae);;;taxon terminal;1;1;0;0
+Les Punaises pies;Tritomegas;;Les Punaises pies;Tritomegas;Les Punaises (Heteroptera);Les Cydnides (Cydnidae);;;taxon terminal;1;1;0;0
+La Cydnide de l'Euphorbe;Cydnus aterrimus;;La Cydnide de l'Euphorbe;Cydnus aterrimus;Les Punaises (Heteroptera);Les Cydnides (Cydnidae);;;taxon terminal;1;1;0;0
+La Cydnide à deux points;Adomerus biguttatus;;La Cydnide à deux points;Adomerus biguttatus;Les Punaises (Heteroptera);Les Cydnides (Cydnidae);;;taxon terminal;1;1;0;0
+Les Punaises à ailes non visibles;Scutelleridae et autres familles;;Les Punaises à ailes non visibles;Scutelleridae et autres familles;Les Punaises (Heteroptera);Les Punaises à ailes non visibles (Scutelleridae et autres familles);;;taxon intermédiaire;1;1;0;0
+Les Podops;Podops inunctus et curvidens;;Les Podops;Podops inunctus et curvidens;Les Punaises (Heteroptera);Les Punaises à ailes non visibles (Scutelleridae et autres familles);;;taxon terminal;1;1;0;0
+Le Pentatome rayé;Graphosoma italicum;;Le Pentatome rayé;Graphosoma italicum;Les Punaises (Heteroptera);Les Punaises à ailes non visibles (Scutelleridae et autres familles);;;taxon terminal;1;1;0;0
+Le Pentatome ponctué;Graphosoma semipunctatum;;Le Pentatome ponctué;Graphosoma semipunctatum;Les Punaises (Heteroptera);Les Punaises à ailes non visibles (Scutelleridae et autres familles);;;taxon terminal;1;1;0;0
+La Punaise Ancyrosoma;Ancyrosoma leucogrammes;;La Punaise Ancyrosoma;Ancyrosoma leucogrammes;Les Punaises (Heteroptera);Les Punaises à ailes non visibles (Scutelleridae et autres familles);;;taxon terminal;1;1;0;0
+Les Punaises Eurygaster;Eurygaster maura et autres espèces;;Les Punaises Eurygaster;Eurygaster maura et autres espèces;Les Punaises (Heteroptera);Les Punaises à ailes non visibles (Scutelleridae et autres familles);;;taxon terminal;1;1;0;0
+Les Punaises noires velues;Odontoscelis;;Les Punaises noires velues;Odontoscelis;Les Punaises (Heteroptera);Les Punaises à ailes non visibles (Scutelleridae et autres familles);;;taxon terminal;1;1;0;0
+Les Punaises Scarabées;Thyreocoris scarabaeoides et fulvipennis;;Les Punaises Scarabées;Thyreocoris scarabaeoides et fulvipennis;Les Punaises (Heteroptera);Les Punaises à ailes non visibles (Scutelleridae et autres familles);;;taxon terminal;1;1;0;0
+Le Coptosoma;Coptosoma scutellatum;;Le Coptosoma;Coptosoma scutellatum;Les Punaises (Heteroptera);Les Punaises à ailes non visibles (Scutelleridae et autres familles);;;taxon terminal;1;1;0;0
+Les Punaises à bouclier;Pentatomidae et Acanthosomatidae;;Les Punaises à bouclier;Pentatomidae et Acanthosomatidae;Les Punaises (Heteroptera);Les Punaises à bouclier (Pentatomidae et Acanthosomatidae);;;taxon intermédiaire;1;1;0;0
+La Punaise verte bleuâtre;Zicrona caerula;modifié (correction appelation);La Punaise verte bleuâtre;Zicrona caerulea;Les Punaises (Heteroptera);Les Punaises à bouclier (Pentatomidae et Acanthosomatidae);;;taxon terminal;1;1;0;0
+La Punaise du chou;Eurydema oleracea;;La Punaise du chou;Eurydema oleracea;Les Punaises (Heteroptera);Les Punaises à bouclier (Pentatomidae et Acanthosomatidae);;;taxon terminal;1;1;0;0
+Les Punaises Eurydema;Eurydema ornata et autres espèces;;Les Punaises Eurydema;Eurydema ornata et autres espèces;Les Punaises (Heteroptera);Les Punaises à bouclier (Pentatomidae et Acanthosomatidae);;;taxon terminal;1;1;0;0
+La Punaise verte ponctuée;Nezara viridula;;La Punaise verte ponctuée;Nezara viridula;Les Punaises (Heteroptera);Les Punaises à bouclier (Pentatomidae et Acanthosomatidae);;;taxon terminal;1;1;0;0
+Les Punaises allongées;Lygaeidae et autres familles;modifié (correction appelation);Les Punaises allongées;Lygaeidae, Miridae et autres familles;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon intermédiaire;1;1;0;0
+Les Mirides;Miridae;;Les Mirides;Miridae;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+Le Gendarme;Pyrrhocoris apterus;;Le Gendarme;Pyrrhocoris apterus;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+La Punaise rouge méditerrannéenne;Scantius aegyptius;;La Punaise rouge méditerrannéenne;Scantius aegyptius;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+La Lygée familière;Tropidothorax leucopterus;;La Lygée familière;Tropidothorax leucopterus;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+Les Lygées rouges à points blancs;Lygaeus equestris et simulans;;Les Lygées rouges à points blancs;Lygaeus equestris et simulans;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+Les Lygées rouge terne;Arocatus roeselii et autres espèces;;Les Lygées rouge terne;Arocatus roeselii et autres espèces;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+La Punaise à damier;Spilostethus saxatilis;;La Punaise à damier;Spilostethus saxatilis;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+La Viole rouge;Spilostethus pandurus;;La Viole rouge;Spilostethus pandurus;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+La Punaise des boîtes aux lettres;Melanocoryphus albomaculatus;;La Punaise des boîtes aux lettres;Melanocoryphus albomaculatus;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+La Lygée superbe;Horvathiolus superbus;;La Lygée superbe;Horvathiolus superbus;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+La Corise de la Jusquiame;Corizus hyoscyami;;La Corise de la Jusquiame;Corizus hyoscyami;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+Le Rhyparochrome commun;Rhyparochromus vulgaris;;Le Rhyparochrome commun;Rhyparochromus vulgaris;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+Les Punaises inodores;Rhopalidae;;Les Punaises inodores;Rhopalidae;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);Les Punaises inodores (Rhopalidae);;taxon intermédiaire;1;1;0;0
+Le Chorosome;Chorosoma schillingii;;Le Chorosome;Chorosoma schillingii;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);Les Punaises inodores (Rhopalidae);;taxon terminal;1;1;0;0
+Le Myrmus;Myrmus miriformis;;Le Myrmus;Myrmus miriformis;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);Les Punaises inodores (Rhopalidae);;taxon terminal;1;1;0;0
+Les Punaises à tête large;Alydidae;;Les Punaises à tête large;Alydidae;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+Les Punaises à échasses;Berytidae;;Les Punaises à échasses;Berytidae;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+Les Dicranocéphales;Dicranocephalus;;Les Dicranocéphales;Dicranocephalus;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+Les Coréides;Coreidae;;Les Coréides;Coreidae;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);Les Coréides (Coreidae);;taxon intermédiaire;1;1;0;0
+La Punaise américaine;Leptoglossus occidentalis;;La Punaise américaine;Leptoglossus occidentalis;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);Les Coréides (Coreidae);;taxon terminal;1;1;0;0
+Les Punaises demoiselles;Nabidae;;Les Punaises demoiselles;Nabidae;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);;;taxon terminal;1;1;0;0
+Les Réduves;Reduviidae;;Les Réduves;Reduviidae;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);Les Réduves (Reduviidae);;taxon intermédiaire;1;1;0;0
+La Punaise guitare;Phymata crassipes;;La Punaise guitare;Phymata crassipes;Les Punaises (Heteroptera);Les Punaises allongées (Lygaeidae, Miridae et autres familles);Les Réduves (Reduviidae);;taxon terminal;1;1;0;0
+Les Coléoptères;Coleoptera;;Les Coléoptères;Coleoptera;Les Coléoptères (Coleoptera);;;;taxon intermédiaire;1;1;0;0
+Les Cantharides;Cantharidae et Lampyridae;;Les Cantharides;Cantharidae et Lampyridae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Malachites;Malachiinae;;Les Malachites;Malachiinae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Dasytines;Dasytinae;;Les Dasytines;Dasytinae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Mordelles;Mordellidae;;Les Mordelles;Mordellidae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Longicornes;Cerambycidae;;Les Longicornes;Cerambycidae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Clairons;Cleridae;;Les Clairons;Cleridae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Méloïdes;Meloidae;;Les Méloïdes;Meloidae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Dermestes;Dermestidae;;Les Dermestes;Dermestidae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Buprestes;Buprestidae;;Les Buprestes;Buprestidae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Oedemerides;Oedemeridae;;Les Oedemerides;Oedemeridae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Tenebrions;Tenebrionidae;;Les Tenebrions;Tenebrionidae;Les Coléoptères (Coleoptera);;;;taxon terminal;1;1;0;0
+Les Taupins;Elateridae;;Les Taupins;Elateridae;Les Coléoptères (Coleoptera);Les Taupins (Elateridae);;;taxon intermédiaire;1;1;0;0
+Le Taupin à deux tâches;Calambus bipustulatus;;Le Taupin à deux tâches;Calambus bipustulatus;Les Coléoptères (Coleoptera);Les Taupins (Elateridae);;;taxon terminal;1;1;0;0
+Les Taupins mouchetés;Elateridae;;Les Taupins mouchetés;Elateridae;Les Coléoptères (Coleoptera);Les Taupins (Elateridae);;;taxon terminal;1;1;0;0
+Les Taupins rouges;Ampedus et autres genres;;Les Taupins rouges;Ampedus et autres genres;Les Coléoptères (Coleoptera);Les Taupins (Elateridae);;;taxon terminal;1;1;0;0
+Les Coccinelles;Coccinellidae;;Les Coccinelles;Coccinellidae;Les Coléoptères (Coleoptera);Les Coccinelles (Coccinellidae);;;taxon intermédiaire;1;1;0;0
+La Coccinelle à 7 points;Coccinella septempunctata;;La Coccinelle à 7 points;Coccinella septempunctata;Les Coléoptères (Coleoptera);Les Coccinelles (Coccinellidae);;;taxon terminal;1;1;0;0
+La Coccinelle asiatique;Harmonia axyridis;;La Coccinelle asiatique;Harmonia axyridis;Les Coléoptères (Coleoptera);Les Coccinelles (Coccinellidae);;;taxon terminal;1;1;0;0
+Les Coccinelles jaunes à points noirs;Psyllobora et autres genres;;Les Coccinelles jaunes à points noirs;Psyllobora et autres genres;Les Coléoptères (Coleoptera);Les Coccinelles (Coccinellidae);;;taxon terminal;1;1;0;0
+La Coccinelle à 22 Points;Psyllobora vigintiduopunctata;;La Coccinelle à 22 Points;Psyllobora vigintiduopunctata;Les Coléoptères (Coleoptera);Les Coccinelles (Coccinellidae);;;taxon terminal;1;1;0;0
+La Coccinelle à 14 Points;Propylea quatuordecimpunctata;;La Coccinelle à 14 Points;Propylea quatuordecimpunctata;Les Coléoptères (Coleoptera);Les Coccinelles (Coccinellidae);;;taxon terminal;1;1;0;0
+La Coccinelle à 16 Points;Tytthaspis sedecimpunctata;;La Coccinelle à 16 Points;Tytthaspis sedecimpunctata;Les Coléoptères (Coleoptera);Les Coccinelles (Coccinellidae);;;taxon terminal;1;1;0;0
+Les Chrysomèles;Chrysomelidae;;Les Chrysomèles;Chrysomelidae;Les Coléoptères (Coleoptera);Les Chrysomèles (Chrysomelidae);;;taxon intermédiaire;1;1;0;0
+Les Craches-sang;Timarcha;modifié (correction appelation);Les Crache-sang;Timarcha;Les Coléoptères (Coleoptera);Les Chrysomèles (Chrysomelidae);;;taxon terminal;1;1;0;0
+Les Bruches;Bruchinae et Urodontinae;;Les Bruches;Bruchinae et Urodontinae;Les Coléoptères (Coleoptera);Les Chrysomèles (Chrysomelidae);;;taxon terminal;1;1;0;0
+Le Doriphore;Leptinotarsa decemlineata;modifié (correction appelation);Le Doryphore;Leptinotarsa decemlineata;Les Coléoptères (Coleoptera);Les Chrysomèles (Chrysomelidae);;;taxon terminal;1;1;0;0
+Les Charançons;Curculionidae et autres familles;;Les Charançons;Curculionidae et autres familles;Les Coléoptères (Coleoptera);Les Charançons (Curculionidae et autres familles);;;taxon intermédiaire;1;1;0;0
+Les Apions;Apionidae;modifié (correction appelation);Les Apions;Apioninae;Les Coléoptères (Coleoptera);Les Charançons (Curculionidae et autres familles);;;taxon terminal;1;1;0;0
+Les Balanins;Curculio, Anthonomus;;Les Balanins;Curculio, Anthonomus;Les Coléoptères (Coleoptera);Les Charançons (Curculionidae et autres familles);;;taxon terminal;1;1;0;0
+Les Charançons longs;Lixus et autres;;Les Charançons longs;Lixus et autres;Les Coléoptères (Coleoptera);Les Charançons (Curculionidae et autres familles);;;taxon terminal;1;1;0;0
+Les Charançons verts;Phyllobius, Polydrusus;;Les Charançons verts;Phyllobius, Polydrusus;Les Coléoptères (Coleoptera);Les Charançons (Curculionidae et autres familles);;;taxon terminal;1;1;0;0
+Les Carabes;Carabidae;;Les Carabes;Carabidae;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon intermédiaire;1;1;0;0
+Les Scaritines;Scaritinae;;Les Scaritines;Scaritinae;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+Les Nebrinies;Nebria, Leistus;;Les Nebrinies;Nebria, Leistus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+Les Amaras;Amara;;Les Amaras;Amara;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+Les Cicindèles;Cicindelidae;modifié (correction appelation);Les Cicindèles;Cicindelinae;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+Les Calosomes;Calosoma;;Les Calosomes;Calosoma;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+Les Cychres;Cychrus;;Les Cychres;Cychrus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+Le Diachrome allemand;Diachromus germanus;;Le Diachrome allemand;Diachromus germanus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+La Drypte dentée;Drypta dentata;;La Drypte dentée;Drypta dentata;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+;;ajout;Les Bombardiers;Brachinus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+L'Anchomène des champs;Anchomenus dorsalis;;L'Anchomène des champs;Anchomenus dorsalis;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);;;taxon terminal;1;1;0;0
+Les Petits Carabes;Bembidion et autres genres;;Les Petits Carabes;Bembidion et autres genres;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Petits Carabes (Bembidion et autres genres);;taxon intermédiaire;1;1;0;0
+Les Bembidions;Bembidion;;Les Bembidions;Bembidion;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Petits Carabes (Bembidion et autres genres);;taxon terminal;1;1;0;0
+Les Notiophiles;Notiophilus;;Les Notiophiles;Notiophilus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Petits Carabes (Bembidion et autres genres);;taxon terminal;1;1;0;0
+Les Elaphres et Asaphidions;Elaphrus, Asaphidion;;Les Elaphres et Asaphidions;Elaphrus, Asaphidion;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Petits Carabes (Bembidion et autres genres);;taxon terminal;1;1;0;0
+Les Carabus;Carabus;;Les Carabus;Carabus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon intermédiaire;1;1;0;0
+Le Carabe doré;Carabus auratus;;Le Carabe doré;Carabus auratus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe à reflets cuivrés;Carabus auronitens;;Le Carabe à reflets cuivrés;Carabus auronitens;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe chancelé;Carabus cancellatus;;Le Carabe chancelé;Carabus cancellatus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe violacé;Carabus violaceus;;Le Carabe violacé;Carabus violaceus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe de bois;Carabus nemoralis;modifié (correction appelation);Le Carabe des bois;Carabus nemoralis;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe problématique;Carabus problematicus;;Le Carabe problématique;Carabus problematicus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe embrouillé;Carabus intricatus;;Le Carabe embrouillé;Carabus intricatus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe granuleux;Carabus granulatus;;Le Carabe granuleux;Carabus granulatus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe chagriné;Carabus coriaceus;;Le Carabe chagriné;Carabus coriaceus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe à collier;Carabus monilis;;Le Carabe à collier;Carabus monilis;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Le Carabe espagnol;Carabus hispanus;;Le Carabe espagnol;Carabus hispanus;Les Coléoptères (Coleoptera);Les Carabes (Carabidae);Les Carabus (Carabus);;taxon terminal;1;1;0;0
+Les Staphylins;Staphylinidae;;Les Staphylins;Staphylinidae;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon intermédiaire;1;1;0;0
+Le Scaphidium à 4 tâches;Scaphidium quadrimaculatum;;Le Scaphidium à 4 tâches;Scaphidium quadrimaculatum;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Les Tachyporines;Tachyporinae;;Les Tachyporines;Tachyporinae;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Les Staphylins à gros yeux;Stenus;;Les Staphylins à gros yeux;Stenus;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Les Staphylins à thorax étranglé;Rugilus, Astenus;;Les Staphylins à thorax étranglé;Rugilus, Astenus;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Les Staphylins Ontholestes;Ontholestes;;Les Staphylins Ontholestes;Ontholestes;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Les Staphylins à raies d'or;Platydracus, Staphylinus;;Les Staphylins à raies d'or;Platydracus, Staphylinus;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Les Staphylins Ocypus;Ocypus olens et autres espèces;modifié (correction appelation);Les Staphylins Ocypus;Ocypus;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+L'Oxypore roux;Oxyporus rufus;;L'Oxypore roux;Oxyporus rufus;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Le Staphylin bourdon;Emus hirtus;;Le Staphylin bourdon;Emus hirtus;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Les Staphylins Paedurus;Paedurus;modifié (correction appelation);Les Staphylins Paederus;Paederus;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Les Xantholines;Xantholinini;;Les Xantholines;Xantholinini;Les Coléoptères (Coleoptera);Les Staphylins (Staphylinidae);;;taxon terminal;1;1;0;0
+Les Histerides;Histeridae;;Les Histerides;Histeridae;Les Coléoptères (Coleoptera);Les Histerides (Histeridae);;;taxon intermédiaire;1;1;0;0
+Les Histers à tâches rouges;Hister;;Les Histers à tâches rouges;Hister;Les Coléoptères (Coleoptera);Les Histerides (Histeridae);;;taxon terminal;1;1;0;0
+Les Sylphides;Silphidae;modifié (correction appelation);Les Silphides;Silphidae;Les Coléoptères (Coleoptera);Les Silphides (Silphidae);;;taxon terminal;1;1;0;0
+Les Sylphes noirs;Phosphuga et Silpha;modifié (correction appelation);Les Silphes noirs;Phosphuga et Silpha;Les Coléoptères (Coleoptera);Les Silphides (Silphidae);;;taxon terminal;1;1;0;0
+Les Scarabées;Scarabaeidae;modifié (correction appelation);Les Scarabées;Scarabaeoidea;Les Coléoptères (Coleoptera);Les Scarabées (Scarabaeoidea);;;taxon intermédiaire;1;1;0;0
+Les Lucanes;Lucanidae;;Les Lucanes;Lucanidae;Les Coléoptères (Coleoptera);Les Scarabées (Scarabaeoidea);;;taxon terminal;1;1;0;0
+Les Onthophages;Onthophagus;;Les Onthophages;Onthophagus;Les Coléoptères (Coleoptera);Les Scarabées (Scarabaeoidea);;;taxon terminal;1;1;0;0
+Les Aphodiens;Aphodiinae;;Les Aphodiens;Aphodiinae;Les Coléoptères (Coleoptera);Les Scarabées (Scarabaeoidea);;;taxon terminal;1;1;0;0
+Les Hannetons;Melolonthinae;modifié (regroupement);Les Hannetons;Rutelinae, Melolonthinae;Les Coléoptères (Coleoptera);Les Scarabées (Scarabaeoidea);;;taxon terminal;1;1;0;0
+Les Rutelines;Rutelinae;suppression;;;;;;;;1;1;0;0
+Les Dynastides;Dynastidae;;Les Dynastides;Dynastidae;Les Coléoptères (Coleoptera);Les Scarabées (Scarabaeoidea);;;taxon terminal;1;1;0;0
+Les Cétoines;Cetoniinae;;Les Cétoines;Cetoniinae;Les Coléoptères (Coleoptera);Les Scarabées (Scarabaeoidea);;;taxon terminal;1;1;0;0
+Les Trogides;Trogidae;;Les Trogides;Trogidae;Les Coléoptères (Coleoptera);Les Scarabées (Scarabaeoidea);;;taxon terminal;1;1;0;0
+Les Géotrupes;Geotrupidae;;Les Géotrupes;Geotrupidae;Les Coléoptères (Coleoptera);Les Scarabées (Scarabaeoidea);;;taxon terminal;1;1;0;0
+Les Petits Coléoptères à antennes en massue;Coleoptera;;Les Petits Coléoptères à antennes en massue;Coleoptera;Les Coléoptères (Coleoptera);Les Petits Coléoptères à antennes en massue (Coleoptera);;;taxon terminal;1;1;0;0
+Les Nitidulides;Nitidulidae;;Les Nitidulides;Nitidulidae;Les Coléoptères (Coleoptera);Les Petits Coléoptères à antennes en massue (Coleoptera);;;taxon terminal;1;1;0;0
+Les Latridiides;Latridiidae;;Les Latridiides;Latridiidae;Les Coléoptères (Coleoptera);Les Petits Coléoptères à antennes en massue (Coleoptera);;;taxon terminal;1;1;0;0
+Les Phalacrides;Phalacridae;;Les Phalacrides;Phalacridae;Les Coléoptères (Coleoptera);Les Petits Coléoptères à antennes en massue (Coleoptera);;;taxon terminal;1;1;0;0
+Les Byrrhides;Byrrhidae;;Les Byrrhides;Byrrhidae;Les Coléoptères (Coleoptera);Les Petits Coléoptères à antennes en massue (Coleoptera);;;taxon terminal;1;1;0;0
