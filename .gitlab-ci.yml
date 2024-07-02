@@ -23,10 +23,10 @@ stages:
     - deploy
 
 variables:
-    DB_USER: DB_USER
-    DB_PASSWORD: DB_PASSWORD
-    DB_HOST: DB_HOST
-    DB_PORT: DB_PORT
+    DB_USER: $DB_USER
+    DB_PASSWORD: $DB_PASSWORD
+    DB_HOST: $DB_HOST
+    DB_PORT: $DB_PORT
 
 before_script:
     - apt-get update && apt-get install -y libssl-dev libcurl4-gnutls-dev libxml2-dev pandoc
