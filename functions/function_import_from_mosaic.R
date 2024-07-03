@@ -6,6 +6,7 @@
 #' @export
 #'
 #' @examples
+#' 
 read_sql_query <- function(filepath){
   con = file(filepath, "r")
   lines <- readLines(con)

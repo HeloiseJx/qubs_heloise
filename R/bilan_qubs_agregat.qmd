@@ -112,8 +112,7 @@ palette_qubs <- c("#ff8800",
 
 ## Chiffres clés
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Tableau participation
 
 ```{r tableau_chiffres}
@@ -138,6 +137,7 @@ DT::datatable(synthese_participation_qubs,
 ### Répartition participants/protocoles
 
 Permet de rendre compte de l'overlap de participation entre protocoles. Combien de participants ont appliqué plusieurs protocoles Qubs ?
+
 ```{r participants_protocoles}
 triforce <- data.table::dcast(data.table::as.data.table(dt_qubs %>% select(participant_id, protocole)),
                   participant_id ~ protocole)
@@ -160,6 +160,7 @@ DT::datatable(participants_protocoles,
 ```
 
 ### Tableau observations
+
 ```{r tableau_obs}
 ## TABLEAU RESUME OBS QUBS
 synthese_obs_qubs <- dt_qubs %>%
@@ -185,15 +186,13 @@ DT::datatable(synthese_obs_qubs,
               rownames = FALSE)
 
 ```
-
 :::
 
 <br>
 
 ## Stats spéciales par protocole
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Aspifaune
 
 Dans le cadre du protocole Aspifaune on totalise `r length(unique(dt_aspifaune$participation_id))*0.25*0.25` m² de surface totale aspirée !
@@ -236,11 +235,11 @@ Sinon je trouve que c'est plus parlant de donner le nombre de nuits différentes
 
 ## Communauté Qubs
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Intractions au total
 
 Ce tableau donne pour chaque protocole le **nombre total** de validations, de suggestions, de ré-identifications et de commentaires sur participations.
+
 ```{r}
 # recuperer les donnees des interactions sociales via la table qubs.comments
 query <- read_sql_query(here::here("sql", "table_comments_qubs.sql"))
@@ -306,15 +305,13 @@ DT::datatable(dt_comments %>%
               rownames = FALSE)
           
 ```
-
 :::
 
 <br>
 
 ## Top taxons
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Top taxons validés
 
 ```{r}
@@ -347,7 +344,6 @@ DT::datatable(top_taxons,
                              buttons = c("copy", "csv")),
               rownames = FALSE)
 ```
-
 :::
 
 <br>
@@ -360,8 +356,7 @@ Pour Aspifaune, Noctambules et l'ensemble des données Qubs, sont fournis un don
 
 Pour Opération escargots : la distribution des observations entre escargots et limaces.
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Qubs
 
 ```{r}
@@ -371,6 +366,8 @@ regroupement_2a <- dt_qubs %>%
   group_by(Regroupement2a) %>%
   reframe(nb_obs = n(),
           nb_obs_validees = sum(taxon_valide == 1)) %>%
+  arrange(desc(nb_obs)) %>%
+  mutate(Regroupement2a = factor(Regroupement2a, levels = Regroupement2a)) %>%
   mutate(prop = nb_obs/sum(nb_obs), # Compute percentages
          ymax = cumsum(prop), # Compute the cumulative percentages (top of each rectangle)
          ymin = c(0, head(ymax, n=-1))) # Compute the bottom of each rectangle
@@ -406,6 +403,8 @@ regroupement_2b <- dt_qubs %>%
   group_by(Regroupement2b) %>%
   reframe(nb_obs = n(),
           nb_obs_validees = sum(taxon_valide == 1)) %>%
+  arrange(desc(nb_obs)) %>%
+  mutate(Regroupement2b = factor(Regroupement2b, levels = Regroupement2b)) %>%
   mutate(prop = nb_obs/sum(nb_obs), # Compute percentages
          ymax = cumsum(prop), # Compute the cumulative percentages (top of each rectangle)
          ymin = c(0, head(ymax, n=-1))) # Compute the bottom of each rectangle
@@ -431,6 +430,8 @@ regroupement_2a <- dt_qubs %>%
   group_by(Regroupement2a) %>%
   reframe(nb_obs = n(),
           nb_obs_validees = sum(taxon_valide == 1)) %>%
+  arrange(desc(nb_obs)) %>%
+  mutate(Regroupement2a = factor(Regroupement2a, levels = Regroupement2a)) %>%
   mutate(prop = nb_obs/sum(nb_obs), # Compute percentages
          ymax = cumsum(prop), # Compute the cumulative percentages (top of each rectangle)
          ymin = c(0, head(ymax, n=-1))) # Compute the bottom of each rectangle
@@ -467,6 +468,8 @@ regroupement_2b <- dt_qubs %>%
   group_by(Regroupement2b) %>%
   reframe(nb_obs = n(),
           nb_obs_validees = sum(taxon_valide == 1)) %>%
+  arrange(desc(nb_obs)) %>%
+  mutate(Regroupement2b = factor(Regroupement2b, levels = Regroupement2b)) %>%
   mutate(prop = nb_obs/sum(nb_obs), # Compute percentages
          ymax = cumsum(prop), # Compute the cumulative percentages (top of each rectangle)
          ymin = c(0, head(ymax, n=-1))) # Compute the bottom of each rectangle
@@ -492,6 +495,8 @@ regroupement_2a <- dt_qubs %>%
   group_by(Regroupement2a) %>%
   reframe(nb_obs = n(),
           nb_obs_validees = sum(taxon_valide == 1)) %>%
+  arrange(desc(nb_obs)) %>%
+  mutate(Regroupement2a = factor(Regroupement2a, levels = Regroupement2a)) %>%
   mutate(prop = nb_obs/sum(nb_obs), # Compute percentages
          ymax = cumsum(prop), # Compute the cumulative percentages (top of each rectangle)
          ymin = c(0, head(ymax, n=-1))) # Compute the bottom of each rectangle
@@ -528,6 +533,8 @@ regroupement_2b <- dt_qubs %>%
   group_by(Regroupement2b) %>%
   reframe(nb_obs = n(),
           nb_obs_validees = sum(taxon_valide == 1)) %>%
+  arrange(desc(nb_obs)) %>%
+  mutate(Regroupement2b = factor(Regroupement2b, levels = Regroupement2b)) %>%
   mutate(prop = nb_obs/sum(nb_obs), # Compute percentages
          ymax = cumsum(prop), # Compute the cumulative percentages (top of each rectangle)
          ymin = c(0, head(ymax, n=-1))) # Compute the bottom of each rectangle
@@ -584,7 +591,6 @@ DT::datatable(regroupement_2b %>% select(Regroupement2b, nb_obs, nb_obs_validees
 
 
 ```
-
 :::
 
 <br>
@@ -592,6 +598,7 @@ DT::datatable(regroupement_2b %>% select(Regroupement2b, nb_obs, nb_obs_validees
 ## Carte des sites
 
 Une carte simplifiée avec l'ensemble des sites d'échantillonnages (tous protocoles confondus).
+
 ```{r}
 #| echo: false
 ## CARTO
