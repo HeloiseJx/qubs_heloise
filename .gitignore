@@ -3,7 +3,7 @@
 .RData
 .Ruserdata
 .env
-reporting/
+/reporting
 *.html
 *.Rproj
 *.tiff
