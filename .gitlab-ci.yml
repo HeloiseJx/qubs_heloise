@@ -4,12 +4,11 @@ stages:
     - render
 
 before_script:
-    - apt-get update && apt-get install -y libssl-dev libcurl4-gnutls-dev libxml2-dev pandoc
+    - apt-get update && apt-get install -y libmariadb-dev
 
-render:
+render_quarto:
     stage: render
     script:
-        - echo "Attention"
         - quarto render R/bilan_qubs.qmd
     artifacts:
         paths:
