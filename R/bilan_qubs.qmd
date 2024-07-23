@@ -580,31 +580,30 @@ Une carte simplifiée avec l'ensemble des sites d'échantillonnages (tous protoc
 
 ```{r}
 #| echo: false
-# ## CARTO
-# # Carto ---------------------------------------------------------------
-# #coordonnees sites
-# coord_qubs <- dt_qubs %>%
-#   select(participation_id, latitude, longitude) %>%
-#   distinct() %>%
-#   sf::st_as_sf(coords = c("longitude", 
-#                           "latitude"),
-#                crs = 4326)
-# #shapefile de la France pour carto
-# France <- sf::st_simplify(sf::read_sf(here::here("maps", "metropole-version-simplifiee.geojson")),
-#                           dTolerance = 4000)
-# #carte sites
-# carte_sites_qubs <- tm_shape(France) +
-#   tm_borders(lwd = 3, col = "#352e68") +
-#   tm_shape(coord_qubs) + 
-#   tm_symbols(shape = 20, size = 0.8, col = "#4939a5") +
-#   tm_view(symbol.size.fixed = 0.1)
-# #save maps
-# tmap_save(carte_sites_qubs,
-#           filename = here::here("reporting", "carte_sites_qubs.tiff"))
-# 
-# carte_sites_qubs
+## CARTO
+# Carto ---------------------------------------------------------------
+#coordonnees sites
+coord_qubs <- dt_qubs %>%
+  select(participation_id, latitude, longitude) %>%
+  distinct() %>%
+  sf::st_as_sf(coords = c("longitude",
+                          "latitude"),
+               crs = 4326)
+#shapefile de la France pour carto
+France <- sf::st_simplify(sf::read_sf(here::here("maps", "metropole-version-simplifiee.geojson")),
+                          dTolerance = 4000)
+#carte sites
+carte_sites_qubs <- tm_shape(France) +
+  tm_borders(lwd = 3, col = "#352e68") +
+  tm_shape(coord_qubs) +
+  tm_symbols(shape = 20, size = 0.8, col = "#4939a5") +
+  tm_view(symbol.size.fixed = 0.1)
+#save maps
+tmap_save(carte_sites_qubs,
+          filename = here::here("reporting", "carte_sites_qubs.tiff"))
 
-print("il y a des cartes ici")
+carte_sites_qubs
+
 ```
 
 <br>
