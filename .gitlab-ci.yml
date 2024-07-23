@@ -10,7 +10,7 @@ render:
     stage: render
     script:
         - echo "Attention"
-        - quarto render r/bilan_qubs.qmd
+        - quarto render R/bilan_qubs.qmd
     artifacts:
         paths:
           - bilan_qubs.html
