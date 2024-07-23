@@ -1,32 +1,7 @@
-# This file is a template, and might need editing before it works on your project.
-# This is a sample GitLab CI/CD configuration file that should run without any modifications.
-# It demonstrates a basic 3 stage CI/CD pipeline. Instead of real tests or scripts,
-# it uses echo commands to simulate the pipeline execution.
-#
-# A pipeline is composed of independent jobs that run scripts, grouped into stages.
-# Stages run in sequential order, but jobs within stages run in parallel.
-#
-# For more information, see: https://docs.gitlab.com/ee/ci/yaml/index.html#stages
-#
-# You can copy and paste this template into a new `.gitlab-ci.yml` file.
-# You should not add this template to an existing `.gitlab-ci.yml` file by using the `include:` keyword.
-#
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
-
-image: rocker/verse:latest
+image: rocker/tidyverse:latest
 
 stages:
     - render
-    - deploy
-
-variables:
-    DB_USER: $DB_USER
-    DB_PASSWORD: $DB_PASSWORD
-    DB_HOST: $DB_HOST
-    DB_PORT: $DB_PORT
 
 before_script:
     - apt-get update && apt-get install -y libssl-dev libcurl4-gnutls-dev libxml2-dev pandoc
@@ -35,14 +10,7 @@ render:
     stage: render
     script:
         - echo "Attention"
-        - R -e "quarto::quarto_render('R/bilan_qubs.Rmd', output_format = 'html_document', output_dir = '$OUTPUT_DIR')"
-        - echo "C'est parti"
-
-
-deploy:
-  stage: deploy
-  script:
-    - apt-get update && apt-get install -y rsync
-    - rsync -av --delete -e "ssh -o StrictHostKeyChecking=no" $OUTPUT_DIR/ $SSH_USER@$SSH_HOST:/path/to/deploy/
-  only:
-    - main
+        - quarto render r/bilan_qubs.qmd
+    artifacts:
+        paths:
+          - bilan_qubs.html
