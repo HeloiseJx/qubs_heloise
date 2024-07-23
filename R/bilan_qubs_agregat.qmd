@@ -16,6 +16,9 @@ library(dplyr)
 library(ggplot2)
 library(sf)
 library(tmap)
+library(DT)
+library(reshape2)
+library(data.table)
 
 #Add new .env variables (access to database)
 readRenviron(here::here(".env"))
@@ -111,6 +114,8 @@ palette_camemberts <- c("Les Insectes" = "#377eb8",
                         "Les Milles-pattes" = "#a25427",
                         "Les Escargots" = "#43185d",
                         "Les Limaces" = "#c99de5")
+
+dir.create(here::here("reporting"))
 
 ```
 
