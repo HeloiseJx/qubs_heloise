@@ -12,4 +12,4 @@ render_quarto:
         - quarto render R/bilan_qubs.qmd
     artifacts:
         paths:
-          - /builds/gitlab/vigie-nature/Qubs/bilan_qubs.html
+          - R/bilan_qubs.html
