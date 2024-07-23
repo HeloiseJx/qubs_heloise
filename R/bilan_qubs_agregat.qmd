@@ -102,6 +102,16 @@ palette_qubs <- c("#ff8800",
                   "#1a702d",
                   "#0f0608")
 
+palette_camemberts <- c("Les Insectes" = "#377eb8",
+                        "Les Gastéropodes" = "#e41a1c",
+                        "Les Collemboles et diploures" = "#4daf4a",
+                        "Arachnides" = "#984ea3",
+                        "Les Crustacés terrestres" = "#ff7f00",
+                        "Les Vers sens large" = "#ffff33",
+                        "Les Milles-pattes" = "#a25427",
+                        "Les Escargots" = "#43185d",
+                        "Les Limaces" = "#c99de5")
+
 ```
 
 <br>
@@ -362,7 +372,7 @@ Pour Opération escargots : la distribution des observations entre escargots et 
 ```{r}
 # Distribution des obs selon le regroupement 2a.
 regroupement_2a <- dt_qubs %>% 
-  filter(!is.na(taxon)) %>%
+  filter(!is.na(Regroupement2a)) %>%
   group_by(Regroupement2a) %>%
   reframe(nb_obs = n(),
           nb_obs_validees = sum(taxon_valide == 1)) %>%
@@ -377,7 +387,8 @@ donut_taxo <- ggplot(regroupement_2a, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, 
   geom_rect(color = "black") +
   coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
   xlim(c(2, 4))  + # Try to remove that to see how to make a pie chart
-  scale_fill_brewer(palette = "Set1") +
+  scale_fill_manual(values = palette_camemberts, 
+                    breaks = sort(as.character(regroupement_2a$Regroupement2a))) +
   labs(fill = "Groupes d'espèces") +
   theme(panel.background = element_rect(fill = "white"),
         panel.grid = element_blank(),
@@ -425,7 +436,7 @@ DT::datatable(regroupement_2b %>% select(Regroupement2b, nb_obs, nb_obs_validees
 ```{r}
 # Distribution des obs selon le regroupement 2a.
 regroupement_2a <- dt_qubs %>% 
-  filter(!is.na(taxon)) %>%
+  filter(!is.na(Regroupement2a)) %>%
   filter(protocole == "Aspifaune" ) %>%
   group_by(Regroupement2a) %>%
   reframe(nb_obs = n(),
@@ -441,7 +452,8 @@ donut_taxo <- ggplot(regroupement_2a, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, 
   geom_rect(color = "black") +
   coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
   xlim(c(2, 4))  + # Try to remove that to see how to make a pie chart
-  scale_fill_brewer(palette = "Set1") +
+  scale_fill_manual(values = palette_camemberts, 
+                    breaks = sort(as.character(regroupement_2a$Regroupement2a))) +
   labs(fill = "Groupes d'espèces") +
   theme(panel.background = element_rect(fill = "white"),
         panel.grid = element_blank(),
@@ -490,7 +502,7 @@ DT::datatable(regroupement_2b %>% select(Regroupement2b, nb_obs, nb_obs_validees
 ```{r}
 # Distribution des obs selon le regroupement 2a.
 regroupement_2a <- dt_qubs %>% 
-  filter(!is.na(taxon)) %>%
+  filter(!is.na(Regroupement2a)) %>%
   filter(protocole == "Noctambules" ) %>%
   group_by(Regroupement2a) %>%
   reframe(nb_obs = n(),
@@ -506,7 +518,8 @@ donut_taxo <- ggplot(regroupement_2a, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, 
   geom_rect(color = "black") +
   coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
   xlim(c(2, 4))  + # Try to remove that to see how to make a pie chart
-  scale_fill_brewer(palette = "Set1") +
+  scale_fill_manual(values = palette_camemberts, 
+                    breaks = sort(as.character(regroupement_2a$Regroupement2a))) +
   labs(fill = "Groupes d'espèces") +
   theme(panel.background = element_rect(fill = "white"),
         panel.grid = element_blank(),
