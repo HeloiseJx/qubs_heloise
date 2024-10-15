@@ -4,6 +4,7 @@
 .Ruserdata
 .env
 /reporting
+/data
 *.html
 *.Rproj
 *.tiff

@@ -34,23 +34,30 @@ dt_noctambules <- import_from_mosaic(query,
 ## data escargots
 query <- read_sql_query(here::here("sql", "export_a_plat_escargots.sql"))
 dt_escargots <- import_from_mosaic(query,
-                                     database_name = "qubs",
-                                     force_UTF8 = TRUE)
+                                   database_name = "qubs",
+                                   force_UTF8 = TRUE)
 ## data aspifaune
 query <- read_sql_query(here::here("sql", "export_a_plat_aspifaune.sql"))
 dt_aspifaune <- import_from_mosaic(query,
-                                     database_name = "qubs",
-                                     force_UTF8 = TRUE) %>%
-  filter(protocole == "Aspifaune")
+                                   database_name = "qubs",
+                                   force_UTF8 = TRUE)
+
+## data vers de terre
+query <- read_sql_query(here::here("sql", "export_a_plat_vers_de_terre.sql"))
+dt_vers <- import_from_mosaic(query,
+                              database_name = "qubs",
+                              force_UTF8 = TRUE)
 
 #identifier les champs communs aux differents dataframe
 champs_communs <- Reduce(intersect, list(colnames(dt_aspifaune),
                                          colnames(dt_noctambules),
-                                         colnames(dt_escargots)))
+                                         colnames(dt_escargots),
+                                         colnames(dt_vers)))
 #rbind des donnees des 3 protocoles
 dt_qubs <- rbind(dt_aspifaune %>% select(all_of(champs_communs)),
                  dt_noctambules %>% select(all_of(champs_communs)),
-                 dt_escargots %>% select(all_of(champs_communs)))
+                 dt_escargots %>% select(all_of(champs_communs)),
+                 dt_vers %>% select(all_of(champs_communs)))
 
 # Ajouter la taxonomie et les regroupements d'especes
 taxo <- data.table::fread(here::here("data", "thesaurus_V1V2.csv")) %>% 
@@ -115,23 +122,14 @@ DT::datatable(synthese_participation_qubs,
 Permet de rendre compte de l'overlap de participation entre protocoles. Combien de participants ont appliqué plusieurs protocoles Qubs ?
 
 ```{r participants_protocoles}
-triforce <- data.table::dcast(data.table::as.data.table(dt_qubs %>% select(participant_id, protocole)),
-                  participant_id ~ protocole)
-participants_protocoles <- as.data.frame(t(data.frame(
-  `aspifaune` = length(which(triforce$Aspifaune > 0 & triforce$Noctambules == 0 & triforce$`Opération escargots` == 0)),
-  `escargots` = length(which(triforce$Aspifaune == 0 & triforce$Noctambules == 0 & triforce$`Opération escargots` > 0)),
-  `noctambules` = length(which(triforce$Aspifaune == 0 & triforce$Noctambules > 0 & triforce$`Opération escargots` == 0)),
-  `aspifaune+noctambule` = length(which(triforce$Aspifaune > 0 & triforce$Noctambules > 0 & triforce$`Opération escargots` == 0)),
-  `aspifaune+escargots` = length(which(triforce$Aspifaune > 0 & triforce$Noctambules == 0 & triforce$`Opération escargots` > 0)),
-  `noctambules+escargots` = length(which(triforce$Aspifaune == 0 & triforce$Noctambules > 0 & triforce$`Opération escargots` > 0)),
-  `aspifaune+noctambules+escargots` = length(which(triforce$Aspifaune > 0 & triforce$Noctambules > 0 & triforce$`Opération escargots` > 0)))))
-colnames(participants_protocoles) <- "nb_participants"
-                                                                                 
-DT::datatable(participants_protocoles,
-              colnames = c("Nombre de\nparticipants"),
+qubs_protocoles <- dt_qubs %>% select(site_id, protocole) %>% distinct() %>% group_by(site_id) %>% summarise(nb_protocoles = n_distinct(protocole)) %>% group_by(nb_protocoles) %>% reframe(nb_sites = n_distinct(site_id))
+                                                                  
+DT::datatable(qubs_protocoles,
+              colnames = c("Combinaison\nprotocoles", "Nombre de\nsites"),
               extensions = "Buttons",
               options = list(dom = 'Blfrtip',
-                             buttons = c("copy", "csv")))
+                             buttons = c("copy", "csv")),
+              rownames = FALSE)
 
 ```
 
@@ -152,10 +150,11 @@ synthese_obs_qubs <- dt_qubs %>%
 synthese_obs_qubs$nb_photos[synthese_obs_qubs$protocole == "Aspifaune"] <- length(unique(dt_aspifaune$url_photo_taxon))
 synthese_obs_qubs$nb_photos[synthese_obs_qubs$protocole == "Noctambules"] <- length(unique(dt_noctambules$url_photo_taxon))
 synthese_obs_qubs$nb_photos[synthese_obs_qubs$protocole == "Opération escargots"] <- sum(length(unique(dt_escargots$url_photo_taxon_dessus)), length(unique(dt_escargots$url_photo_taxon_dessous)), length(unique(dt_escargots$url_photo_taxon_cote)))
+synthese_obs_qubs$nb_photos[synthese_obs_qubs$protocole == "En quête de vers"] <- length(unique(dt_vers$url_photo_taxon))
                                                                                  
 DT::datatable(synthese_obs_qubs,
-              colnames = c("Protocole", "Taxons Qubs\ndifférents", "Taxons\nidentifiés", "Taxons non\nidentifiés", 
-                           "Pourcentage taxons\nvalidés", "Nombre de\nphotos"),
+              colnames = c("Protocole", "Taxons Qubs\ndifférents", "Organismes\nidentifiés", "Organismes non\nidentifiés", 
+                           "Pourcentage identifications\nvalidées", "Nombre de\nphotos"),
               extensions = "Buttons",
               options = list(dom = 'Blfrtip',
                              buttons = c("copy", "csv")),
@@ -205,6 +204,12 @@ Sinon je trouve que c'est plus parlant de donner le nombre de nuits différentes
 -   Nombre de taxons différents observés et validés : `r length(unique(na.omit(dt_escargots %>% filter(taxon_valide == 1) %>% pull(taxon))))`
 
 -   Nombre d'abris : `r length(unique(dt_escargots$abri_id))` (`r length(unique(dt_escargots$abri_id[dt_escargots$abri_typ == "Coupelle"]))` Coupelles ; `r length(unique(dt_escargots$abri_id[dt_escargots$abri_typ == "Planche"]))` Planches)
+
+<br>
+
+### En quête de vers
+
+Dans le cadre du protocole En quête de vers on totalise `r length(unique(dt_vers$participation_id))*10` litres de sol trié !
 :::
 
 <br>
@@ -290,29 +295,37 @@ DT::datatable(dt_comments %>%
 ::: panel-tabset
 ### Top taxons validés
 
+Le tableau ci-dessous fournit, pour chaque taxon de la clé Qubs et pour chaque protocole, le nombre d'identifications validées. Petites précisions :
+
+-   Si le chiffre est égal à zéro : le taxon a été identifié dans le cadre du protocole mais n'a pas encore été validé
+
+-   Si la case est vide (NA) : le taxon n'a pas été identifié dans le cadre du protocole
+
 ```{r}
 ## TOP TAXON
-top_taxons_valides <- data.table::dcast(data.table::as.data.table(na.omit(dt_qubs %>% 
-                                                                    filter(taxon_valide == "1") %>%
-                                                                    select(taxon, protocole))),
-                                taxon ~ protocole) %>%
-  mutate(Qubs = Aspifaune+Noctambules+`Opération escargots`)
+top_taxons_valides <- dt_qubs %>% group_by(taxon, protocole) %>%
+  summarise(nb_valide = sum(taxon_valide)) %>% 
+  tidyr::pivot_wider(names_from = protocole, values_from = nb_valide)
 
 DT::datatable(top_taxons_valides,
               extensions = "Buttons",
               options = list(dom = 'Blfrtip',
                              buttons = c("copy", "csv")),
               rownames = FALSE)
+
 ```
 
 <br>
 
 ### Top taxons tout compris
 
+Le tableau ci-dessous fournit, pour chaque taxon de la clé Qubs et pour chaque protocole, le nombre d'observations sans prendre en compte la validation. Si la case est vide alors le taxon n'a pas été observé dans le cadre du protocole.
+
 ```{r}
 ## TOP TAXON
-top_taxons <- data.table::dcast(data.table::as.data.table(na.omit(dt_qubs %>% select(taxon, protocole))), taxon ~ protocole) %>%
-  mutate(Qubs = Aspifaune+Noctambules+`Opération escargots`)
+top_taxons <- dt_qubs %>% group_by(taxon, protocole) %>%
+  summarise(nb_obs = n_distinct(observation_id)) %>% 
+  tidyr::pivot_wider(names_from = protocole, values_from = nb_obs)
 
 DT::datatable(top_taxons,
               extensions = "Buttons",
@@ -569,6 +582,70 @@ DT::datatable(regroupement_2b %>% select(Regroupement2b, nb_obs, nb_obs_validees
               rownames = FALSE)
 
 
+```
+
+### En quête de vers
+
+```{r}
+# Distribution des obs selon le regroupement 2a.
+regroupement_2a <- dt_qubs %>% 
+  filter(!is.na(Regroupement2a)) %>%
+  filter(protocole == "En quête de vers" ) %>%
+  group_by(Regroupement2a) %>%
+  reframe(nb_obs = n(),
+          nb_obs_validees = sum(taxon_valide == 1)) %>%
+  arrange(desc(nb_obs)) %>%
+  mutate(Regroupement2a = factor(Regroupement2a, levels = Regroupement2a)) %>%
+  mutate(prop = nb_obs/sum(nb_obs), # Compute percentages
+         ymax = cumsum(prop), # Compute the cumulative percentages (top of each rectangle)
+         ymin = c(0, head(ymax, n=-1))) # Compute the bottom of each rectangle
+
+# Donut plot pour regroupement 2a
+donut_taxo <- ggplot(regroupement_2a, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=Regroupement2a)) +
+  geom_rect(color = "black") +
+  coord_polar(theta="y") + # Try to remove that to understand how the chart is built initially
+  xlim(c(2, 4))  + # Try to remove that to see how to make a pie chart
+  scale_fill_manual(values = palette_camemberts, 
+                    breaks = sort(as.character(regroupement_2a$Regroupement2a))) +
+  labs(fill = "Groupes d'espèces") +
+  theme(panel.background = element_rect(fill = "white"),
+        panel.grid = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text = element_blank())
+donut_taxo
+ggsave(here::here("reporting", "donut_taxo_vers.tiff"), donut_taxo)
+
+#tableau distribution des obs selon regroupement 2a
+DT::datatable(regroupement_2a %>% select(Regroupement2a, nb_obs, nb_obs_validees, prop) %>%
+                mutate(prop = round(prop, 3)),
+              colnames = c("Regroupement2a", "Observations", "Observations\nvalidées", 
+                           "Proportion\ngroupe"),
+              extensions = "Buttons",
+              options = list(dom = 'Blfrtip',
+                             buttons = c("copy", "csv")),
+              rownames = FALSE)
+
+#tableau distribution des obs selon regroupement 2b
+regroupement_2b <- dt_qubs %>% 
+  filter(!is.na(taxon)) %>%
+  filter(protocole == "En quête de vers" ) %>%
+  group_by(Regroupement2b) %>%
+  reframe(nb_obs = n(),
+          nb_obs_validees = sum(taxon_valide == 1)) %>%
+  arrange(desc(nb_obs)) %>%
+  mutate(Regroupement2b = factor(Regroupement2b, levels = Regroupement2b)) %>%
+  mutate(prop = nb_obs/sum(nb_obs), # Compute percentages
+         ymax = cumsum(prop), # Compute the cumulative percentages (top of each rectangle)
+         ymin = c(0, head(ymax, n=-1))) # Compute the bottom of each rectangle
+DT::datatable(regroupement_2b %>% select(Regroupement2b, nb_obs, nb_obs_validees, prop) %>%
+                mutate(prop = round(prop, 3)),
+              colnames = c("Regroupement2b", "Observations", "Observations\nvalidées", 
+                           "Proportion\ngroupe"),
+              extensions = "Buttons",
+              options = list(dom = 'Blfrtip',
+                             buttons = c("copy", "csv")),
+              rownames = FALSE)
 ```
 :::
 
