@@ -1,0 +1,124 @@
+---
+title: "restit_qubs_solideo"
+author: "Héloïse Jeux - Vigie-Nature"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      cache = FALSE,
+                      message = FALSE, 
+                      warning = FALSE)
+```
+
+<br>
+<font size = 5>
+*EN BREF ...*
+</font>
+<br>
+
+<font size = 5>
+...vos observations qubs
+</font>
+
+<br>
+Nombre d’observations total d’espèces : `r nb_tot_obs`
+<br>
+Richesse en taxons du site : `r nb_tot_tax`
+<br>
+Top 3 des taxons d’invertébrés les plus observés par protocole : 
+
+```{r}
+DT::datatable(top3)
+```
+
+
+Top 3 des espèces d’invertébrés les moins observés par protocole : (A condition qu'il y ait au moins 6 taxons par protocole)
+
+```{r}
+DT::datatable(flop3)
+```
+
+% d’observation par groupe taxonomique
+<br>
+
+```{r}
+donut_taxo
+```
+
+Question d'insérer les photos des espèces / des dernières observations ?
+
+<br>
+
+<font size = 5>
+ ... la participation sur votre site
+</font>
+<br>
+
+
+Nombre total de participants : `r nb_tot_participants`
+
+<br>
+
+Dans le cadre du protocole Aspifaune on totalise `r length(unique(dt_aspifaune$session_id))*0.25*0.25` m² de surface totale aspirée !
+
+Dans le cadre du protocole Noctambule, on cumule `r length(unique(dt_noctambules$session_id))` nuits de pose.
+
+
+<br>
+*L'importance du respect des protocoles et de l'assiduité de la participation*
+<br>
+Participer plusieurs fois aux protocoles c'est apprendre et aussi améliorer les connaissances sur votre site --> passage du descriptif au statiqtique sur les sites
+
+<br>
+```{r}
+plot_participations_richesse
+```
+
+<br>
+
+```{r}
+plot_fidel_participant
+```
+
+<br>
+```{r}
+plot_activite_participants
+```
+<br>
+
+Nombre de gros participants sur le site (< 20 participations ) : `r nb_gros_participants`
+
+<br>
+
+
+
+
+
+
+<font size = 5>
+...la communauté qubs de votre site
+</font>
+<br>
+Ne concerne que les personnes active dans la communauté qui ont participé sur le site.
+<br>
+
+
+Une communauté active permet d'avoir des informations fiables :
+<br>
+`r pourc_taxon_valide` % d'identifications ont été validées sur le site.
+
+<br>
+Refaire ce graph en ajoutant un niveau correspondant au valideur ? --> trop atomisé si communauté active
+<br>
+```{r}
+plot_cercles_commu
+
+```
+
+

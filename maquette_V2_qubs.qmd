@@ -1,0 +1,1015 @@
+---
+title: "V2_maquette_PlaineNature"
+editor: visual
+format:
+  html:
+    toc: true
+    toc-location: left
+    sidebar: true
+    toc-title: "Sommaire"
+    toc-depth: 2
+    embed-resources: true
+execute:
+  echo: true
+  message : false
+  warning : false
+  error : false
+---
+
+# IMPORT DE DONNEES & FORMATAGE
+
+## librairies R
+
+```{r librairies}
+# R 4.4.2
+library(cowplot) # 1.1.3
+suppressWarnings(suppressMessages(library(dplyr))) # 1.1.4
+suppressWarnings(suppressMessages(library(flexdashboard))) # 0.6.2
+library(fmsb) # 0.7.6
+library(ggplot2) # 3.5.1
+suppressWarnings(suppressMessages(library(here))) # 1.0.1
+suppressWarnings(suppressMessages(library(httr))) # 1.4.7
+library(jsonlite) # 1.8.9
+suppressWarnings(suppressMessages(library(plotly))) # 4.10.4
+suppressWarnings(suppressMessages(library(RMySQL))) # 0.10.29
+library(stringr) # 1.5.1
+library(tidyr)
+library(lubridate)
+library(sf)
+library(vegan)
+```
+
+## données autres
+
+### Intercommunalités
+
+```{r couche publique des intercommunalites BD ADMIN EXPRESS}
+# couche ADMIN EXPRESS - polygones 
+invisible(capture.output({coord_epci <- st_read(here::here("maps/ADMIN-EXPRESS_3-2__SHP_WGS84G_FRA_2024-12-18/ADMIN-EXPRESS_3-2__SHP_WGS84G_FRA_2024-12-18/ADMIN-EXPRESS/1_DONNEES_LIVRAISON_2024-12-00243/ADE_3-2_SHP_WGS84G_FRA-ED2024-12-18/EPCI.shp"), quiet = TRUE) }))
+
+# recuperation des coordonnees des intercommunalites d'interet
+coord_plaineco = coord_epci %>% filter(NOM == "Plaine Commune") # emprise de Plaine Commune
+coord_grand_paris = coord_epci %>% filter(NOM == "Métropole du Grand Paris") # emprise de la MGP
+```
+
+### France Metropole
+
+```{r metropole}
+
+invisible(capture.output({france = read_sf(here::here("maps","metropole-version-simplifiee.geojson"), crs = 4326)}))
+
+```
+
+## Import des données qubs
+
+### dt_aspifaune_brut
+
+```{r}
+dt_aspifaune_brut = readRDS("data/dt_aspifaune.rds")
+```
+
+### dt_noctambules_brut
+
+```{r}
+dt_noctambules_brut = readRDS("data/dt_noctambules.rds")
+```
+
+### dt_vers_brut
+
+```{r}
+dt_vers_brut = readRDS("data/dt_vers.rds")
+```
+
+### dt_escargots_brut
+
+```{r}
+dt_escargots_brut = readRDS("data/dt_escargots.rds")
+```
+
+### dt_qubs_brut = données brutes
+
+récupération des années à partir des colonnes de dates des protocoles
+
+bind des 4 protocoles précédents avec les colonnes communes qui nous intéressent : session_id, observation_id, participation_nom, protocole, mission_id, mission_nom, participant_id, user_pseudo, site_id, site_nom, site_code_postale, site_type, site_type_autre, site_taille, site_compositions, site_compositions_autre, site_arrosages, site_produits_phyto, site_techniques_entretien, site_techniques_entretien_autre, site_anne_changement_terre, presence_organisme, url_photo_collecte, taxon, taxon_valide, abondance, taxon_ne_sait_pas, taxon_pas_dans_liste, taxon_denomination_precision, date, user_id, Regroupement2a, Regroupement2b, Regroupement3, geometry
+
+```{r import des donnees qubs de la BD MOSAIC}
+ 
+#identifier les champs communs aux differents dataframe
+champs_communs <- Reduce(intersect, list(colnames(dt_aspifaune_brut),
+                                         colnames(dt_noctambules_brut),
+                                         colnames(dt_escargots_brut),
+                                         colnames(dt_vers_brut)))
+#rbind des donnees des 3 protocoles
+dt_qubs <- rbind(dt_aspifaune_brut %>% select(all_of(champs_communs)),
+                 dt_noctambules_brut %>% select(all_of(champs_communs)),
+                 dt_escargots_brut %>% select(all_of(champs_communs)),
+                 dt_vers_brut %>% select(all_of(champs_communs)))
+
+# Ajouter la taxonomie et les regroupements d'especes
+taxo <- data.table::fread(here::here("data", "thesaurus_V1V2.csv")) %>% 
+  select(`Nom français V1`, `Regroupement2a`, `Regroupement2b`, `Regroupement3`)
+colnames(taxo) <- c("taxon", "Regroupement2a", "Regroupement2b", "Regroupement3")
+
+dt_qubs_brut <- dt_qubs %>% left_join(taxo, by = "taxon")
+
+
+```
+
+### dt_qubs_tot = filtre et formatage sur les donnees brutes
+
+```{r modification de la BD qubs}
+dt_qubs_tot = dt_qubs_brut %>%
+  # rename(year = date) %>% # s'appelle déjà year
+  mutate(abondance = as.numeric(abondance)) %>%
+  #on ajoute les infos manquantes pour la colonne abondance
+  mutate(abondance = case_when(presence_organisme == 1 & is.na(abondance) ~ 1, 
+                               TRUE ~ abondance)) 
+
+
+
+```
+
+### coord_qubs_national = df qubs spatialise
+
+On récupère un point par site qubs et on produit df_qubs_spatial, une table avec les coordonnées des sessions qubs.
+
+```{r df qubs spatialise}
+coord_qubs_national <- dt_qubs_tot %>%
+  mutate(longitude = as.numeric(longitude), latitude = as.numeric(latitude)) %>% 
+  st_as_sf(coords = c("longitude", "latitude"), crs = 4326)  %>% # on passe tout en format sf, projection WGS 84
+  st_join(france, left = F) %>%
+  select(session_id,  protocole) %>%
+  unique()
+
+```
+
+### dt_protoc_oso = couverture du sol
+
+Cette table de données permet d'avoir pour chaque session de la BD qubs les types de couverture du sol dans un rayon de 1km. La BD oso est un raster public distingant 23 catégories de couverture du sol, qui sont qu'il est possible d'agglomérer pour simplifier l'information. Ainsi, ces catégories sont groupées en imperméable, agricole, semi-naturelle, abbrévié respectivement im, ag, sn.
+
+![](data/oso_diagramme_couverture.png){fig-align="center" width="50%"}
+
+```{r child avec methode de calcul de la couverture du sol}
+knitr::knit_child("maquette_V2_child_couverture_sol_qubs.qmd", quiet = TRUE) %>%
+   knitr::asis_output()
+
+```
+
+### coord_plaine_nature = coordonnées Plaine Nature
+
+```{r dataPlaine Nature}
+# emprise spatiale Plaine Nature
+json_plaine_nature = '{"type": "FeatureCollection","name": "villageAthletes","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": [{ "type": "Feature", "properties": { }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 2.328302397552035, 48.922067901345237 ], [ 2.32981567138738, 48.923334320437128 ], [ 2.331231071790587, 48.924828257922385 ], [ 2.333060552098988, 48.92644581533628 ], [ 2.333745666123945, 48.926989936022409 ], [ 2.336877615952319, 48.925862115645039 ], [ 2.337186293699827, 48.926168806163972 ], [ 2.338014453510215, 48.925886848821236 ], [ 2.337291695857513, 48.925293249211663 ], [ 2.339234107049149, 48.924214858534825 ], [ 2.339776175288675, 48.923878475026783 ], [ 2.339023302733777, 48.923294745326601 ], [ 2.339994508329595, 48.922775319093915 ], [ 2.338887785673895, 48.922072848357288 ], [ 2.339836405093066, 48.921637509420734 ], [ 2.340626921275709, 48.922325145322304 ], [ 2.341515310890487, 48.921860126396467 ], [ 2.339746060386478, 48.920489779489607 ], [ 2.33878238351621, 48.919737804199627 ], [ 2.339490083717814, 48.919391495982325 ], [ 2.338661923907426, 48.917748972880204 ], [ 2.337961752431371, 48.916917796030702 ], [ 2.335770893296619, 48.917734130557733 ], [ 2.336331783350018, 48.918379767508057 ], [ 2.335240118145416, 48.918780503486708 ], [ 2.335371870842523, 48.918931397065208 ], [ 2.335940289621471, 48.918745872109326 ], [ 2.336663047274172, 48.91967348999794 ], [ 2.335443393735239, 48.920024743475018 ], [ 2.334521124855489, 48.919502809599713 ], [ 2.334411958335029, 48.919505283232859 ], [ 2.333275120777133, 48.919992586569272 ], [ 2.332469547143393, 48.920331469843077 ], [ 2.332160869395885, 48.920000007395508 ], [ 2.330542193402855, 48.920949864051636 ], [ 2.328121708138859, 48.921926911295728 ], [ 2.328302397552035, 48.922067901345237 ] ] ] ] } }]}'
+
+
+coord_plaine_nature = st_read(
+  dsn = json_plaine_nature,
+  quiet = TRUE
+) %>% 
+  mutate(NOM = "plaine_nature")
+
+```
+
+### coord_1001_voisins = coordonnées 1001 voisins
+
+```{r data 1001 voisins}
+# emprise spatiale 1001 voisins
+json_1001_voisins = '{"type": "FeatureCollection","name": "villageMedias","crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },"features": [{ "type": "Feature", "properties": { }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 2.420072557139776, 48.943024583355111 ], [ 2.420073023091361, 48.943019380665795 ], [ 2.420067979421824, 48.943018487004629 ], [ 2.420063769199778, 48.943012880064778 ], [ 2.420062648382413, 48.943017542425913 ], [ 2.419853817681765, 48.942792045255153 ], [ 2.419349393069956, 48.942742595638627 ], [ 2.418965428066935, 48.942421171936957 ], [ 2.418878847723117, 48.942445896910577 ], [ 2.418167383158698, 48.941896999613682 ], [ 2.418240788232805, 48.9415916419726 ], [ 2.418090213721817, 48.941421036485124 ], [ 2.418216319874769, 48.941142874113687 ], [ 2.418348072571884, 48.941061279524 ], [ 2.41838571619963, 48.9406978110948 ], [ 2.419277870177235, 48.939142841017727 ], [ 2.419797352240144, 48.939268946538014 ], [ 2.420369535381899, 48.939120587069297 ], [ 2.420130075744921, 48.938710898976481 ], [ 2.421566602744255, 48.938299656704928 ], [ 2.421472493674887, 48.938156239773946 ], [ 2.421431085684365, 48.937970786235013 ], [ 2.421427321321591, 48.937931222724195 ], [ 2.421865869584844, 48.937875895574457 ], [ 2.422385116374816, 48.937819177454948 ], [ 2.421165462835882, 48.93592008779553 ], [ 2.420194257240064, 48.93620693409509 ], [ 2.418898466938361, 48.9344919564561 ], [ 2.418503449222627, 48.934288066621242 ], [ 2.418390587018131, 48.934288066621242 ], [ 2.417656982688909, 48.934573512156931 ], [ 2.417559203297922, 48.934700972633571 ], [ 2.418556759433161, 48.936048674271575 ], [ 2.417438037871099, 48.936412949305087 ], [ 2.41696466925218, 48.935812056353456 ], [ 2.416783979838995, 48.935767545476715 ], [ 2.415569972844152, 48.938260093454787 ], [ 2.418285960586102, 48.93892617368131 ], [ 2.418014691193634, 48.940914934347788 ], [ 2.417875645043659, 48.941176253680126 ], [ 2.417160416116465, 48.941482850134911 ], [ 2.418357483478821, 48.942489165584945 ], [ 2.419071862013785, 48.943142740749323 ], [ 2.416245675962213, 48.944625355205332 ], [ 2.414223150117127, 48.942834970265309 ], [ 2.412908305434752, 48.943906125930063 ], [ 2.414279581219374, 48.945333062294772 ], [ 2.414364227872746, 48.945388656392268 ], [ 2.414550450510164, 48.945414600283222 ], [ 2.414714100706683, 48.945470194289918 ], [ 2.414866464682752, 48.945614738417362 ], [ 2.414826962911178, 48.945718513430165 ], [ 2.414719743816907, 48.945840819418201 ], [ 2.414539164289713, 48.945911237881383 ], [ 2.414279581219374, 48.946615417047866 ], [ 2.413777344409368, 48.947252875934325 ], [ 2.413698340866222, 48.947430769984116 ], [ 2.413681411535547, 48.947534541220314 ], [ 2.414019998149034, 48.948134927707542 ], [ 2.414742316257807, 48.947986684802096 ], [ 2.416796408379629, 48.94761607561162 ], [ 2.416677903064908, 48.947226932999065 ], [ 2.416785122159179, 48.947152810252604 ], [ 2.416852839481876, 48.946934147509033 ], [ 2.416993917237496, 48.946615417047866 ], [ 2.417360719402107, 48.946341158974974 ], [ 2.421085172150464, 48.944373127777325 ], [ 2.420072557139776, 48.943024583355111 ] ] ] ] } }]}'
+
+
+coord_1001_voisins = st_read(
+  dsn = json_1001_voisins,
+  quiet = TRUE
+) %>% 
+  mutate(NOM = "1001_voisins")
+
+```
+
+## df_qubs_VA = transects du Village des athlètes et releves
+
+actuellement pas de transects sur les sites SOLIDEO donc les 2 tables de données transect\_... sont vides.
+
+**Plaine Nature**
+
+```{r jointure emprise SOLIDEO et VA}
+# df_qubs_VA = coord_qubs_national %>%
+#   st_join(coord_plaine_nature) %>%
+#   filter(!is.na(NOM)) %>%
+#   as.data.frame() %>%
+#   left_join(dt_qubs_tot)
+
+
+```
+
+Comme il n'y a pas encore de transect sur les sites SOLIDEO, ceux-ci viennent combler le manque pour faire un test.
+
+```{r donnee de remplacement VA}
+df_qubs_VA = dt_qubs_tot %>% 
+  filter(session_id == 103) %>%
+  left_join(dt_protoc_oso)
+
+```
+
+## df_qubs_VM = transects du Village des Medias et releves
+
+**1001 voisins**
+
+actuellement pas de transects sur les sites SOLIDEO donc les 2 tables de données transect\_... sont vides.
+
+```{r jointure emprise SOLIDEO et VM}
+# df_qubs_VM = coord_qubs_national %>%
+#   st_join(coord_1001_voisins) %>%
+#   filter(!is.na(NOM)) %>%
+#   as.data.frame() %>%
+#   left_join(dt_qubs_tot)
+
+```
+
+Comme il n'y a pas encore de transect sur les sites SOLIDEO, ceux-ci viennent combler le manque pour faire un test.
+
+```{r donnee de remplacement VM}
+
+df_qubs_VM = dt_qubs_tot %>% 
+  filter(session_id %in% c(103, 104, 107, 214)) %>%
+  left_join(dt_protoc_oso)
+
+```
+
+# CALCUL DU REFERENTIEL
+
+## 1\_ table de données pour construire les referentiels
+
+### dt_qubs_tot_valide
+
+**sessions valides**
+
+```{r sessions valides}
+
+func_sessions_valides  = function(datafr) {
+  dt_tot_valide = datafr %>% filter(taxon_valide == 1)
+  
+
+# sessions vides
+dt_vide = datafr %>% filter(is.na(observation_id)) %>%
+  mutate(abondance = 0)
+
+# on considere que les sessions vides sont valides
+# df final 
+dt_tot_valide = dt_tot_valide %>% bind_rows(dt_vide)
+
+return(dt_tot_valide)
+
+}
+
+dt_qubs_tot_valide = func_sessions_valides(dt_qubs_tot)
+
+```
+
+<!-- **dt_aspifaune_valide** -->
+
+<!-- ```{r} -->
+<!-- dt_aspifaune_valide = dt_qubs_tot_valide %>%  -->
+<!--   filter(protocole == "Aspifaune") %>%  -->
+<!--   select(session_id, observation_id) %>% -->
+<!--   left_join(dt_aspifaune_brut) -->
+
+<!-- ``` -->
+
+<!-- **dt_noctambules_valide** -->
+
+<!-- ```{r} -->
+<!-- dt_noctambules_valide = dt_qubs_tot_valide %>%  -->
+<!--   filter(protocole == "Noctambules") %>%  -->
+<!--   select(session_id, observation_id) %>% -->
+<!--   left_join(dt_noctambules_brut) -->
+
+<!-- ``` -->
+
+<!-- **dt_vers_valide** -->
+
+<!-- ```{r} -->
+<!-- dt_vers_valide = dt_qubs_tot_valide %>%  -->
+<!--   filter(protocole == "En quête de vers") %>%  -->
+<!--   select(session_id, observation_id) %>% -->
+<!--   left_join(dt_vers_brut) -->
+
+<!-- ``` -->
+
+<!-- **dt escargots_valide** -->
+
+<!-- ```{r} -->
+<!-- dt_escargots_valide = dt_qubs_tot_valide %>%  -->
+<!--   filter(protocole == "Opération escargots") %>%  -->
+<!--   select(session_id, observation_id) %>% -->
+<!--   left_join(dt_escargots_brut) -->
+<!-- ``` -->
+
+### filtre sur les outliers richesse et abondance
+**richesse en espèces & abondance**
+
+```{r clean richesse et abondance}
+temp = dt_qubs_tot_valide %>%
+  group_by(session_id, protocole) %>%
+  reframe(richesse = n_distinct(taxon),
+          abondance_session = sum(abondance)) %>%
+  ungroup() %>%
+  left_join(dt_qubs_tot_valide %>% select(session_id, observation_id) %>% unique()) %>%
+  # on fait en sorte que les sessions sans observations aient des richesses specifiques nulles
+  mutate(richesse = case_when(is.na(observation_id) & richesse == 1 & abondance_session == 0 ~ 0, 
+                            TRUE ~ richesse), 
+         abondance_session = case_when(is.na(abondance_session) ~ 0, 
+                               TRUE ~ abondance_session))
+
+ggplot(temp, aes(y = abondance_session, x = protocole)) +
+  geom_boxplot()
+
+ggplot(temp, aes(y = richesse, x = protocole)) +
+  geom_boxplot()
+
+
+
+
+# enlever les outlier pour la richesse et le nombre de points de contact
+## calcul des fences pour la richesse et le nombre de contacts (bornes au delà desquels les valeurs sont considérés comme des outliers)
+#' Title
+#'
+#' @param x le df temp
+#' @param k la tolérance de l'interquartile (généralement 1.5 à 3)
+#' @param indicateur colonne "richesse" ou "abondance_session" de temp
+#'
+
+iqr_fences <- function(x = temp, k = 3, indicateur = NULL) {
+  
+  protocoles = x %>% pull(protocole) %>% unique()
+  
+  df_quartile_protoc = data.frame()
+  
+  for (p in protocoles) {
+    
+    q <- stats::quantile(x %>% filter(protocole == p) %>% select(indicateur), c(0.25, 0.75), na.rm = TRUE)
+    iqr <- q[2] - q[1]
+    
+    lower = q[1] - k * iqr
+    upper = q[2] + k * iqr
+    
+    
+    dt_temp = data.frame(protocole = p, q1 = lower, q3 = upper)
+    
+    df_quartile_protoc = df_quartile_protoc %>%
+      bind_rows(dt_temp)
+
+  }
+  
+  return(df_quartile_protoc)
+}
+
+
+f_richesse <- iqr_fences(k = 3, indicateur = "richesse") %>% mutate(indicateur = "richesse")
+f_abondance  <- iqr_fences(k = 3, indicateur = "abondance_session") %>% mutate(indicateur = "abondance_session")
+bind_quartiles = f_richesse %>% bind_rows(f_abondance)
+
+
+# "red" --> finir la boucle par protocole
+dt_ref_national_temp <- temp %>%
+  pivot_longer(cols = c(richesse, abondance_session),
+               values_to = "valeur",
+               names_to = "indicateur") %>%
+  # left_join(f_richesse) %>%
+  left_join(bind_quartiles) %>%
+  filter(valeur >= q1 & valeur <= q3) %>%
+  select(-q1, -q3) %>%
+  left_join(dt_qubs_tot_valide) 
+
+
+
+
+
+```
+
+
+**dt_aspifaune_ref**
+
+```{r}
+dt_aspifaune_ref = dt_ref_national_temp %>% 
+  filter(protocole == "Aspifaune") %>% 
+  select(session_id, observation_id) %>%
+  left_join(dt_aspifaune_brut)
+
+```
+
+**dt_noctambules_ref**
+
+```{r}
+dt_noctambules_ref = dt_ref_national_temp %>% 
+  filter(protocole == "Noctambules") %>% 
+  select(session_id, observation_id) %>%
+  left_join(dt_noctambules_brut)
+
+```
+
+**dt_vers_ref**
+
+```{r}
+dt_vers_ref = dt_ref_national_temp %>% 
+  filter(protocole == "En quête de vers") %>% 
+  select(session_id, observation_id) %>%
+  left_join(dt_vers_brut)
+
+```
+
+**dt escargots_ref**
+
+```{r}
+dt_escargots_ref = dt_ref_national_temp %>% 
+  filter(protocole == "Opération escargots") %>% 
+  select(session_id, observation_id) %>%
+  left_join(dt_escargots_brut)
+```
+
+
+### dt_ref_national : données de référence
+
+**phenologie de participation par protocole**
+
+3 périodes basé sur l'OPVT qui propose des suivis de janvier à avril :
+
+janvier-avril : période activité maximale vers mai-sept : période estivale sèche octobre-décembre : automne humide
+
+ou faire les 4 saisons ?
+
+Ball, K. C., Lloyd, G., Yoo, J., Hurley, O. C., Hagemeier, L., & Franco, A. L. C. (2026). Seasonal variation of micro and macro soil invertebrate communities in a temperate forest. Applied Soil Ecology, 218, 106729. https://doi.org/10.1016/j.apsoil.2025.106729
+
+Bonato Asato, A. E., Wirth, C., Eisenhauer, N., & Hines, J. (2023). On the phenology of soil organisms : Current knowledge and future steps. Ecology and Evolution, 13(4), e10022. https://doi.org/10.1002/ece3.10022
+
+```{r}
+dt_escargot_periode = dt_escargots_ref %>%
+  mutate(mois = as.character(month(date))) %>%
+  as.data.frame() %>%
+  select(session_id, observation_id, mois, protocole) %>%
+  distinct()%>%
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
+                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
+                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
+
+dt_aspifaune_periode = dt_aspifaune_ref %>%
+  mutate(mois = as.character(month(date_debut))) %>%
+  as.data.frame() %>%
+  select(session_id, observation_id, mois, protocole) %>%
+  distinct() %>%
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
+                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
+                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
+
+dt_vers_periode = dt_vers_ref %>%
+  mutate(mois = as.character(month(date_debut))) %>%
+  as.data.frame() %>%
+  select(session_id, observation_id, mois, protocole) %>%
+  distinct() %>%
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
+                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
+                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
+
+dt_noctambules_periode = dt_noctambules_ref %>%
+  mutate(mois = as.character(month(date_debut))) %>%
+  as.data.frame() %>%
+  select(session_id, observation_id, mois, protocole) %>%
+  distinct() %>%
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
+                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
+                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
+
+```
+
+
+
+```{r}
+dt_ref_national = dt_vers_periode %>% 
+  bind_rows(dt_escargot_periode) %>% 
+  bind_rows(dt_aspifaune_periode) %>% 
+  bind_rows(dt_noctambules_periode) 
+
+
+
+
+# ggplot(dt_qubs_periode %>% mutate(mois = as.numeric(mois)), aes(x = mois, fill = protocole)) +
+#   geom_bar(stat = "count", position = "dodge")
+ 
+```
+
+
+### dt_qubs_mgp
+```{r}
+
+dt_qubs_mgp = coord_qubs_national %>%
+  st_join(coord_grand_paris) %>%
+  as.data.frame() %>%
+  select(session_id, NOM) %>%
+  rename(mgp = NOM)
+
+```
+
+
+
+
+## 2\_ referentiels potentiels
+
+Le référentiel qubs prend en compte ces critères, ordonnés de façon hierarchique
+
+-   couverture du sol à l'emplacement du point
+-   saisonnalité avec couverture sol \> periode
+
+![](data/tableau_referentiels_qubs.png){fig-align="center" width="70%"}
+
+Les rangs hierarchiques associés à chaque filtre vont du plus fin (1) au moins fin (chiffre le plus grand).
+
+```{r referentiels potentiels}
+dt_ref_recap = dt_ref_national %>%
+  left_join(dt_protoc_oso) %>%
+  left_join(dt_qubs_mgp) %>% 
+  select(protocole, session_id, observation_id, regroupement, periode, mgp ) %>%
+  mutate(combi_couvsol_saison_mgp = paste0("1", regroupement, "---", periode, "---", mgp),
+         combi_couvsol_saison = paste0("2", regroupement, "---", periode),
+         combi_couvsol = paste0("3", regroupement),
+         combi_no_ref = "4no_ref") %>%
+  pivot_longer(cols = starts_with("combi"),
+               names_to = "critere",
+               values_to = "ref_lies"
+                 ) %>%
+  mutate(priorite = str_extract(ref_lies, "\\d+"), 
+         ref_lies = str_remove(ref_lies, "\\d+"))  %>%
+  
+  # compter le nombre de sessions par protocole pour chaque referentiel
+  group_by(protocole, ref_lies) %>%
+  mutate(nb_session = n_distinct(session_id)) %>%
+  ungroup()  
+  
+
+
+
+
+```
+
+
+## 3_ dt_VA & dt_VM : df locaux et référentiels choisis
+Selection des referentiels retenus par protocole et sessions locales Le référentiel doit faire au moins 30 sessions pour être retenu le poids des données locales dans le référentiel ne doit pas excéder 50%
+
+```{r boucle calcul referentiel}
+
+#'
+#' @param dt_qubs_site df contenant les informations sur les sessions du site
+#'
+#' @returns un df contenant les informations sur les sessions locales et les référentiels choisis pour ces sessions
+
+fun_calcul_ref_choisi = function(dt_qubs_site) {
+  
+  poids_donnees = dt_ref_recap %>% 
+  filter(session_id %in% unique(dt_qubs_site$session_id)) %>%
+  select(ref_lies, session_id, nb_session, priorite, protocole) %>%
+  unique() %>%
+  group_by(ref_lies, protocole) %>%
+  mutate(nb_session_local  = n_distinct(session_id)) %>%
+  ungroup() %>%
+  mutate(poids = nb_session_local / nb_session)
+  
+
+dt_ref_choisi = poids_donnees %>%
+  # on ne garde que les référentiels de plus de 30 sessions
+  filter(nb_session > 29) %>%
+  
+  # on ne considère que les référentiels pour lesquels le poids des données locales ne dépassent pas 50% (en nombre de sessions)
+  filter(poids < 0.5) %>%
+  group_by(session_id, protocole) %>%
+  
+  # on considère les référentiels par ordre de priorité
+  filter(priorite == min(priorite)) %>%
+  
+  ungroup() %>%
+  rename(ref_choisi = ref_lies) %>%
+  select(session_id, ref_choisi) 
+
+
+dt_ref_final = dt_ref_choisi %>%
+  left_join(poids_donnees) %>%
+  left_join(dt_ref_national) %>% 
+  select(-ref_lies) %>%
+  unique() 
+
+  return(dt_ref_final)
+}
+
+
+dt_VA = fun_calcul_ref_choisi(dt_qubs_site = df_qubs_VA)
+dt_VM = fun_calcul_ref_choisi(dt_qubs_site = df_qubs_VM)
+
+```
+## 4_selection : dt_ref_VA & dt_ref_VM
+```{r constitution des df de reference pour les sessions locales}
+
+func_df_ref = function(dt_qubs_site) {
+  
+  dt_site = fun_calcul_ref_choisi(dt_qubs_site)
+  
+  ref_site = dt_site %>% 
+  select(protocole, ref_choisi) %>%
+  unique() %>%
+  rename(ref_lies = ref_choisi)
+  
+  dt_ref_site = ref_site %>%
+    left_join(dt_ref_recap) %>%
+    left_join(dt_qubs_tot) %>%
+    unique() %>% 
+  mutate(abondance = case_when(is.na(abondance) ~0, 
+                               TRUE ~abondance))
+    
+    # filter(observation_id %in% unique(dt_ref_national$observation_id))
+  
+  return(dt_ref_site)
+  
+}
+
+dt_ref_VA = func_df_ref(dt_qubs_site = df_qubs_VA) 
+dt_ref_VM = func_df_ref(dt_qubs_site = df_qubs_VM)
+
+
+```
+
+# INDICATEURS
+
+
+
+## Composition en espèces
+
+### donut aspifaune et noctambules
+
+### histogrammes escargots et vers
+
+
+```{r calcul composition communute}
+## POURCENTAGE D'ESPECES en abondance --> frequence d'abondance ----
+# fréquences par especes ; especes valides
+func_pourc_sp = function(dt_q) {
+  
+  if (length(dt_q$taxon) > 0) {
+
+  df_pourc_sp <- dt_q %>% 
+    group_by(protocole) %>%
+    mutate(ntot_taxon = sum(abondance), nb_session = n_distinct(session_id)) %>%
+    ungroup() %>%
+    group_by(taxon, protocole, ntot_taxon, nb_session) %>%
+    reframe(pourc_taxon = round(100 * sum(abondance) / ntot_taxon, 1)) %>%
+    ungroup() %>%
+    unique() %>%
+    left_join(dt_q %>% select(session_id, taxon, abondance, Regroupement2b)) %>%
+    group_by(Regroupement2b, protocole) %>%
+    mutate(pourc_regroup = round(100 * sum(abondance) / ntot_taxon, 1)) %>%
+    ungroup() %>%
+    na.omit() %>%
+    select(-abondance, -session_id) %>%
+    unique() 
+    
+  }
+  else {
+    df_pourc_sp = paste0("Il n'y a pas de sessions à l'échelle spatiale considérée.")
+  }
+  
+  return(df_pourc_sp)
+} 
+
+
+df_compo_VA = func_pourc_sp(dt_q = df_qubs_VA) %>% mutate(echelle = "local")
+df_compo_VM = func_pourc_sp(df_qubs_VM) %>% mutate(echelle = "local")
+
+df_compo_VA_ref = func_pourc_sp(dt_q = dt_ref_VA) %>% mutate(echelle = "ref")
+df_compo_VM_ref = func_pourc_sp(dt_ref_VM) %>% mutate(echelle = "ref")
+
+
+
+# df combinant taxon observés en local et dans la référence. On ne considère que les taxons observés localement.
+
+va_combi_temp = df_compo_VA %>% mutate(combi_temp = paste0(protocole, taxon)) %>%
+  pull(combi_temp) %>% unique()
+
+vm_combi_temp = df_compo_VM %>% mutate(combi_temp = paste0(protocole, taxon)) %>%
+  pull(combi_temp) %>% unique()
+
+df_compo_VA_ref_local = df_compo_VA_ref %>% 
+  mutate(combi_temp = paste0(protocole, taxon)) %>%
+  filter(combi_temp %in% va_combi_temp) %>%
+  select(-combi_temp) %>%
+  bind_rows(df_compo_VA)
+  
+  
+df_compo_VM_ref_local = df_compo_VM_ref %>% 
+  mutate(combi_temp = paste0(protocole, taxon)) %>%
+  filter(combi_temp %in% vm_combi_temp) %>%
+  select(-combi_temp) %>%
+  bind_rows(df_compo_VM)
+
+
+rm(va_combi_temp, vm_combi_temp)
+
+```
+
+
+
+**histogramme sans affichage en parallèle local et référence**
+
+```{r histogramme compo especes}
+
+func_histo_compo = function(df_compo_site, df_compo_ref, p = NULL, col = "taxon", pourc = "pourc_taxon") {
+  
+  
+  dt_protoc = df_compo_site %>% filter(protocole == p)
+  
+  if (length(dt_protoc$taxon) > 0) {
+    histo_compo =
+      ggplot(dt_protoc, aes(x = reorder(!!sym(col), !!sym(pourc)), y = !!sym(pourc), fill = !!sym(col))) +
+      geom_bar(stat = "identity") +
+      coord_flip() +
+      theme_minimal() +
+      labs(x = paste0("Animaux observés"), 
+           y = "Part du nombre total d'animaux observé", 
+           title = paste0( "Protocole ", p, " : ", unique(dt_protoc$nb_session), " session(s)")
+           )
+    
+  }
+  
+  else {
+    histo_compo = paste0("Il n'y a pas de sessions pour le protocole '", p, "' sur le site.")
+
+  }
+  
+  
+  return(histo_compo)
+}
+
+# histo_compo_VM_escargots =
+  func_histo_compo(df_compo_site = df_compo_VM, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VM_vers = 
+  func_histo_compo(df_compo_site = df_compo_VM, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VM_noctambules = 
+  func_histo_compo(df_compo_site = df_compo_VM, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup")
+# histo_compo_VM_Aspifaune = 
+  func_histo_compo(df_compo_site = df_compo_VM, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup")
+
+
+
+# histo_compo_VA_escargots = 
+  func_histo_compo(df_compo_site = df_compo_VA, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VA_vers = 
+  func_histo_compo(df_compo_site = df_compo_VA, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VA_noctambules = 
+  func_histo_compo(df_compo_site = df_compo_VA, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup")
+# histo_compo_VA_Aspifaune = 
+  func_histo_compo(df_compo_site = df_compo_VA, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup")
+
+  
+  
+  
+  
+# REFERENCES
+  
+# histo_compo_VA_escargots_ref = 
+  func_histo_compo(df_compo_site = df_compo_VA_ref, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VA_vers_ref = 
+  func_histo_compo(df_compo_site = df_compo_VA_ref, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VA_noctambules_ref = 
+  func_histo_compo(df_compo_site = df_compo_VA_ref, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup")
+# histo_compo_VA_Aspifaune_ref = 
+  func_histo_compo(df_compo_site = df_compo_VA_ref, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup")
+  
+  
+# histo_compo_VM_escargots_ref =   
+  func_histo_compo(df_compo_site = df_compo_VM_ref, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VM_vers_ref = 
+  func_histo_compo(df_compo_site = df_compo_VM_ref, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VM_noctambules_ref = 
+  func_histo_compo(df_compo_site = df_compo_VM_ref, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup")
+# histo_compo_VM_Aspifaune_ref = 
+  func_histo_compo(df_compo_site = df_compo_VM_ref, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup")
+  
+  
+  
+```
+
+
+
+**histogramme AVEC affichage en parallèle local et référence**
+
+```{r histogramme compo especes local et ref}
+
+func_histo_compo_local_ref = function(df_compo_site_ref, p = NULL, col = "taxon", pourc = "pourc_taxon") {
+  
+  
+  dt_protoc = df_compo_site_ref %>% filter(protocole == p)
+  
+  nb_session_local = df_compo_site_ref %>% filter(echelle == "local") %>% mutate(nb_session = length(protocole)) %>% pull(nb_session) %>% unique()
+  
+  if (length(dt_protoc$taxon) > 0) {
+    histo_compo =
+      ggplot(dt_protoc, aes(x = reorder(!!sym(col), !!sym(pourc)), y = !!sym(pourc), fill = echelle)) +
+      geom_bar(stat = "identity", position = "dodge") +
+      coord_flip() +
+      theme_minimal() +
+      labs(x = paste0("Animaux observés"), 
+           y = "Part du nombre total d'animaux observé", 
+           title = paste0( "Protocole ", p, " : ", nb_session_local, " session(s) réalisées localement")
+           )
+    
+  }
+  
+  else {
+    histo_compo = paste0("Il n'y a pas de sessions pour le protocole '", p, "' sur le site.")
+
+  }
+  
+  
+  return(histo_compo)
+}
+
+# histo_compo_VM_escargots =
+  func_histo_compo_local_ref(df_compo_site = df_compo_VM_ref_local, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VM_vers = 
+  func_histo_compo_local_ref(df_compo_site = df_compo_VM_ref_local, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VM_noctambules = 
+  func_histo_compo_local_ref(df_compo_site = df_compo_VM_ref_local, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup")
+# histo_compo_VM_Aspifaune = 
+  func_histo_compo_local_ref(df_compo_site = df_compo_VM_ref_local, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup")
+
+
+
+# histo_compo_VA_escargots = 
+  func_histo_compo_local_ref(df_compo_site = df_compo_VA_ref_local, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VA_vers = 
+  func_histo_compo_local_ref(df_compo_site = df_compo_VA_ref_local, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon")
+# histo_compo_VA_noctambules = 
+  func_histo_compo_local_ref(df_compo_site = df_compo_VA_ref_local, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup")
+# histo_compo_VA_Aspifaune = 
+  func_histo_compo_local_ref(df_compo_site = df_compo_VA_ref_local, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup")
+
+  
+  
+  
+  
+  
+```
+
+
+
+**donut**
+
+```{r}
+
+
+#'
+#' @param df_compo_site df local considéré
+#' @param pourc colonne pourcentage considéré : "pourc_taxon" ou "pourc_regroup"
+#' @param p protocole considéré
+#' @param category colonne taxonomique considérée : "taxon" ou "Regroupement2b"
+#'
+#' @returns plot donut représentant la répartition des taxons
+
+func_donut_compo_commu = function(df_compo_site, pourc = "pourc_taxon", p = "Aspifaune", category = "taxon") {
+      
+      data_site = df_compo_site %>% filter(protocole == p) %>% rename(fraction = !!sym(pourc))  %>% select(!!sym(category), fraction, protocole) %>% unique() %>% arrange(fraction)
+  
+  if (length(data_site$protocole) > 0) {
+           
+  # Compute the cumulative percentages (top of each rectangle)
+  data_site$ymax = cumsum(data_site$fraction)
+  
+  # Compute the bottom of each rectangle
+  data_site$ymin = c(0, head(data_site$ymax, n=-1))
+  
+  # Compute label position
+  data_site$labelPosition <- (data_site$ymax + data_site$ymin) / 2
+  
+  # Compute a good label
+  data_site = data_site %>% 
+  mutate(label = paste0(!!sym(category), "\n", fraction, " %"))
+  
+  # Make the plot
+  plot = ggplot(data_site, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=!!sym(category))) +
+  geom_rect() +
+  geom_label( x=4.1, aes(y=labelPosition, label=label), size=3) +
+  coord_polar(theta="y") +
+  xlim(c(2, 4)) +
+  theme_void() +
+  theme(legend.position = "none") +
+    labs(title = paste0(p, " : ", unique(df_compo_site$nb_session), " sessions"))
+  
+  }
+  else {
+    plot = paste0("Il n'y a pas de sessions à l'échelle spatiale considérée.")
+  }
+  
+  
+  
+  return(plot)
+
+}
+
+
+# donut_VA_aspifaune_regroup = 
+  func_donut_compo_commu(df_compo_site = df_compo_VA, pourc = "pourc_regroup", p = "Aspifaune", category = "Regroupement2b")
+# donut_VA_noctambules_regroup = 
+  func_donut_compo_commu(df_compo_site = df_compo_VA, pourc = "pourc_regroup", p = "Noctambules", category = "Regroupement2b")
+# donut_VA_escargots_taxon = 
+  func_donut_compo_commu(df_compo_site = df_compo_VA, pourc = "pourc_taxon", p = "Opération escargots", category = "taxon")
+# donut_VA_vers_taxon = 
+  func_donut_compo_commu(df_compo_site = df_compo_VA, pourc = "pourc_taxon", p = "En quête de vers", category = "taxon")
+
+
+
+# donut_VM_aspifaune_regroup = 
+  func_donut_compo_commu(df_compo_site = df_compo_VM, pourc = "pourc_regroup", p = "Aspifaune", category = "Regroupement2b")
+# donut_VM_noctambules_regroup = 
+  func_donut_compo_commu(df_compo_site = df_compo_VM, pourc = "pourc_regroup", p = "Noctambules", category = "Regroupement2b")
+# donut_VM_escargots_taxon = 
+  func_donut_compo_commu(df_compo_site = df_compo_VM, pourc = "pourc_taxon", p = "Opération escargots", category = "taxon")
+# donut_VM_vers_taxon = 
+  func_donut_compo_commu(df_compo_site = df_compo_VM, pourc = "pourc_taxon", p = "En quête de vers", category = "taxon")
+
+
+  func_donut_compo_commu(df_compo_site = df_compo_VM_ref, pourc = "pourc_regroup", p = "Aspifaune", category = "Regroupement2b")
+
+```
+
+# abondance médiane par protocole
+
+```{r}
+func_nb_tax = function(dt_q) {
+  
+  if (length(dt_q$taxon) > 0) {
+
+  df_nb_tax <- dt_q %>% 
+    filter(taxon_valide == 1) %>%
+    group_by(session_id, protocole) %>%
+    mutate(nb_indiv = sum(abondance)) %>%
+    ungroup() %>%
+    select(session_id, nb_indiv, protocole) %>%
+    unique() %>%
+    group_by(protocole) %>%
+    mutate(nb_session = n_distinct(session_id)) %>%
+    ungroup()
+    
+  }
+  else {
+    df_nb_tax = paste0("Il n'y a pas de sessions à l'échelle spatiale considérée.")
+  }
+  
+  return(df_nb_tax)
+} 
+
+df_nb_tax_VA = func_nb_tax(dt_q = df_qubs_VA) %>% mutate(echelle = "local")
+df_nb_tax_VM = func_nb_tax(df_qubs_VM) %>% mutate(echelle = "local")
+
+df_nb_tax_VA_ref = func_nb_tax(dt_q = dt_ref_VA) %>% mutate(echelle = "ref")
+df_nb_tax_VM_ref = func_nb_tax(dt_ref_VM) %>% mutate(echelle = "ref")
+
+
+df_nb_tax_VA_ref_local = df_nb_tax_VA %>% 
+  bind_rows(df_nb_tax_VA_ref)
+df_nb_tax_VM_ref_local = df_nb_tax_VM %>% 
+  bind_rows(df_nb_tax_VM_ref)
+
+
+
+labels_df <- df_nb_tax_VA_ref_local |>
+  group_by(protocole, echelle) |>
+  summarise(
+    nb_session = first(nb_session),
+    y = max(nb_indiv, na.rm = TRUE) * 1.1,
+    .groups = "drop"
+  )
+
+ggplot(df_nb_tax_VA_ref_local, aes(x = protocole, y = nb_indiv, fill = echelle)) +
+  geom_boxplot() +
+  theme_minimal() +
+  geom_text(
+    data = labels_df,
+    aes(y = y, label = paste0("n = ", nb_session)),
+    position = position_dodge(width = 0.75),
+    vjust = 0)
+
+
+labels_df <- df_nb_tax_VM_ref_local |>
+  group_by(protocole, echelle) |>
+  summarise(
+    nb_session = first(nb_session),
+    y = max(nb_indiv, na.rm = TRUE) * 1.1,
+    .groups = "drop"
+  )
+
+ggplot(df_nb_tax_VM_ref_local, aes(x = protocole, y = nb_indiv, fill = echelle)) +
+  geom_boxplot() +
+  theme_minimal() +
+  geom_text(
+    data = labels_df,
+    aes(y = y, label = paste0("n = ", nb_session)),
+    position = position_dodge(width = 0.75),
+    vjust = 0)
+
+
+
+```

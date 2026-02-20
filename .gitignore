@@ -9,3 +9,8 @@
 *.Rproj
 *.tiff
 *.csv
+/image
+/maps
+/reporting
+/sql
+/tableaux

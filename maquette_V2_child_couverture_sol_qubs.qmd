@@ -1,0 +1,161 @@
+---
+title: "child_oso"
+editor: visual
+format:
+  html:
+    toc: true
+    toc-location: left
+    sidebar: true
+    toc-title: "Sommaire"
+    toc-depth: 2
+    embed-resources: true
+execute:
+  echo: true
+  message : false
+  warning : false
+  error : false
+---
+
+Objet final : dt_protoc_oso, format 'sf'
+
+
+```{r}
+library(terra) #librairie pour la lecture et la manipulation du raster
+```
+
+**association légende explicite**
+
+Le raster oso est projeté en lambert 93. Ce raster est une donnée publique. On le récupère et associe aux différentes catégories numériques la légende qui convient grâce aux métadonnées. production raster oso
+
+
+creation legende raster oso
+
+```{r}
+# Import du raster oso (couverture du sol)
+# projection = lambert 93
+oso <- rast("C:/Git/referentiels_heloise/maps/OSO/DATA/OCS_2023.tif")
+# vérification de la projection :
+crs(oso)
+
+
+## ajout des descriptions des différentes catégories oso 
+library(xml2)
+
+# Lire le fichier XML avec les metadonnees
+xml_doc <- read_xml("C:/Git/referentiels_heloise/maps/OSO/PUBLIC_METADATA/OSO_20230101_RASTER_V1-0_MTD_ALL.xml")
+
+# Extraire les noeuds pour chaque classe
+nodes <- xml_find_all(xml_doc, ".//Classes_Statistic_List")
+
+# Construire un data.frame qui associe aux codes les noms
+oso_legend <- tibble(
+  code = nodes |> xml_attr("classe") |> as.integer(),
+  label = nodes |> xml_find_first(".//Name") |> xml_text()
+)
+
+# Ajouter la légende à la couche oso
+levels(oso) <- oso_legend
+```
+
+**calcul de la couverture du sol à l'emplacement du point**
+
+On calcule ensuite pour 1 km autour de chaque participation aux protocoles VN les % que représentent les 23 catégories de couverture du sol. On fixe la taille de ce buffer à un rayon de 1000 m autour du point.
+
+La fonction suivante (func_oso_categ_couv) permet de faire ce calcul :
+
+
+fonction calcul couverture sol buffer a partir d une BD Vigie-Nature
+
+```{r}
+# fonction qui renvoie le pourcentage des 23 catégories de couverture du sol dans un rayon donné autour des points du protocole
+#' Title
+#'
+#' @param dt_protoc_l93 df contenant les coordonnées des points du protocole en L93
+#' @param zone_tampon rayon en m pour le buffer
+#'
+#' @returns dt_protoc_oso_brut (WGS84) qui renvoie le pourcentage de couverture du sol dans le buffer, pour les 23 catégories oso, ainsi que la couverture du sol là où le point a été réalisé
+#'
+#'
+
+func_oso_categ_couv = function(dt_protoc_l93, zone_tampon) {
+  # Convertir en vecteur terra les points de mes objets sf
+  points_vect <- vect(dt_protoc_l93)
+  
+  # COUVERTURE DU SOL LA OU LE POINT EST PLACE
+  # Lors de l’extraction avec terra::extract(), les IDs générés sont par défaut 1:nrow(points_sf). 
+  extrait_point <- terra::extract(oso, points_vect) %>%
+    rename(couv_point = label)
+  
+  # merge de mon dt_protoc et des frequences associées aux points :
+  ## 1_ creation de la colonne ID qui est le numero de ligne 
+  dt_proto_oso = dt_protoc_l93 %>%
+    mutate(ID = row_number()) %>%
+    # left_join(prop_couv) %>%
+    left_join(extrait_point)
+  
+  # on repasse en WGS84 (projection utilisee pour la manipulation des donnees spatiales sur R)
+  dt_protoc_oso_brut = st_transform(dt_proto_oso, crs = 4326)
+
+  return(dt_protoc_oso_brut)
+  
+}   
+
+
+
+# pour les données qubs :
+dt_protoc = coord_qubs_national
+dt_protoc_l93 <- st_transform(dt_protoc, crs = 2154) # import dt_protocole en wgs84 et conversion en L93 --> projection de la dt OSO
+dt_qubs_oso_WGS84 = func_oso_categ_couv(dt_protoc_l93, 1000)
+# write_rds(dt_qubs_oso_WGS84, "data/dt_qubs_oso_brut_1000.rds") #ecriture de la BD en local
+
+rm(dt_protoc)
+rm(dt_protoc_l93)
+```
+
+**regroupement des catégories de couverture du sol**
+
+```{r}
+## critere couverture sol a l'emplacement de relevé qubs
+# colonne couv_point dt_protoc_oso
+
+a1 = data.frame(
+  regroupement = "semi_nat_foret", couv_point = c("forets de feuillus", "forets de coniferes", "landes ligneuses"))
+
+a2 = data.frame(
+  regroupement = "semi_nat_pelouse", couv_point = "pelouses")
+
+a3 = data.frame(
+  regroupement = "semi_nat_nonvegetalise", couv_point = c("eau", "surfaces minérales", "plages et dunes", "glaciers ou neiges"))
+
+a4 = data.frame(
+  regroupement = "agricole_vignes_vergers", couv_point = c("vergers", "vignes"))
+
+a5 = data.frame(
+  regroupement = "agricole_prairies", couv_point = "prairies")
+
+a6 = data.frame(
+  regroupement = "agricole_cultures", couv_point = c("colza", "cereales à pailles", "protéagineux", "soja", "tournesol", "maïs", "riz", "tubercules/racines"))
+
+a7 =  data.frame(
+  regroupement = "artificialise", couv_point = c("batis denses", "batis diffus", "zones ind et com", "surfaces routes", "serres"))
+    
+df_corresp_regroupement = a1 %>% 
+  bind_rows(a2) %>% 
+  bind_rows(a3) %>%
+  bind_rows(a4) %>% 
+  bind_rows(a5) %>%
+  bind_rows(a6) %>%
+  bind_rows(a7)
+
+
+
+dt_protoc_oso = dt_qubs_oso_WGS84 %>%
+  as.data.frame() %>%
+  select(-geometry) %>%
+  select(protocole, session_id, couv_point ) %>%
+  unique() %>%
+  left_join(df_corresp_regroupement)
+
+
+rm(a1, a2, a3, a4, a5, a6, a7, df_corresp_regroupement)
+```

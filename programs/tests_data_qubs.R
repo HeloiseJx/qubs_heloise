@@ -71,7 +71,7 @@ participation_semaine <- dt_escargots %>% mutate(semaine = lubridate::floor_date
         axis.title = element_text(size = 16))
 
 plotly::ggplotly(participation_semaine)
-ggsave(here::here("reporting", "participation_semaine_escargots.tiff"), participation_semaine)
+# ggsave(here::here("reporting", "participation_semaine_escargots.tiff"), participation_semaine)
 
 
 

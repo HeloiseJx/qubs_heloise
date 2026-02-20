@@ -104,7 +104,7 @@ synthese_participation_qubs <- dt_qubs %>%
   group_by(protocole) %>%
   reframe(nb_sites = n_distinct(site_id),
           nb_participants = n_distinct(participant_id),
-          nb_sessions = n_distinct(participation_id),
+          nb_sessions = n_distinct(session_id),
           nb_sessions_vides = sum(presence_organisme == 0))
 
 DT::datatable(synthese_participation_qubs,
@@ -170,7 +170,7 @@ DT::datatable(synthese_obs_qubs,
 ::: panel-tabset
 ### Aspifaune
 
-Dans le cadre du protocole Aspifaune on totalise `r length(unique(dt_aspifaune$participation_id))*0.25*0.25` m² de surface totale aspirée !
+Dans le cadre du protocole Aspifaune on totalise `r length(unique(dt_aspifaune$session_id))*0.25*0.25` m² de surface totale aspirée !
 
 <br>
 
@@ -182,7 +182,7 @@ duree_pose_noctambules <- dt_noctambules %>%
   mutate(date_fin = lubridate::ymd(lubridate::as_date(date_debut)+lubridate::days(1))) %>%
   mutate(date_pose = lubridate::as_datetime(paste(date_debut, heure_pose_gobelet)),
          date_releve = lubridate::as_datetime(paste(date_fin, heure_releve))) %>%
-  select(participation_id, date_pose, date_releve) %>%
+  select(session_id, date_pose, date_releve) %>%
   distinct() %>%
   mutate(duree = difftime(date_releve, date_pose, units = "hours")) %>%
   pull(duree) %>%
@@ -209,7 +209,7 @@ Sinon je trouve que c'est plus parlant de donner le nombre de nuits différentes
 
 ### En quête de vers
 
-Dans le cadre du protocole En quête de vers on totalise `r length(unique(dt_vers$participation_id))*10` litres de sol trié !
+Dans le cadre du protocole En quête de vers on totalise `r length(unique(dt_vers$session_id))*10` litres de sol trié !
 :::
 
 <br>
@@ -229,12 +229,12 @@ dt_comments <- import_from_mosaic(query,
                                   force_UTF8 = TRUE)
 
 #ajouter le protocole aux donnees sociales
-## melt le tableau dt_qubs sur observation_id et participation_id 
+## melt le tableau dt_qubs sur observation_id et session_id 
 ## pour obtenir une colonne resource_id equivalente à celle de la table qubs.comments
 dt_comments <- dt_comments %>% left_join(reshape2::melt(dt_qubs %>% 
-                                                          select(observation_id, participation_id, protocole) %>% 
+                                                          select(observation_id, session_id, protocole) %>% 
                                                           rename(observation = observation_id,
-                                                                 participation = participation_id) %>%
+                                                                 participation = session_id) %>%
                                                           distinct(), id = c("protocole") %>% 
                                                           na.omit()) %>%
                                            #rename columns to match the structure of dt_comments
@@ -661,7 +661,7 @@ Une carte simplifiée avec l'ensemble des sites d'échantillonnages (tous protoc
 # Carto ---------------------------------------------------------------
 #coordonnees sites
 coord_qubs <- dt_qubs %>%
-  select(participation_id, latitude, longitude) %>%
+  select(session_id, latitude, longitude) %>%
   distinct() %>%
   sf::st_as_sf(coords = c("longitude",
                           "latitude"),

@@ -1,0 +1,850 @@
+---
+title: "QMD_restit_V2_solideo_qubs"
+author: "Héloïse Jeux - Vigie-Nature"
+format:
+  html:
+    toc: true
+    toc-location: left
+    sidebar: true
+    toc-title: "Sommaire"
+    toc-depth: 2
+    embed-resources: true
+execute:
+  echo: false
+  message : false
+  warning : false
+  error : false
+editor: visual
+---
+
+```{r import data}
+
+source("programs/make_bilan.R")
+# en l'absence de connection au serveur la partie sur la communauté du script script_indic est commentée
+```
+
+#### *Données de la métropole de Dijon*
+
+#### *Référentiel Bourgogne-Franche-Comté*
+
+# Carte simplifiée des collections
+
+*filtre : pas de filtre*
+
+```{r carto_simple}
+carte_collections
+```
+
+# EN BREF ...
+
+## ...vos observations qubs, tous protocoles confondus :
+
+*filtre : pas de filtre*
+
+-   Nombre d'animaux différents du site observés : `r nb_tot_tax`
+-   Nombre d’observations total d'individus : `r nb_tot_obs`
+
+#### **A - Invertébrés les plus fréquemment observés sur les sites par protocole :**
+
+*filtre : taxons validés seulement*
+
+Ce classement correspond aux taxons les ubiquistes sur les sites, ne concerne par l'abondance. Ce sont les taxons les plus observés sur l'ensemble des sessions. (présence-absence sur les sessions). On pourrait décrire cette fréquence comme la part de sessions où les taxons ont été observés.
+
+```{r}
+DT::datatable(top3)
+```
+
+```{r}
+# if (nrow(dt_qubs) > 5) {
+#   DT::datatable(flop3)
+# } else{
+#   print("pas assez de relevés")
+# }
+
+```
+
+**Fréquence d'observation des espèces par rapport aux données du référentiel :**
+
+*filtre : taxons validés seulement*
+
+Top 3 des espèces les plus observées à l'échelle locale et leur fréquence d'observation dans les données du référentiel. Idem précédemment, ici il s'agit des taxons les plus ubiquistes localement. On pourrait décrire cette fréquence comme la part de sessions où les taxons ont été observés.
+
+```{r}
+func_freq_combi()
+```
+
+#### **B - Invertébrés les plus abondants sur les différents protocoles :**
+
+On considère le nombre d'individus observés à chaque session par rapport au nombre d'individus observé total. Ceci permet de mettre en lumière la biomasse que certaines espèces représentent dans les sols.
+
+```{r}
+DT::datatable(top3_abond)
+```
+
+```{r}
+func_pourc_combi()
+```
+
+**part d'individus par groupe d'animaux**
+
+*filtre : individus validés*
+
+Abondance par taxon sur le nombre d'individus total
+
+```{r}
+donut_taxo
+```
+
+**En moyenne ...**
+
+Sur votre site en participant à l'un des protocoles qubs, vous pouvez vous attendre en moyenne à avoir :
+
+*filtre : taxons validés*
+
+```{r}
+
+df_moy_tax_session_local = func_nb_tax_moy(dt_qubs) %>% mutate(echelle = "local")
+
+DT::datatable(df_moy_tax_session_local)
+```
+
+Dans votre référentiel, vous pouvez vous attendre à avoir cette quantité de taxons par collection en moyenne :
+
+*filtre : taxons validés*
+
+```{r}
+
+
+df_moy_tax_session_ref = func_nb_tax_moy(dt_ref_valide) %>% mutate(echelle = "référentiel")
+
+DT::datatable(df_moy_tax_session_ref)
+```
+
+A l'échelle nationale, le nombre de taxon moyen par collection est :
+
+*filtre : taxons validés*
+
+```{r}
+
+df_moy_tax_session_national = func_nb_tax_moy(dt_qubs_total_valide) %>% mutate(echelle = "national")
+DT::datatable(df_moy_tax_session_national)
+```
+
+Combinaison des 2 tableaux précédents sur un même graphe :
+
+Les valeurs en haut des barres correspondent aux nombre de sessions à partir desquelles ont été calculé les moyennes.
+
+*filtre : taxons validés*
+
+```{r}
+
+rbind(df_moy_tax_session_local, df_moy_tax_session_ref, df_moy_tax_session_national) %>%
+  ggplot(aes(x = protocole, y = moy_nb_tax, fill = echelle)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.5) +  
+  geom_text(
+    aes(label = nb_session),
+    position = position_dodge(width = 0.5),
+    vjust = -0.5, size = 3
+  ) +
+  labs(y = "Nombre de taxons moyen par session", x = "Protocole") +
+  theme_minimal()
+```
+
+**Détail des abondances pour les différents protocoles**
+
+*filtre : taxons validés*
+
+```{r}
+a = dt_qubs %>%
+  group_by(session_id, protocole) %>%
+  summarize(abond_sess = sum(abondance)) %>%
+  ungroup()
+for (p in unique(a$protocole)) {
+  plot = a %>%
+    filter(protocole == p) %>%
+    ggplot(aes(x = abond_sess)) +
+    geom_bar(position = "dodge") +
+    ggtitle(p) +
+    theme_minimal()
+  
+  print(plot)
+}
+
+
+```
+
+## ... la participation sur votre site
+
+*filtre : pas de filtre*
+
+-   Nombre total de participants : `r nb_tot_participants`
+
+-   Nombre total de participations : `r nb_tot_participation`
+
+    *filtre : pas de filtre*
+
+    ```{r}
+    DT::datatable(synthese_participation_qubs[, c("protocole", "nb_sessions")])
+    ```
+
+*filtre : pas de filtre*
+
+```{r}
+# surface aspirée pour le protocole Aspifaune
+if ("Aspifaune" %in% dt_qubs_nonvalid$protocole) {
+  S_aspi = length(dt_qubs_nonvalid$session_id[dt_qubs_nonvalid$protocole == "Aspifaune"])*0.25*0.25
+} else {
+  S_aspi = 0
+}
+
+```
+
+```{r}
+# nuits de pose pour Noctambule
+if ("Noctambules" %in% dt_qubs_nonvalid$protocole) {
+  nb_nuit = length(unique(dt_qubs_nonvalid$session_id[dt_qubs_nonvalid$protocole == "Noctambules"]))
+} else {
+  nb_nuit = 0
+}
+
+```
+
+```{r}
+# surface aspirée pour le protocole Aspifaune
+if ("En quête de vers" %in% dt_qubs_nonvalid$protocole) {
+  V_terre = length(dt_qubs$session_id[dt_qubs$protocole == "En quête de vers"])*0.25*0.2*0.2
+} else {
+  V_terre = 0
+}
+```
+
+-   Dans le cadre du protocole *Aspifaune* on totalise `r S_aspi` m² de surface totale aspirée !
+
+-   Dans le cadre du protocole *Noctambule*, on cumule `r nb_nuit` nuits de pose.
+
+-   Dans le cadre du protocole *En quête de vers*, on cumule `r V_terre` m\^3 de terre retournée.
+
+Le poids de vos données dans le référentiel :
+
+*filtre : pas de filtre*
+
+```{r}
+ func_poids_radar()
+
+```
+
+Les valeurs correspondent au pourcentage que représentent les données locales dans le référentiel.
+
+### **L'importance du respect des protocoles et de l'assiduité de la participation**
+
+Participer plusieurs fois aux protocoles c'est apprendre et aussi améliorer les connaissances sur votre site. L'accumulation de données permet de passer des informations descriptives à des indicateurs statistiquement validés.
+
+Richesse cumulée en taxons en fonction du nombre de sessions tous protocoles confondus :
+
+*filtre : taxons valides*
+
+```{r}
+
+# func_riches_cum_tt_protoc(dt_qubs, "LOCAL") + func_riches_cum_tt_protoc(dt_ref_valide, "REFERENTIEL")
+
+func_riches_cum_par_protoc(dt_qubs, "LOCAL")
+# func_riches_cum_par_protoc(dt_ref_valide, "REFERENTIEL")
+# func_riches_cum_par_protoc(dt_qubs_total_valide, "NATIONAL")
+```
+
+**Nombre de participant.e.s annuel et fidélité au programme :**
+
+*filtre : pas de filtre*
+
+```{r}
+plot_fidel_participant
+```
+
+*filtre : pas de filtre*
+
+```{r}
+plot_activite_participants
+plot_nb_protoc_user
+```
+
+## ... la communauté qubs de votre site
+
+La communauté correspond aux participant.e.s de votre site qui s'investissent aussi dans la validation et les échanges autour des identifications d'autres participant.e.s.
+
+Une communauté active permet d'avoir des informations fiables :
+
+*filtre : pas de filtre*
+
+-   **`r pourc_taxon_valide` % d'identifications ont été validées** sur le site.
+
+-   **`r pourc_tax_nonidentif` % de taxons non identifiés** sur le site.
+
+*filtre : pas de filtre*
+
+```{r}
+# func_cercle_commu()
+func_plot_commu_sankey()
+```
+
+# REFERENTIEL
+
+## Référentiels possibles
+
+filtres possibles pour QUBS : - Couverture sol - MGP - MGP + Couverture sol
+
+on considère la couverture en surface imperméable.
+
+Au sujet du filtre "couverture imperméable" : Pour Le village des Médias : 60 % de couverture imperméable
+
+Pour le Village des athlètes : 80 % de couverture imperméable On prend un pourcentage de +- 15% en matière de couverture imperméable pour le filtre "couverture imperméable"
+
+Les combinaisons possibles de ces filtres :
+
+-   MGP
+
+-   Biogéoregions + couverture
+
+-   Couverture
+
+Approche par site : Un site est une emprise sur laquelle plusieurs sessions sont réalisées. Pour calculer les référentiels associés, je considère une approche par session où je calcule le référentiel associé à chaque session du site, ce qui permet d'avoir une distinction entre les protocoles, mais pour chacun des protocoles on devrait retrouver à priori le même référentiel pour toutes les sessions vu la grossièreté du ref.
+
+```{r}
+source("programs/calcul_ref_qubs.R")
+
+# df de sortie : 
+# dt_ref_session_paysloc
+# dt_ref_session_couvsol_paysloc
+```
+
+### 1. Couverture du sol
+
+Ces référentiels sont formés de manière à ce qu'il y ait toujours au moins 50 sessions dedans. Imperméable - agricole - semi-naturel - équilibré
+
+```{r}
+a = ggplot(dt_ref_session_paysloc %>% select(-session_id) %>% unique(), aes(x = protocole, y = n_ref_lies, fill = ref_lies)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs - Couverture du sol")
+
+```
+
+### 2. Taux d'imperméabilisation solideo
+
+On considère les sessions par protocole qui se situent dans des taux d'imperméabilisation similaires à ceux des sites SOLIDEO +-15%, à l'échelle nationale.
+
+```{r}
+
+a = ggplot(dt_qubs_VA_VM %>% 
+         filter(range_VA == "urbainVA") %>% 
+         group_by(protocole) %>% 
+         reframe(nb_session = n_distinct(session_id)) , 
+       aes(x = protocole, y = nb_session, fill = protocole)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs \nTaux d'imperméabilisation VA (65-95%)") +
+  theme(legend.position = "none")
+
+
+b = ggplot(dt_qubs_VA_VM %>% 
+         filter(range_VM == "urbainVM") %>% 
+         group_by(protocole) %>% 
+         reframe(nb_session = n_distinct(session_id)) , 
+       aes(x = protocole, y = nb_session, fill = protocole)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs \nTaux d'imperméabilisation VM (45-75%)") +
+  theme(legend.position = "none")
+```
+
+### 3. Metropole du Grand Paris
+
+Nombre de sessions pour chaque protocole dans l'emprise de la MGP.
+
+```{r}
+
+dt_qubs_gdparis_valide = dt_qubs_gdparis %>% 
+  filter(session_id %in% dt_qubs_total_valide$session_id) %>%
+  group_by(protocole) %>%
+  mutate(nb_session = n_distinct(session_id)) %>%
+  ungroup() %>%
+  unique() %>% 
+  mutate(combi = paste0(protocole, "---", session_id))
+
+a = ggplot(dt_qubs_gdparis_valide %>% select(protocole, nb_session) %>% unique(), aes(x = protocole, y = nb_session, fill = protocole)) +
+  geom_bar(stat = "identity", width  = 0.5) +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs - MGP")
+
+
+```
+
+### 4. Metropole du Grand Paris + critère urbain
+
+```{r}
+
+a = ggplot(dt_qubs_VA_VM %>% 
+         filter(range_VA == "urbainVA") %>%
+         group_by(protocole) %>% 
+         mutate(nb_session = n_distinct(session_id)) %>%
+         ungroup() %>%
+         mutate(combi = paste0(protocole, "---", session_id)) %>%
+         filter(combi %in% unique(dt_qubs_gdparis_valide$combi)) %>%
+         select(protocole, nb_session) %>%
+         unique(),
+       aes(x = protocole, y = nb_session, fill = protocole)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs \nMétropole Grand Paris + \ntaux d'imperméabilisation VA (65-95%)") +
+  theme(legend.position = "none")
+
+
+b = ggplot(dt_qubs_VA_VM %>% 
+         filter(range_VM == "urbainVM") %>%
+         group_by(protocole) %>% 
+         mutate(nb_session = n_distinct(session_id)) %>%
+         ungroup() %>%
+         mutate(combi = paste0(protocole, "---", session_id)) %>%
+         filter(combi %in% unique(dt_qubs_gdparis_valide$combi)) %>%
+         select(protocole, nb_session) %>%
+         unique(),
+       aes(x = protocole, y = nb_session, fill = protocole)) +
+  geom_bar(stat = "identity", width = 0.5) +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs \nMétropole Grand Paris + \ntaux d'imperméabilisation VM (45-75%)") +
+  theme(legend.position = "none")
+
+```
+
+### 5. Metropole du Grand Paris + paysage local
+
+Nombre de sessions pour chaque protocole dans l'emprise de la MGP et remplissant critère de couverture du sol similaire à celui des sites.
+
+```{r}
+  
+dt_ref_MGP_payslocal = dt_ref_session_paysloc %>%
+  mutate(combi = paste0(protocole, "---", session_id)) %>%
+  filter(combi %in% unique(dt_qubs_gdparis_valide$combi))
+
+
+a = ggplot(dt_ref_MGP_payslocal, aes(x = protocole, fill = ref_choisi)) +
+  geom_bar(stat = "count", position = "dodge", width = 0.5) +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs - MGP")
+
+
+```
+
+localement on aurait juste les données en milieu imperméable :
+
+```{r}
+
+dt_qubs_nonvalid$combi = paste0(dt_qubs_nonvalid$protocole, "---", dt_qubs_nonvalid$session_id)
+
+paysage_local = dt_ref_session_paysloc %>%
+  mutate(combi = paste0(protocole, "---", session_id)) %>%
+  filter(combi %in% unique(dt_qubs_nonvalid$combi)) %>%
+  pull(ref_choisi) %>%
+  unique()
+
+a = ggplot(dt_ref_MGP_payslocal %>% filter(ref_lies == paysage_local), aes(x = protocole, fill = ref_choisi)) +
+  geom_bar(stat = "count", position = "dodge", width = 0.5) +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs \nMGP + > 50 % imperméable") +
+  theme(legend.position = "none")
+
+
+```
+
+### 6. Distinction N/S + paysage local
+
+Chaque référentiel est sauvegardé que s'il compte au moins 50 sessions. Ce graphe permet d'avoir un panorama des référentiels et leur taille.
+
+```{r}
+a = ggplot(dt_ref_session_paysloc_x_NS %>% select(-session_id) %>% unique(), aes(x = protocole, y = n_ref_lies, fill = ref_lies)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs - Couverture du sol  & distinction N/S")
+
+```
+
+Référentiels retenus pour ce site par protocole :
+
+```{r}
+temp = dt_ref_session_paysloc_x_NS %>%
+  mutate(combi = paste0(session_id, "---", protocole))
+  
+ref_local_temp =  dt_qubs_nonvalid %>% 
+  mutate(combi = paste0(session_id, "---", protocole))
+
+# recuperation des ref_choisi et des sessions qui les constituent
+temp1 = temp %>%
+  filter(combi %in% unique(ref_local_temp$combi)) %>%
+  select(protocole, ref_choisi) %>%
+  unique() %>%
+  
+  # association aux ref locaux l'ensemble des sessions qui les constituent
+  rename(ref_lies = ref_choisi) %>%
+  left_join(dt_ref_session_paysloc_x_NS) %>%
+  select(protocole, session_id, ref_lies, n_ref_lies) %>%
+  unique() # --> liste des sessions constituant les referentiels pour les sessions locales
+
+
+temp2 = temp1 %>%
+  left_join(dt_qubs)
+
+
+
+a = ggplot(temp1, aes(x = protocole, fill = ref_lies)) +
+  geom_bar(stat = "count", width = 0.5) +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux sessons locales \n nombre de sessions", 
+       title = "Référentiels Qubs locaux - Couverture du sol  & distinction N/S")
+
+```
+
+### 7. Distinction N/S + gradient urbain
+
+```{r}
+
+a = ggplot(dt_ref_session_urbainVA_x_NS %>% select(-session_id) %>% unique(), aes(x = protocole, y = n_ref_lies, fill = ref_lies)) +
+  geom_bar(stat = "identity", width = 0.5, position = "dodge") +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs - Couverture du sol  & distinction N/S")
+
+
+
+
+
+```
+
+```{r}
+ref_local = dt_ref_session_urbainVA_x_NS %>%
+  filter(session_id %in% dt_qubs_nonvalid$session_id) %>%
+  pull(ref_choisi) %>%
+  unique()
+
+
+a = ggplot(dt_ref_session_urbainVA_x_NS %>% select(-session_id) %>% unique() %>% filter(ref_lies == ref_local), aes(x = protocole, y = n_ref_lies, fill = ref_lies)) +
+  geom_bar(stat = "identity", width = 0.5, position = "dodge") +
+  theme_minimal() +
+  labs(y = "taille des référentiels associés aux protocoles \n nombre de sessions", 
+       title = "Référentiels Qubs - Couverture du sol  & distinction N/S")
+
+
+```
+
+## Exemple d'application des référentiels
+
+```{r}
+
+# SITE = Plaine commune # on considère les sessions même sans données validées
+# REF = sessions dans meme conditions de couverture impermeable que sites solideo # on ne considère que les taxons validés
+
+# calcul de la richesse et de l'abondance par session
+
+# SITE
+dt_rich_abond_VA = dt_qubs_nonvalid %>% # données non valides
+  group_by(protocole, session_id) %>%
+  reframe(nb_tax_sess = case_when(is.na(observation_id) ~ 0,
+                                      TRUE ~ n_distinct(observation_id)),
+          nb_indiv_sess = case_when(is.na(observation_id) ~ 0,
+                                        TRUE ~ sum(abondance))) %>%
+  ungroup() %>% 
+  unique() %>%
+  mutate(echelle = "site VA")
+
+
+paysage_local = dt_ref_session_paysloc %>%
+  mutate(combi = paste0(protocole, "---", session_id)) %>%
+  filter(combi %in% unique(dt_qubs_nonvalid$combi)) %>%
+  pull(ref_choisi) %>%
+  unique()
+
+# REF
+# données valides
+
+# 1. COUVERTURE SOL :
+dt_rich_abond_paysloc = dt_qubs_total_valide %>%
+  left_join(dt_ref_session_paysloc) %>%
+  filter(ref_lies == paysage_local) %>%
+  unique() %>%
+  group_by(protocole, session_id) %>%
+  reframe(nb_tax_sess = case_when(is.na(observation_id) ~ 0,
+                                      TRUE ~ n_distinct(observation_id)),
+          nb_indiv_sess = case_when(is.na(observation_id) ~ 0,
+                                        TRUE ~ sum(abondance))) %>%
+  ungroup() %>% 
+  unique() %>%
+  mutate(echelle = "1_ref_couvsol_im") %>%
+  filter(protocole %in% unique(dt_rich_abond_VA$protocole))
+
+
+# 2. TAUX URBANISATION VA :sessions qui sont réalisées dans les mêmes conditions de couverture du sol que les sites SOLIDEO
+dt_rich_abond_imVA = dt_qubs_total_valide %>%
+  left_join(dt_qubs_VA_VM) %>%
+  filter(range_VA == "urbainVA") %>%
+  group_by(protocole, session_id) %>%
+  reframe(nb_tax_sess = case_when(is.na(observation_id) ~ 0,
+                                      TRUE ~ n_distinct(observation_id)),
+          nb_indiv_sess = case_when(is.na(observation_id) ~ 0,
+                                        TRUE ~ sum(abondance))) %>%
+  ungroup() %>% 
+  unique() %>%
+  mutate(echelle = "2_ref urbainVA") %>%
+  filter(protocole %in% unique(dt_rich_abond_VA$protocole)) 
+
+
+# 3 . MGP
+dt_rich_abond_MGP = dt_qubs_gdparis_valide %>%
+  group_by(protocole, session_id) %>%
+  reframe(nb_tax_sess = case_when(is.na(observation_id) ~ 0,
+                                      TRUE ~ n_distinct(observation_id)),
+          nb_indiv_sess = case_when(is.na(observation_id) ~ 0,
+                                        TRUE ~ sum(abondance))) %>%
+  ungroup() %>% 
+  unique() %>%
+  mutate(echelle = "5_ref_MGP") %>%
+  filter(protocole %in% unique(dt_rich_abond_VA$protocole))
+
+# 4 . MGP + critère urbain
+dt_rich_abond_MGP_urbain = dt_qubs_VA_VM %>% 
+  left_join(dt_qubs_total) %>%
+  filter(range_VA == "urbainVA") %>%
+  mutate(combi = paste0(protocole, "---", session_id)) %>%
+  filter(combi %in% unique(dt_qubs_gdparis_valide$combi)) %>%
+  unique() %>%
+  group_by(protocole, session_id) %>%
+  reframe(nb_tax_sess = case_when(is.na(observation_id) ~ 0,
+                                      TRUE ~ n_distinct(observation_id)),
+          nb_indiv_sess = case_when(is.na(observation_id) ~ 0,
+                                        TRUE ~ sum(abondance))) %>%
+  ungroup() %>% 
+  unique() %>%
+  mutate(echelle = "7_ref_MGP_urbainVA") %>%
+  filter(protocole %in% unique(dt_rich_abond_VA$protocole)) 
+
+
+# 5. MGP + paysage_local
+dt_rich_abond_MGP_paysloc = dt_ref_session_paysloc %>%
+  mutate(combi = paste0(protocole, "---", session_id)) %>%
+  filter(combi %in% unique(dt_qubs_gdparis_valide$combi)) %>%
+  left_join(dt_qubs_total) %>%
+  group_by(protocole, session_id) %>%
+  reframe(nb_tax_sess = case_when(is.na(observation_id) ~ 0,
+                                      TRUE ~ n_distinct(observation_id)),
+          nb_indiv_sess = case_when(is.na(observation_id) ~ 0,
+                                        TRUE ~ sum(abondance))) %>%
+  ungroup() %>% 
+  unique() %>%
+  mutate(echelle = "6_ref_MGP_paysloc") %>%
+  filter(protocole %in% unique(dt_rich_abond_VA$protocole))
+
+
+# 6. Distinction N/S + paysage local
+
+# identifier les référentiels locaux et les sessions qui les composent
+temp = dt_ref_session_paysloc_x_NS %>%
+  mutate(combi = paste0(session_id, "---", protocole))
+  
+ref_local_temp =  dt_qubs_nonvalid %>% 
+  mutate(combi = paste0(session_id, "---", protocole))
+
+# recuperation des ref_choisi et des sessions qui les constituent
+temp1 = temp %>%
+  filter(combi %in% unique(ref_local_temp$combi)) %>%
+  select(protocole, ref_choisi) %>%
+  unique() %>%
+  
+  # association aux ref locaux l'ensemble des sessions qui les constituent
+  rename(ref_lies = ref_choisi) %>%
+  left_join(dt_ref_session_paysloc_x_NS) %>%
+  select(protocole, session_id, ref_lies, n_ref_lies) %>%
+  unique() # --> liste des sessions constituant les referentiels pour les sessions locales
+
+
+temp2 = temp1 %>%
+  left_join(dt_qubs_total) 
+
+
+dt_rich_abond_paysloc_NS = temp2 %>%
+  group_by(protocole, session_id) %>%
+  reframe(nb_tax_sess = case_when(is.na(observation_id) ~ 0,
+                                      TRUE ~ n_distinct(observation_id)),
+          nb_indiv_sess = case_when(is.na(observation_id) ~ 0,
+                                        TRUE ~ sum(abondance))) %>%
+  ungroup() %>% 
+  unique() %>%
+  mutate(echelle = "3_ref_NS_paysloc") %>%
+  filter(protocole %in% unique(dt_rich_abond_VA$protocole))
+
+
+
+
+
+# 7. Distinction N/S + gradient urbain
+
+## VA ################
+temp = dt_ref_session_urbainVA_x_NS %>%
+  mutate(combi = paste0(session_id, "---", protocole))
+  
+ref_local_temp =  dt_qubs_nonvalid %>% 
+  mutate(combi = paste0(session_id, "---", protocole))
+
+# recuperation des ref_choisi et des sessions qui les constituent
+temp1 = temp %>%
+  filter(combi %in% unique(ref_local_temp$combi)) %>%
+  select(protocole, ref_choisi) %>%
+  unique() %>%
+  
+  # association aux ref locaux l'ensemble des sessions qui les constituent
+  rename(ref_lies = ref_choisi) %>%
+  left_join(dt_ref_session_urbainVA_x_NS) %>%
+  select(protocole, session_id, ref_lies, n_ref_lies) %>%
+  unique() # --> liste des sessions constituant les referentiels pour les sessions locales
+
+
+temp2 = temp1 %>%
+  left_join(dt_qubs_total) 
+
+
+dt_rich_abond_urbainVA_NS = temp2 %>%
+  group_by(protocole, session_id) %>%
+  reframe(nb_tax_sess = case_when(is.na(observation_id) ~ 0,
+                                      TRUE ~ n_distinct(observation_id)),
+          nb_indiv_sess = case_when(is.na(observation_id) ~ 0,
+                                        TRUE ~ sum(abondance))) %>%
+  ungroup() %>% 
+  unique() %>%
+  mutate(echelle = "4_ref_NS_urbainVA") %>%
+  filter(protocole %in% unique(dt_rich_abond_VA$protocole))
+
+## VM ###########
+# temp = dt_ref_session_urbainVM_x_NS %>%
+#   mutate(combi = paste0(session_id, "---", protocole))
+#   
+# ref_local_temp =  dt_qubs_nonvalid %>% 
+#   mutate(combi = paste0(session_id, "---", protocole))
+# 
+# # recuperation des ref_choisi et des sessions qui les constituent
+# temp1 = temp %>%
+#   filter(combi %in% unique(ref_local_temp$combi)) %>%
+#   select(protocole, ref_choisi) %>%
+#   unique() %>%
+#   
+#   # association aux ref locaux l'ensemble des sessions qui les constituent
+#   rename(ref_lies = ref_choisi) %>%
+#   left_join(dt_ref_session_urbainVM_x_NS) %>%
+#   select(protocole, session_id, ref_lies, n_ref_lies) %>%
+#   unique() # --> liste des sessions constituant les referentiels pour les sessions locales
+# 
+# 
+# temp2 = temp1 %>%
+#   left_join(dt_qubs_total) 
+# 
+# 
+# dt_rich_abond_urbainVM_NS = temp2 %>%
+#   group_by(protocole, session_id) %>%
+#   reframe(nb_tax_sess = case_when(is.na(observation_id) ~ 0,
+#                                       TRUE ~ n_distinct(observation_id)),
+#           nb_indiv_sess = case_when(is.na(observation_id) ~ 0,
+#                                         TRUE ~ sum(abondance))) %>%
+#   ungroup() %>% 
+#   unique() %>%
+#   mutate(echelle = "ref_NS_urbainVM") %>%
+#   filter(protocole %in% unique(dt_rich_abond_VA$protocole))
+
+
+
+
+
+
+
+dt_qubs_total_valide$combi = paste0(dt_qubs_total_valide$protocole, "---", dt_qubs_total_valide$session_id)
+
+bind_VA = rbind(dt_rich_abond_imVA, dt_rich_abond_MGP, dt_rich_abond_MGP_paysloc, dt_rich_abond_MGP_urbain, dt_rich_abond_paysloc, dt_rich_abond_paysloc_NS, dt_rich_abond_urbainVA_NS) %>%
+  # ne bien garder que les sessions valides dans les référentiels --> très important
+  mutate(combi = paste0(protocole, "---", session_id)) %>%
+  filter(combi %in% unique(dt_qubs_total_valide$combi)) %>%
+  bind_rows(dt_rich_abond_VA)
+
+
+# Calcul du nombre de sessions par échelle pour Aspifaune
+nb_sessions_par_echelle_aspi <- bind_VA %>%
+  filter(protocole == "Aspifaune") %>%
+  group_by(echelle) %>%
+  summarise(n_sessions = n_distinct(session_id), .groups = "drop")
+
+
+#  Créer le boxplot avec le nombre de sessions affiché au-dessus
+bind_VA %>%
+  filter(protocole == "Aspifaune") %>%
+  ggplot(aes(x = echelle, y = nb_indiv_sess, fill = echelle)) +
+  geom_boxplot() +
+  geom_text(
+    data = nb_sessions_par_echelle_aspi,
+    aes(x = echelle, y = -4,
+        label = paste0("n = ", n_sessions)),
+    vjust = 0,
+    size = 3,
+    fontface = "bold"
+  ) +
+  theme_minimal() +
+  labs(
+    x = "Échelle",
+    y = "Abondance totale par session",
+    title = "Abondance par échelle (Aspifaune)"
+  ) +
+  coord_cartesian(clip = "off") +  # pour éviter que le texte soit coupé
+  theme(axis.text.x = element_text(angle = 15, hjust = 1))
+
+
+
+
+# 
+# ggplot(bind_VA %>% filter(protocole == "Aspifaune"), aes(x = protocole, y = nb_indiv_sess, fill = echelle)) +
+#   geom_boxplot() +
+#   theme_minimal() +
+#   labs(y = "abondance totale par session")
+  
+
+# Calcul du nombre de sessions par échelle pour Aspifaune
+nb_sessions_par_echelle_noct <- bind_VA %>%
+  filter(protocole == "Noctambules") %>%
+  group_by(echelle) %>%
+  summarise(n_sessions = n_distinct(session_id), .groups = "drop")
+
+
+#  Créer le boxplot avec le nombre de sessions affiché au-dessus
+a = bind_VA %>%
+  filter(protocole == "Noctambules") %>%
+  ggplot(aes(x = echelle, y = nb_indiv_sess, fill = echelle)) +
+  geom_boxplot() +
+  geom_text(
+    data = nb_sessions_par_echelle_noct,
+    aes(x = echelle, y = -4,
+        label = paste0("n = ", n_sessions)),
+    vjust = 0,
+    size = 3,
+    fontface = "bold"
+  ) +
+  theme_minimal() +
+  labs(
+    x = "Échelle",
+    y = "Abondance totale par session",
+    title = "Abondance par échelle (Noctambules)"
+  ) +
+  coord_cartesian(clip = "off") +  # pour éviter que le texte soit coupé
+  theme(axis.text.x = element_text(angle = 15, hjust = 1))
+
+
+```
