@@ -18,7 +18,6 @@ execute:
 
 Objet final : dt_protoc_oso, format 'sf'
 
-
 ```{r}
 library(terra) #librairie pour la lecture et la manipulation du raster
 ```
@@ -26,7 +25,6 @@ library(terra) #librairie pour la lecture et la manipulation du raster
 **association légende explicite**
 
 Le raster oso est projeté en lambert 93. Ce raster est une donnée publique. On le récupère et associe aux différentes catégories numériques la légende qui convient grâce aux métadonnées. production raster oso
-
 
 creation legende raster oso
 
@@ -63,7 +61,6 @@ On calcule ensuite pour 1 km autour de chaque participation aux protocoles VN le
 
 La fonction suivante (func_oso_categ_couv) permet de faire ce calcul :
 
-
 fonction calcul couverture sol buffer a partir d une BD Vigie-Nature
 
 ```{r}
@@ -81,16 +78,48 @@ func_oso_categ_couv = function(dt_protoc_l93, zone_tampon) {
   # Convertir en vecteur terra les points de mes objets sf
   points_vect <- vect(dt_protoc_l93)
   
+  # COUVERTURE DU SOL DANS UN BUFFER
+  # Créer un buffer 
+  buffers <- buffer(points_vect, width = zone_tampon) # buffer autour de chacun des points
+  
+  # Extraire les valeurs du raster pour chaque buffer
+  # Lors de l’extraction avec terra::extract(), les IDs générés sont par défaut 1:nrow(points_sf). 
+  extrait <- terra::extract(oso, buffers)
+  
+
+  
+  # La colonne 1 est l'ID du polygone
+  # Les suivantes sont les valeurs du raster
+  # calcul des proportions de couvertures du sol pour chaque point (ID) 
+  prop_couv <- extrait %>%
+    as_tibble() %>%
+    filter(!is.na(label)) %>%  # <-- filtrer les NA avant le group_by
+    group_by(ID, class = label) %>%
+    summarise(n = n(), .groups = "drop") %>%
+    group_by(ID) %>%
+    mutate(pct = n / sum(n)) %>%
+    select(ID, class, pct) %>%
+    pivot_wider(
+      names_from = class,
+      values_from = pct,
+      values_fill = 0,
+      names_expand = TRUE
+    ) %>%
+    { if ("NA" %in% names(.)) select(., -`NA`) else . }  # <-- suppression sûre de la colonne "NA"
+
+  
   # COUVERTURE DU SOL LA OU LE POINT EST PLACE
   # Lors de l’extraction avec terra::extract(), les IDs générés sont par défaut 1:nrow(points_sf). 
   extrait_point <- terra::extract(oso, points_vect) %>%
     rename(couv_point = label)
   
+  
+  # MERGE COUVERTURE SOL BUFFER ET A L'EMPLACEMENT DU POINT
   # merge de mon dt_protoc et des frequences associées aux points :
   ## 1_ creation de la colonne ID qui est le numero de ligne 
   dt_proto_oso = dt_protoc_l93 %>%
     mutate(ID = row_number()) %>%
-    # left_join(prop_couv) %>%
+    left_join(prop_couv) %>%
     left_join(extrait_point)
   
   # on repasse en WGS84 (projection utilisee pour la manipulation des donnees spatiales sur R)
@@ -105,7 +134,7 @@ func_oso_categ_couv = function(dt_protoc_l93, zone_tampon) {
 # pour les données qubs :
 dt_protoc = coord_qubs_national
 dt_protoc_l93 <- st_transform(dt_protoc, crs = 2154) # import dt_protocole en wgs84 et conversion en L93 --> projection de la dt OSO
-dt_qubs_oso_WGS84 = func_oso_categ_couv(dt_protoc_l93, 1000)
+dt_qubs_oso_WGS84 = func_oso_categ_couv(dt_protoc_l93, 50)
 # write_rds(dt_qubs_oso_WGS84, "data/dt_qubs_oso_brut_1000.rds") #ecriture de la BD en local
 
 rm(dt_protoc)
@@ -115,47 +144,88 @@ rm(dt_protoc_l93)
 **regroupement des catégories de couverture du sol**
 
 ```{r}
-## critere couverture sol a l'emplacement de relevé qubs
-# colonne couv_point dt_protoc_oso
 
-a1 = data.frame(
-  regroupement = "semi_nat_foret", couv_point = c("forets de feuillus", "forets de coniferes", "landes ligneuses"))
-
-a2 = data.frame(
-  regroupement = "semi_nat_pelouse", couv_point = "pelouses")
-
-a3 = data.frame(
-  regroupement = "semi_nat_nonvegetalise", couv_point = c("eau", "surfaces minérales", "plages et dunes", "glaciers ou neiges"))
-
-a4 = data.frame(
-  regroupement = "agricole_vignes_vergers", couv_point = c("vergers", "vignes"))
-
-a5 = data.frame(
-  regroupement = "agricole_prairies", couv_point = "prairies")
-
-a6 = data.frame(
-  regroupement = "agricole_cultures", couv_point = c("colza", "cereales à pailles", "protéagineux", "soja", "tournesol", "maïs", "riz", "tubercules/racines"))
-
-a7 =  data.frame(
-  regroupement = "artificialise", couv_point = c("batis denses", "batis diffus", "zones ind et com", "surfaces routes", "serres"))
+func_regroupement_couv_oso_im_ag_sn = function(dt_oso) {
+  # ajout des colonnes manquantes dans le df pour avoir toutes les catégories oso, même si les valeurs des cellules valent 0
+  categ_oso_not_in_dt_protoc_oso = oso_legend %>%
+    filter(!label %in% colnames(dt_oso)) %>%
+    pull(label)
+  
+  
+  if (length(categ_oso_not_in_dt_protoc_oso) >= 1) {
+    dt_oso_toutes_colonnes = dt_oso
+    dt_oso_toutes_colonnes[, length(dt_oso):length(dt_oso) + length(categ_oso_not_in_dt_protoc_oso)] = 0
+    colnames(dt_oso_toutes_colonnes)[length(dt_oso):length(dt_oso) + length(categ_oso_not_in_dt_protoc_oso)] <- categ_oso_not_in_dt_protoc_oso
+    dt_oso = dt_oso_toutes_colonnes
+  }
+  
+  
+  dt_protoc_oso_modif <- dt_oso |>
+    mutate(
+      # formation de 3 classes
+      `foret` = eau + `forets de feuillus` + `forets de coniferes`  + `landes ligneuses` ,
+      impermeable = `batis denses` + `batis diffus` + `zones ind et com` + `surfaces routes` + serres,
+      agricole = colza + `cereales à pailles` + `protéagineux` + soja + tournesol + `maïs` + riz + `tubercules/racines` + vergers + vignes,
+      milieu_ouvert = prairies + pelouses,
+      total = `foret` + impermeable + agricole + milieu_ouvert,
+      fo = `foret` / total,
+      im = impermeable / total,
+      ag = agricole / total,
+      mo = milieu_ouvert / total,
+      
+      zone = case_when(
+        fo >= 0.5 ~ "dominance_foret",
+        im >= 0.5 ~ "dominance_impermeable",
+        ag >= 0.5 ~ "dominance_agricole",
+        mo >= 0.5 ~ "dominance_mil_ouvert",
+        
+        TRUE ~ couv_point
+      )
+    ) %>%
+    mutate(
+      zone = case_when(
+        zone == couv_point &
+          zone %in% c("forets de feuillus", "forets de coniferes", "landes ligneuses") ~ "dominance_foret",
+        zone == couv_point &
+          zone %in% c(
+            "batis denses",
+            "batis diffus",
+            "zones ind et com",
+            "surfaces routes",
+            "serres"
+          ) ~ "dominance_impermeable",
+        zone == couv_point &
+          zone %in% c(
+            "colza",
+            "cereales à pailles",
+            "protéagineux",
+            "soja",
+            "tournesol",
+            "maïs",
+            "riz",
+            "tubercules/racines",
+            "vergers",
+            "vignes"
+          ) ~ "dominance_agricole",
+        zone == couv_point &
+          zone %in% c("pelouses", "prairies") ~ "dominance_mil_ouvert",
+        TRUE ~ zone
+      )
+    ) %>%
     
-df_corresp_regroupement = a1 %>% 
-  bind_rows(a2) %>% 
-  bind_rows(a3) %>%
-  bind_rows(a4) %>% 
-  bind_rows(a5) %>%
-  bind_rows(a6) %>%
-  bind_rows(a7)
+    # on deselectionne PAS les colonnes contenant les proportions de couverture du sol
+    # select(session_id, date, user_id, user_pseudo, protocole, category, geometry, zone) %>%
+    rename(paysage_local = zone) %>%
+    # filter(paysage_local != "autre") %>%
+    select(-oso_legend$label)
+  
+  
+  return(dt_protoc_oso_modif)
+  
+}
 
+# df final contenant les categories de couverture du sol pour florileges
+dt_protoc_oso = func_regroupement_couv_oso_im_ag_sn(dt_oso = dt_qubs_oso_WGS84)
 
-
-dt_protoc_oso = dt_qubs_oso_WGS84 %>%
-  as.data.frame() %>%
-  select(-geometry) %>%
-  select(protocole, session_id, couv_point ) %>%
-  unique() %>%
-  left_join(df_corresp_regroupement)
-
-
-rm(a1, a2, a3, a4, a5, a6, a7, df_corresp_regroupement)
 ```
+

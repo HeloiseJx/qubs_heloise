@@ -1,5 +1,5 @@
 ---
-title: "V2_maquette_qubs"
+title: "V2_tous_indic_qubs"
 editor: visual
 
 format:
@@ -39,14 +39,13 @@ library(tidyr)
 library(lubridate)
 library(sf)
 library(vegan)
-library(patchwork)
 ```
 
 ## Jeux de données externes
 
 Import des jeux de données externes permettant la constitution des référentiels.
 
--   Biogeoregions
+-   Intercommunalités
 
 -   Contour de la France (Métropolitaine)
 
@@ -56,7 +55,16 @@ Import des jeux de données externes permettant la constitution des référentie
 
 -   Emprise 1001 Voisins
 
+### Intercommunalités
 
+```{r couche publique des intercommunalites BD ADMIN EXPRESS}
+# couche ADMIN EXPRESS - polygones 
+invisible(capture.output({coord_epci <- st_read(here::here("maps/ADMIN-EXPRESS_3-2__SHP_WGS84G_FRA_2024-12-18/ADMIN-EXPRESS_3-2__SHP_WGS84G_FRA_2024-12-18/ADMIN-EXPRESS/1_DONNEES_LIVRAISON_2024-12-00243/ADE_3-2_SHP_WGS84G_FRA-ED2024-12-18/EPCI.shp"), quiet = TRUE) }))
+
+# recuperation des coordonnees des intercommunalites d'interet
+coord_plaineco = coord_epci %>% filter(NOM == "Plaine Commune") # emprise de Plaine Commune
+coord_grand_paris = coord_epci %>% filter(NOM == "Métropole du Grand Paris") # emprise de la MGP
+```
 
 ### France Metropole
 
@@ -96,55 +104,34 @@ coord_1001_voisins = st_read(
 
 ```
 
-### biogeoregions
-
-```{r couche publique des biogeoregions}
-# biogeoregions
-invisible(capture.output({biogeoregions = st_read("maps/region_biogeo_fr/region_biogeographique.shp") %>%
-  st_transform(crs = 4326) # passage du lambert 93 au WGS 84
-}))
-
-# certains sommets dupliques : on corrige les erreurs
-invalid_index <- which(!st_is_valid(biogeoregions))
-biogeoregions[invalid_index, ] <- st_make_valid(biogeoregions[invalid_index, ])
-
-```
-
-
-
-
 ## Import des données qubs
 
-Import des données brutes des quatre protocoles qubs et creation d'une table qubs regroupant les colonnes communes.
-### dt_aspifaune_brut
+Import des données brutes des quatre protocoles qubs et creation d'une table qubs regroupant les colonnes communes. \### dt_aspifaune_brut
 
 ```{r}
 dt_aspifaune_brut = readRDS("data/dt_aspifaune.rds") %>%
-    mutate(abondance = as.numeric(abondance))  %>%
-  rename(date = date_debut)
+    mutate(abondance = as.numeric(abondance)) 
 ```
 
-### dt_noctambules_brut 
+### dt_noctambules_brut
 
 ```{r}
 dt_noctambules_brut = readRDS("data/dt_noctambules.rds") %>%
-    mutate(abondance = as.numeric(abondance)) %>%
-  rename(date = date_debut)
+    mutate(abondance = as.numeric(abondance)) 
 ```
 
 ### dt_vers_brut
 
 ```{r}
 dt_vers_brut = readRDS("data/dt_vers.rds") %>%
-    mutate(abondance = as.numeric(abondance))  %>%
-  rename(date = date_debut)
+    mutate(abondance = as.numeric(abondance)) 
 ```
 
 ### dt_escargots_brut
 
 ```{r}
 dt_escargots_brut = readRDS("data/dt_escargots.rds") %>%
-    mutate(abondance = as.numeric(abondance))
+    mutate(abondance = as.numeric(abondance)) 
 
 colnames(dt_escargots_brut)
 ```
@@ -185,8 +172,7 @@ dt_qubs_tot = dt_qubs_brut %>%
   mutate(abondance = as.numeric(abondance)) %>%
   #on ajoute les infos manquantes pour la colonne abondance
   mutate(abondance = case_when(presence_organisme == 1 & is.na(abondance) ~ 1, 
-                               TRUE ~ abondance)) %>%
-  mutate(mois = month(as.Date(date)))
+                               TRUE ~ abondance)) 
 
 DT::datatable(head(dt_qubs_tot))
 ```
@@ -207,8 +193,7 @@ coord_qubs_national <- dt_qubs_tot %>%
 
 ### dt_protoc_oso = couverture du sol
 
-Cette table de données permet d'avoir pour chaque session de la BD qubs les types de couverture du sol dans un rayon de 50m. La BD oso est un raster public distingant 23 catégories de couverture du sol, qu'il est possible d'agglomérer pour simplifier l'information. Ainsi, ces catégories sont groupées en imperméable, agricole, forêt, milieu ouvert (prairies et pelouses) si plus de 50% de la surface du buffer correspond à des élements entrant dans une de ces catégories. Sinon, on considère la couverture du sol pour le pixel dans lequel la session tombe.
-
+Cette table de données permet d'avoir pour chaque session de la BD qubs les types de couverture du sol dans un rayon de 1km. La BD oso est un raster public distingant 23 catégories de couverture du sol, qui sont qu'il est possible d'agglomérer pour simplifier l'information. Ainsi, ces catégories sont groupées en imperméable, agricole, semi-naturelle, abbrévié respectivement im, ag, sn.
 
 ![](image/oso_diagramme_couverture.png){fig-align="center" width="100%"}
 
@@ -240,7 +225,7 @@ Comme il n'y a pas encore de session sur les sites SOLIDEO, ceux-ci viennent com
 
 ```{r donnee de remplacement VA}
 df_qubs_VA = dt_qubs_tot %>% 
-  filter(session_id %in% c(1013, 103, 1090)) %>%
+  filter(session_id == 103) %>%
   left_join(dt_protoc_oso)
 
 ```
@@ -274,21 +259,37 @@ df_qubs_VM = dt_qubs_tot %>%
 
 # CALCUL DU REFERENTIEL
 
-
 Après avoir récupéré les données nécessaires, on calcule de façon automatisée le référentiel pour les sessions locales.
 
 Le référentiel correspond à l'ensemble des sessions "comparables" aux sessions locales. Ce sont des sessions pour lesquelles il va faire sens de comparer les valeurs des indicateurs obtenues à l'échelle des sites solideo avec la valeur des indicateurs calculés pour ces sessions.
 
+Pour construire ces référentiels il faut sélectionner les sessions adéquates. Cette sélection se base sur plusieurs critères dans le cas de qubs :
 
+-   habitats qubs
+
+-   taux d'imperméabilisation : +- 15% de celui du site considéré (VA ou VM)
+
+-   région écologique : biogéorégion
+
+-   échelle administrative locale : Métropole du Grand Paris et pour les sessions réalisées sur le site du Village des Athlètes, l'emprise de Plaine Commune est considérée comme un référentiel potentiel
+
+Ces critères sont classés par ordre d'impact sur les communautés de plantes observées.
+
+Ainsi, l'ordre de priorité des critères est celui-ci :
+
+**habitat** \> **taux d'imperméabilisation** \> **région écologique** (biogéorégion) \> **région admninistrative** (MGP \> Plaineco)
+
+En combinant ces critères on obtient plusieurs référentiels possibles et ils sont classés par ordre de priorité grâce à un score :
+
+![](image/ordre_de_priorite_referentiels.png){fig-align="center" width="70%"} *tableau 1 : critères de formation des référentiels et combinaisons possibles, ainsi que leur score de priorité.*
 
 ## 1\_ table de données pour construire les referentiels
-
 
 Un jeu de données est nécessaire au calcul des référentiels :
 
 -   dt_ref_national : jeu de données qubs nettoyé, regroupe les sessions susceptibles de former un référentiel.
 
--   dt_qubs_biogeo : informations sur les biogeoregions auxquelles appartiennent les sessions qubs
+-   dt_qubs_mgp : données qubs dans la metropole du grand paris
 
 ### dt_ref_national : données de référence
 
@@ -317,7 +318,7 @@ dt_qubs_tot_valide = func_sessions_valides(dt_qubs_tot)
 
 **filtre sur les outliers richesse et abondance**
 
-filtre sur les outliers de richesse en espèces par session en calculant le range interquartile et en appliquant un facteur k = 3 pour le calcul des seuils de outliers (on garde les données de richesse comprises dans l'intervalle [ q[1] - k * iqr ; q[2] + k * iqr], avec iqr = range interquartile, q[1] le premier quartile, q[2] le 3e quartile).
+filtre sur les outliers de richesse en espèces par session en calculant le range interquartile et en appliquant un facteur k = 3 pour le calcul des seuils de outliers (on garde les données de richesse comprises dans l'intervalle \[ q\[1\] - k \* iqr ; q\[2\] + k \* iqr\], avec iqr = range interquartile, q\[1\] le premier quartile, q\[2\] le 3e quartile).
 
 ```{r clean richesse et abondance}
 temp = dt_qubs_tot_valide %>%
@@ -439,45 +440,54 @@ dt_escargots_ref = dt_ref_national_temp %>%
   left_join(dt_escargots_brut)
 ```
 
-
-
 **phenologie de participation par protocole**
 
-Je groupe les sessions selon qu'elles ont été réalisées à la période chaude & sèche ou à la periode froide & humide.
+3 périodes basé sur l'OPVT qui propose des suivis de janvier à avril :
 
+janvier-avril : période activité maximale vers mai-sept : période estivale sèche octobre-décembre : automne humide
+
+ou faire les 4 saisons ?
+
+Ball, K. C., Lloyd, G., Yoo, J., Hurley, O. C., Hagemeier, L., & Franco, A. L. C. (2026). Seasonal variation of micro and macro soil invertebrate communities in a temperate forest. Applied Soil Ecology, 218, 106729. https://doi.org/10.1016/j.apsoil.2025.106729
+
+Bonato Asato, A. E., Wirth, C., Eisenhauer, N., & Hines, J. (2023). On the phenology of soil organisms : Current knowledge and future steps. Ecology and Evolution, 13(4), e10022. https://doi.org/10.1002/ece3.10022
 
 ```{r}
 dt_escargot_periode = dt_escargots_ref %>%
-  mutate(mois = month(as.Date(date))) %>%
+  mutate(mois = as.character(month(date))) %>%
   as.data.frame() %>%
   select(session_id, observation_id, mois, protocole) %>%
   distinct()%>%
-  mutate(periode = case_when(mois %in% c("1", "2", "3", "10", "11", "12") ~ "hiver",
-                    mois %in% c("4", "5", "6", "7", "8", "9" ) ~ "ete"))
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
+                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
+                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
 
 dt_aspifaune_periode = dt_aspifaune_ref %>%
-  mutate(mois = month(as.Date(date))) %>%
+  mutate(mois = as.character(month(date_debut))) %>%
   as.data.frame() %>%
   select(session_id, observation_id, mois, protocole) %>%
   distinct() %>%
-  mutate(periode = case_when(mois %in% c("1", "2", "3", "10", "11", "12") ~ "hiver",
-                    mois %in% c("4", "5", "6", "7", "8", "9" ) ~ "ete"))
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
+                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
+                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
 
 dt_vers_periode = dt_vers_ref %>%
-  mutate(mois = month(as.Date(date))) %>%
+  mutate(mois = as.character(month(date_debut))) %>%
   as.data.frame() %>%
   select(session_id, observation_id, mois, protocole) %>%
   distinct() %>%
-  mutate(periode = case_when(mois %in% c("1", "2", "3", "10", "11", "12") ~ "hiver",
-                    mois %in% c("4", "5", "6", "7", "8", "9" ) ~ "ete"))
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
+                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
+                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
 
 dt_noctambules_periode = dt_noctambules_ref %>%
-  mutate(mois = month(as.Date(date))) %>%
+  mutate(mois = as.character(month(date_debut))) %>%
   as.data.frame() %>%
   select(session_id, observation_id, mois, protocole) %>%
   distinct() %>%
-  mutate(periode = case_when(mois %in% c("1", "2", "3", "10", "11", "12") ~ "hiver",
-                    mois %in% c("4", "5", "6", "7", "8", "9" ) ~ "ete"))
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
+                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
+                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
 
 ```
 
@@ -491,26 +501,24 @@ dt_ref_national = dt_vers_periode %>%
 
 
 
+# ggplot(dt_qubs_periode %>% mutate(mois = as.numeric(mois)), aes(x = mois, fill = protocole)) +
+#   geom_bar(stat = "count", position = "dodge")
  
 ```
 
+### dt_qubs_mgp
 
-
-### dt_qubs_biogeo
-
-Sessions qubs et biogeoregions auxquelles elles appartiennent
+Sessions qubs qui se trouvent dans l'emprise de la MGP
 
 ```{r}
 
-dt_qubs_biogeo = coord_qubs_national %>%
-  st_join(biogeoregions) %>%
+dt_qubs_mgp = coord_qubs_national %>%
+  st_join(coord_grand_paris) %>%
   as.data.frame() %>%
-  select(session_id, N_DOMAINE) %>%
-  rename(biogeo = N_DOMAINE)
+  select(session_id, NOM) %>%
+  rename(mgp = NOM)
 
 ```
-
-
 
 ## 2\_ boucle de calcul
 
@@ -523,21 +531,20 @@ Les rangs hiérarchiques associés à chaque filtre vont du plus fin (chiffre le
 **IMPORTANT** : Cette fonction permet d'associer un referentiel à tous les sites et toutes les sessions, **mêmes ceux qui sont filtrés au moment de la constitution de dt_ref_national**. Par la suite, dans le choix du référentiel pour les sites SOLIDEO, on calcule la taille et le poids des données dans les référentiels qui sont concernées en ne considérant que les sessions et sites de dt_ref_national.
 
 Le référentiel qubs prend en compte ces critères, ordonnés de façon hierarchique
-Par protocole qubs :
-usage du sol \> periode \> biogeoregion 
 
+couverture sol \> periode
 
 Les rangs hierarchiques associés à chaque filtre vont du plus fin (1) au moins fin (chiffre le plus grand).
 
 ```{r referentiels potentiels}
 dt_ref_recap = dt_ref_national %>%
   left_join(dt_protoc_oso) %>%
-  left_join(dt_qubs_biogeo) %>% 
-  select(protocole, session_id, observation_id, paysage_local, periode, biogeo ) %>%
-  mutate(combi_couvsol_saison_mgp = paste0("1", paysage_local, "---", periode, "---", biogeo),
+  left_join(dt_qubs_mgp) %>% 
+  select(protocole, session_id, observation_id, paysage_local, periode, mgp ) %>%
+  mutate(combi_couvsol_saison_mgp = paste0("1", paysage_local, "---", periode, "---", mgp),
          combi_couvsol_saison = paste0("2", paysage_local, "---", periode),
          combi_couvsol = paste0("3", paysage_local),
-         combi_no_ref = "4protocole") %>%
+         combi_no_ref = "4no_ref") %>%
   pivot_longer(cols = starts_with("combi"),
                names_to = "critere",
                values_to = "ref_lies"
@@ -556,7 +563,6 @@ dt_ref_recap = dt_ref_national %>%
 
 ```
 
-
 ## 3\_ Conditions et selections
 
 On cherche à sélectionner un référentiel par (groupe de) session(s) locale(s) (rattachées au même référentiel) parmi tous les référentiels qui leur sont liés. La sélection des référentiels se base sur 3 critères :
@@ -569,17 +575,17 @@ On cherche à sélectionner un référentiel par (groupe de) session(s) locale(s
 
 Ainsi, pour un site avec plusieurs sessions, on se retrouve potentiellement avec plusieurs référentiels.
 
-Le tableau montre les sessions réalisées sur le site, les référentiels auxquelles elles sont comparées et il reste les colonnes des 3 critères de décision (n = le nombre de sessions constituant le référentiel, finesse = score de finesse du référentiel et poids = le poids des données locales rattachées au référentiel dans le référentiel considéré).
+A VERIFIER §§§§§§§§§§§§§§§§§ Le tableau montre les sessions réalisées sur le site, les référentiels auxquelles elles sont comparées et il reste les colonnes des 3 critères de décision (n = le nombre de sessions constituant le référentiel, finesse = score de finesse du référentiel et poids = le poids des données locales rattachées au référentiel dans le référentiel considéré).
 
 ### dt_VA & dt_VM : df locaux et référentiels choisis
 
-
 A l'issue de cette selection on a les tables contenant les données produites sur les sites (dt_VA et dt_VM) et les référentiels choisis pour les sessions des sites.
 
-Si pour un protocole (concerne "En quête de vers") on est 'out_of_ref', cela signifie qu'il n'y a pas encore 30 sessions de référence pour ce protocole. Il n'y a donc pas de référentiel pour ce protocole
-
-
 ```{r boucle calcul referentiel}
+
+#' @param dt_qubs_site df contenant les informations sur les sessions du site
+#'
+#' @returns un df contenant les informations sur les sessions locales et les référentiels choisis pour ces sessions
 
 fun_calcul_ref_choisi = function(dt_qubs_site) {
   
@@ -593,6 +599,7 @@ fun_calcul_ref_choisi = function(dt_qubs_site) {
   mutate(poids = nb_session_local / nb_session)
   
 # "red"  quid des sessions avec pas de référentiel ?
+  
   
 dt_ref_choisi = poids_donnees %>%
   # on ne garde que les référentiels de plus de 30 sessions
@@ -610,35 +617,174 @@ dt_ref_choisi = poids_donnees %>%
   select(session_id, ref_choisi) 
 
 
-
-temp = dt_ref_choisi %>%
+dt_ref_final = dt_ref_choisi %>%
   left_join(poids_donnees) %>%
   left_join(dt_ref_national) %>% 
   left_join(dt_qubs_tot %>% select(observation_id, protocole, Regroupement2b) %>% unique()) %>%
-  select(-ref_lies, -nb_session, -priorite,- nb_session_local, -poids, -periode) %>%
+  select(-ref_lies) %>%
   unique() 
-
-colonnes = colnames(temp)
-
-# pour les protocoles pour lesquels il n'y  pas assez de sessions même pour former un référentiel en prenant les données nationales (vers)
-dt_sans_ref = dt_qubs_site %>% 
-  filter(!session_id %in% dt_ref_choisi$session_id) %>%
-  mutate(ref_choisi = "out_of_ref") %>%
-  # select(session_id, ref_choisi)  %>% 
-  unique() %>%
-  select(colonnes)
-
-dt_ref_final = temp %>%
-  bind_rows(dt_sans_ref)
 
   return(dt_ref_final)
 }
+
 
 dt_VA = fun_calcul_ref_choisi(dt_qubs_site = df_qubs_VA)
 dt_VM = fun_calcul_ref_choisi(dt_qubs_site = df_qubs_VM)
 
 DT::datatable(head(dt_VA))
+```
 
+associer à toutes les sessions les référentiels auxquels elles sont potentiellement liées, même celles qui ne peuvent pas être considérées comme une référence
+
+```{r}
+
+# dt_ref_recap_all = dt_qubs_tot %>%
+#     mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
+#                     mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
+#                     mois %in% c("10", "11", "12" ) ~ "oct_dec")) %>%
+#   left_join(dt_protoc_oso) %>%
+#   left_join(dt_qubs_mgp) %>% 
+#   select(protocole, session_id, observation_id, paysage_local, periode, mgp ) %>%
+#   mutate(combi_couvsol_saison_mgp = paste0("1", paysage_local, "---", periode, "---", mgp),
+#          combi_couvsol_saison = paste0("2", paysage_local, "---", periode),
+#          combi_couvsol = paste0("3", paysage_local),
+#          combi_no_ref = "4no_ref") %>%
+#   pivot_longer(cols = starts_with("combi"),
+#                names_to = "critere",
+#                values_to = "ref_lies"
+#                  ) %>%
+#   mutate(priorite = str_extract(ref_lies, "\\d+"), 
+#          ref_lies = str_remove(ref_lies, "\\d+"))  %>%
+#   
+#   # compter le nombre de sessions par protocole pour chaque referentiel
+#   group_by(protocole, ref_lies) %>%
+#   mutate(nb_session = n_distinct(session_id)) %>%
+#   ungroup()  
+
+
+
+```
+
+code qui permettrait de pallier au manque de sesssions vers validées pour former un référentiel
+
+```{r}
+
+
+# 
+# #' @param dt_qubs_site df contenant les informations sur les sessions du site
+# #'
+# #' @returns un df contenant les informations sur les sessions locales et les référentiels choisis pour ces sessions
+# 
+# fun_calcul_ref_choisi = function(dt_qubs_site) {
+#   # referentiels potentiels pour les sessions locales
+#   ref_locaux = dt_ref_recap_all %>%
+#     filter(session_id %in% unique(dt_qubs_site$session_id))
+#   
+#   # pour les sessions qui peuvent être considérées de référence, quelles poids représentent elles dans le référentiel
+#   # ne compte pas le sessions locales qui ne sont pas considérées de référence
+#   poids_donnees = dt_ref_recap %>%
+#     filter(session_id %in% unique(dt_qubs_site$session_id)) %>%
+#     select(ref_lies, session_id, nb_session, priorite, protocole) %>%
+#     unique() %>%
+#     group_by(ref_lies, protocole) %>%
+#     mutate(nb_session_local = n_distinct(session_id)) %>%
+#     ungroup() %>%
+#     mutate(poids = nb_session_local / nb_session) %>%
+#     select(-nb_session_local)
+#   
+#   # ajout des sessions locales qui ne sont pas comptées comme référence --> poids dans le référentiel qui va être nul
+#   temp = ref_locaux  %>%
+#     select(session_id, ref_lies, protocole, priorite) %>%
+#     unique() %>%
+#     filter(!session_id %in% poids_donnees$session_id) %>%
+#     left_join(dt_ref_recap %>% select(protocole, ref_lies, nb_session) %>% unique()) %>%
+#     bind_rows(poids_donnees) %>%
+#     mutate(poids = replace_na(poids, 0))
+#   
+#   "red"
+#   
+#   dt_ref_choisi = temp %>%
+#   # on ne garde que les référentiels de plus de 30 sessions
+#   filter(nb_session > 29) %>%
+#   
+#   # on ne considère que les référentiels pour lesquels le poids des données locales ne dépassent pas 50% (en nombre de sessions)
+#   filter(poids < 0.2) %>%
+#   group_by(session_id, protocole) %>%
+#   
+#   # on considère les référentiels par ordre de priorité
+#   filter(priorite == min(priorite)) %>%
+#   
+#   ungroup() %>%
+#   rename(ref_choisi = ref_lies) %>%
+#   select(session_id, ref_choisi, protocole) 
+# 
+# 
+# dt_ref_final = dt_ref_choisi %>%
+#   left_join(poids_donnees) %>%
+#   left_join(dt_ref_national) %>% 
+#   left_join(dt_qubs_tot %>% select(observation_id, protocole, Regroupement2b) %>% unique()) %>%
+#   select(-ref_lies) %>%
+#   unique() 
+#   
+#   
+#   "red"
+#   
+#   # dt_ref_choisi = temp %>%
+#   #   # on ne garde que les référentiels de plus de 30 sessions
+#   #   filter(nb_session > 29) %>%
+#   #   
+#   #   # on ne considère que les référentiels pour lesquels le poids des données locales ne dépassent pas 50% (en nombre de sessions)
+#   #   filter(poids < 0.2) %>%
+#   #   group_by(session_id, protocole) %>%
+#   #   
+#   #   # on considère les référentiels par ordre de priorité
+#   #   filter(priorite == min(priorite)) %>%
+#   #   
+#   #   ungroup() %>%
+#   #   select(-session_id) %>%
+#   #   unique()
+#   # 
+#   
+#   # cas de en quete de vers : seulement 23 sessions de référence
+#   # solution : on considère les sessions non référence
+#   dt_pas_de_ref = ref_locaux  %>%
+#     select(session_id, ref_lies, protocole, priorite, nb_session) %>%
+#     unique() %>%
+#     filter(!protocole %in% dt_ref_choisi$protocole) %>%
+#     mutate(poids = 0) %>%
+#     # on ne garde que les référentiels de plus de 30 sessions
+#     filter(nb_session > 29) %>%
+#     mutate(ref_lies = "out_of_ref") %>%
+#     
+#     group_by(session_id, protocole) %>%
+#     
+#     # on considère les référentiels par ordre de priorité
+#     filter(priorite == min(priorite)) %>%
+#     ungroup() #%>%
+#     select(-session_id) %>%
+#     unique() %>%
+#     left_join(dt_ref_recap_all %>% select(ref_lies, protocole, session_id) %>% unique()) %>%
+#     left_join(dt_qubs_tot) %>%
+#     select(-ref_lies) %>%
+#     unique()
+#   
+#   
+#   dt_ref_final = dt_ref_choisi %>%
+#     left_join(dt_ref_recap %>% select(ref_lies, protocole, session_id) %>% unique()) %>%
+#     left_join(dt_ref_national) %>%
+#     left_join(dt_qubs_tot %>% select(observation_id, protocole, Regroupement2b) %>% unique()) %>%
+#     # select(-ref_lies) %>%
+#     unique()# %>%
+#     bind_rows(dt_pas_de_ref)
+#   
+#   return(dt_ref_final)
+# }
+# 
+# 
+# dt_VA = fun_calcul_ref_choisi(dt_qubs_site = df_qubs_VA)
+# dt_VM = fun_calcul_ref_choisi(dt_qubs_site = df_qubs_VM)
+# 
+# DT::datatable(head(dt_VA))
 ```
 
 ### dt_ref_VA & dt_ref_VM
@@ -679,21 +825,20 @@ DT::datatable(head(dt_ref_VA))
 
 # INDICATEURS
 
-On utilise dt_VA et dt_VM lorsqu'on veut comparer les sessions locales à des référentiels, mais sinon on utilise df_qubs_VA et df_qubs_VM --> pb du protocole vers qui n'a pas assez de sessions de référence pour constituer un référentiel, même sans appliquer de regroupement --> n'apparaît pas dans dt_VA et dt_VM
-
 Les graphiques et indicateurs suivants sont construits en partant des tables de données contenant les information sur les sites locaux (dt_site) et leur table de données de référence (dt_ref_site). Ce sont les deux variables des fonctions suivantes.
 
-## V2 : Composition des communautés
+## Composition des communautés
 
 On étudie la part que représentent les différentes espèces ou groupes d'espèces sur la biodiversité observée grâce au protocole.
 
-Table de données servant aux représentations de la composition des communautés observées.
-On Calcule la part que représentent les individus d'une espèce par rapport à tous les individus observées à une échelle spatiale donnée : nb de d'individus d'une espèce ou groupe d'espèces (colonne `abondance` filtrée par taxon) / Nombre d'individus total observées localement (`abondance`)
+### histogrammes
 
+Table de données servant aux représentations de la composition des communautés observées. On Calcule la part que représentent les individus d'une espèce par rapport à tous les individus observées à une échelle spatiale donnée : nb de d'individus d'une espèce ou groupe d'espèces (colonne `abondance` filtrée par taxon) / Nombre d'individus total observées localement (`abondance`)
 
 On considère 2 échelles taxonomique de regroupement : espèces (taxon) et ordres (Regroupement2b)
 
-```{r fonction calcul composition communute}
+```{r calcul composition communute}
+
 # fréquences par especes ; especes valides
 func_pourc_sp = function(dt_q) {
   
@@ -717,17 +862,11 @@ func_pourc_sp = function(dt_q) {
     ungroup() %>%
     unique() %>%
     
-    # frequence d'observation des taxons : % de sessions pour lesquelles le taxon est observé
+    # frequence d'observation : % de sessions pour lesquelles le taxon est observé
     group_by(taxon, protocole) %>%
     mutate(nb_session_present = n_distinct(session_id)) %>%
     ungroup() %>%
-    mutate(freq_session_taxon = round(100 * nb_session_present / nb_session)) %>%
-    
-    # frequence d'observation à l'echelle regrouepement 2b : % de sessions pour lesquelles le taxon est observé
-    group_by(Regroupement2b, protocole) %>%
-    mutate(nb_session_present = n_distinct(session_id)) %>%
-    ungroup() %>%
-    mutate(freq_session_2b = round(100 * nb_session_present / nb_session)) %>%    
+    mutate(freq_session = round(100 * nb_session_present / nb_session)) %>%
     
     
     na.omit() %>%
@@ -740,27 +879,16 @@ func_pourc_sp = function(dt_q) {
   }
   
   return(df_pourc_sp)
-}
-```
+} 
 
-
-```{r calcul composition communute}
-# calcul des frequences d'observation des taxons et de leur abondance relative pour les sites SOLIDEO, à l'échelle 'taxon' et 'Regroupement2b'
 
 df_compo_VA = func_pourc_sp(dt_q = dt_VA) %>% mutate(echelle = "local")
-df_compo_VA_2b = df_compo_VA %>% select(protocole, Regroupement2b, freq_session_2b, nb_session) %>% unique()
-df_compo_VA_ref = func_pourc_sp(dt_q = dt_ref_VA) %>% mutate(echelle = "ref")
-df_compo_VA_ref_2b = df_compo_VA_ref %>% select(protocole, Regroupement2b, freq_session_2b, nb_session) %>% unique()
-
-
-DT::datatable(head(df_compo_VA_2b))
-
-
-
 df_compo_VM = func_pourc_sp(dt_q = dt_VM) %>% mutate(echelle = "local")
-df_compo_VM_2b = df_compo_VM %>% select(protocole, Regroupement2b, freq_session_2b, nb_session) %>% unique()
-df_compo_VM_ref = func_pourc_sp(dt_q = dt_ref_VM) %>% mutate(echelle = "ref")
-df_compo_VM_ref_2b = df_compo_VM_ref %>% select(protocole, Regroupement2b, freq_session_2b, nb_session) %>% unique()
+DT::datatable(head(df_compo_VM))
+
+df_compo_VA_ref = func_pourc_sp(dt_q = dt_ref_VA) %>% mutate(echelle = "ref")
+df_compo_VM_ref = func_pourc_sp(dt_ref_VM) %>% mutate(echelle = "ref")
+
 
 
 # df combinant taxon observés en local et dans la référence. On ne considère que les taxons observés localement, on retire les autres de la table de référence
@@ -776,8 +904,7 @@ df_compo_VA_ref_local = df_compo_VA_ref %>%
   filter(combi_temp %in% va_combi_temp) %>%
   select(-combi_temp) %>%
   bind_rows(df_compo_VA)
-
-DT::datatable(df_compo_VA_ref_local)  
+  
   
 df_compo_VM_ref_local = df_compo_VM_ref %>% 
   mutate(combi_temp = paste0(protocole, taxon)) %>%
@@ -790,17 +917,9 @@ rm(va_combi_temp, vm_combi_temp)
 
 ```
 
+**histogramme sans affichage en parallèle local et référence**
 
-
-
-
-
-### sessions locales : affichage simple des freq d'observation des taxons
-
-A utiliser juste pour les sessions du site.
 ```{r histogramme compo especes}
-
-
 
 #' graphe affichant la composition de la communauté observée sur une emprise spatiale définie
 #' se base sur table de données issue de la fonction `func_pourc_sp`
@@ -813,25 +932,12 @@ A utiliser juste pour les sessions du site.
 #'
 #' @returns une représentation de la composition des communautés en histogramme
 #'
-func_histo_compo = function(df_compo_site, df_compo_ref, p, col, pourc , site, indic ) {
+func_histo_compo = function(df_compo_site, p = NULL, col = "taxon", pourc = "pourc_taxon", site, indic ) {
   
-  # récuperation de tous les taxons observés dans le référentiel
-  taxons_ref = df_compo_ref %>% 
-    filter(protocole == p)  %>% 
-    select(!!sym(col)) %>%
-    unique()
   
-  # filtre sur le protocole considere
-  temp = df_compo_site %>% 
-    filter(protocole == p) 
+  dt_protoc = df_compo_site %>% filter(protocole == p)
   
-  # ajout des taxons non observes localement
-  dt_protoc =  temp %>%
-    bind_rows(taxons_ref %>% filter(!.data[[col]] %in% temp[[col]])) %>%
-    mutate(!!sym(pourc) := replace_na(.data[[pourc]], 0))
-  
-  # figure
-  if (length(dt_protoc$protocole) > 0) {
+  if (length(dt_protoc$taxon) > 0) {
     histo_compo =
       ggplot(dt_protoc, aes(x = reorder(!!sym(col), !!sym(pourc)), y = !!sym(pourc))) +
       geom_bar(stat = "identity", fill = "#F76E5EFF") +
@@ -839,11 +945,9 @@ func_histo_compo = function(df_compo_site, df_compo_ref, p, col, pourc , site, i
       theme_minimal() +
       labs(x = paste0("Animaux observés"), 
            y = indic, 
-           title = paste0("Site", " : ", unique(dt_protoc$nb_session), " session(s)")
-           # title = paste0( site, " - ", "Protocole ", p, " : ", unique(dt_protoc$nb_session), " session(s)")
+           title = paste0( site, " - ", "Protocole ", p, " : ", unique(dt_protoc$nb_session), " session(s)")
            ) +
-      theme(legend.position = "none")+
-      scale_y_continuous(limits = c(0, 100))
+      theme(legend.position = "none") 
     
   }
   
@@ -857,92 +961,96 @@ func_histo_compo = function(df_compo_site, df_compo_ref, p, col, pourc , site, i
 }
 
 # histo_compo_VM_escargots =
-  func_histo_compo(df_compo_site = df_compo_VA, df_compo_ref = df_compo_VA_ref, p = "Opération escargots", col = "taxon", pourc = "freq_session_taxon", site = "VA", indic = "Part de sessions pour lesquelles les taxons sont observés")
-# histo_compo_VA_vers = 
-  func_histo_compo(df_compo_site = df_compo_VA, df_compo_ref = df_compo_VA_ref, p = "En quête de vers", col = "taxon", pourc = "freq_session_taxon", site = "VA", indic = "Part de sessions pour lesquelles les taxons sont observés")
-# histo_compo_VA_noctambules = 
-  func_histo_compo(df_compo_site = df_compo_VA_2b, df_compo_ref = df_compo_VA_ref, p = "Noctambules", col = "Regroupement2b", pourc = "freq_session_2b", site = "VA", indic = "Part de sessions pour lesquelles les taxons sont observés")
-histo_compo_VA_Aspifaune = 
-  func_histo_compo(df_compo_site = df_compo_VA_2b, df_compo_ref = df_compo_VA_ref, p = "Aspifaune", col = "Regroupement2b", pourc = "freq_session_2b", site = "VA", indic = "Part de sessions pour lesquelles les taxons sont observés")
+  func_histo_compo(df_compo_site = df_compo_VM, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon", site = "VM", indic = "Part du nombre total d'animaux observé")
+# histo_compo_VM_vers = 
+  func_histo_compo(df_compo_site = df_compo_VM, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon", site = "VM", indic = "Part du nombre total d'animaux observé")
+# histo_compo_VM_noctambules = 
+  func_histo_compo(df_compo_site = df_compo_VM, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup", site = "VM", indic = "Part du nombre total d'animaux observé")
+# histo_compo_VM_Aspifaune = 
+  func_histo_compo(df_compo_site = df_compo_VM, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup", site = "VM", indic = "Part du nombre total d'animaux observé")
+  
   
 
+# histo_compo_VM_noctambules = 
+  func_histo_compo(df_compo_site = df_compo_VM, p = "Noctambules", col = "Regroupement2b", pourc = "freq_session", site = "VM", indic = "Pourcentage de sessions pour lesquelles le taxon est observé")
+# histo_compo_VM_Aspifaune = 
+  func_histo_compo(df_compo_site = df_compo_VM, p = "Aspifaune", col = "Regroupement2b", pourc = "freq_session", site = "VA", indic = "Pourcentage de sessions pour lesquelles le taxon est observé")
 
+
+
+# # histo_compo_VA_escargots = 
+#   func_histo_compo(df_compo_site = df_compo_VA, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon", site = "VA")
+# # histo_compo_VA_vers = 
+#   func_histo_compo(df_compo_site = df_compo_VA, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon", site = "VA")
+# # histo_compo_VA_noctambules = 
+#   func_histo_compo(df_compo_site = df_compo_VA, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup", site = "VA")
+# # histo_compo_VA_Aspifaune = 
+#   func_histo_compo(df_compo_site = df_compo_VA, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup", site = "VA")
+
+  
+  
+  
+  
+# REFERENCES
+  
+# # histo_compo_VA_escargots_ref = 
+#   func_histo_compo(df_compo_site = df_compo_VA_ref, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon", site = "VA")
+# # histo_compo_VA_vers_ref = 
+#   func_histo_compo(df_compo_site = df_compo_VA_ref, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon", site = "VA")
+# # histo_compo_VA_noctambules_ref = 
+#   func_histo_compo(df_compo_site = df_compo_VA_ref, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup", site = "VA")
+# # histo_compo_VA_Aspifaune_ref = 
+#   func_histo_compo(df_compo_site = df_compo_VA_ref, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup", site = "VA")
+  
+#   
+# # histo_compo_VM_escargots_ref =   
+#   func_histo_compo(df_compo_site = df_compo_VM_ref, p = "Opération escargots", col = "taxon", pourc = "pourc_taxon", site = "VM")
+# # histo_compo_VM_vers_ref = 
+#   func_histo_compo(df_compo_site = df_compo_VM_ref, p = "En quête de vers", col = "taxon", pourc = "pourc_taxon", site = "VM")
+# # histo_compo_VM_noctambules_ref = 
+#   func_histo_compo(df_compo_site = df_compo_VM_ref, p = "Noctambules", col = "Regroupement2b", pourc = "pourc_regroup", site = "VM")
+# # histo_compo_VM_Aspifaune_ref = 
+#   func_histo_compo(df_compo_site = df_compo_VM_ref, p = "Aspifaune", col = "Regroupement2b", pourc = "pourc_regroup", site = "VM")
+#   
+#   
+  
 ```
 
-### sessions ref : histogramme avec coloration des taxons locaux
-Ces histogrammes affichent les fréquences d'observation des taxons dans les référentiels associés aux sessions locales. Les taxons qui sont également observés sur le site sont colorés de la même couleur que les graphes précédent.
+### histogramme AVEC affichage en parallèle local et référence
 
-
-```{r histogramme compo especes coloration local et ref}
+```{r histogramme compo especes local et ref}
 
 
 
-#' Title
-#'
-#' @param df_compo_ref 
-#' @param df_compo_site 
-#' @param p 
-#' @param col 
-#' @param pourc 
-#' @param site 
-#' @param indic 
-#'
-#' @returns
-#' @export
-#'
-#' @examples
-func_histo_compo_ref = function(df_compo_ref,
-                                df_compo_site,
-                                p = NULL,
-                                col = "taxon",
-                                pourc = "freq_session_taxon",
-                                site,
-                                indic = "Pourcentage de sessions pour lesquelles le taxon est observé") {
+func_histo_compo_local_ref = function(df_compo_site_ref, taxons_locaux,  p = NULL, col = "taxon", pourc = "freq_session_taxon", site, indic = "Pourcentage de sessions pour lesquelles le taxon est observé") {
+  
+  dt_protoc = df_compo_site_ref %>% 
+    filter(protocole == p) %>%
+    mutate(echelle = case_when((taxon %in% taxons_locaux) | (Regroupement2b %in% taxons_locaux) ~ "local", 
+                               TRUE ~ echelle))
+  
+  nb_session_local = df_compo_site_ref %>% filter(echelle == "local") %>% mutate(nb_session = length(protocole)) %>% pull(nb_session) %>% unique()
   
   
   
-  if (p %in% unique(df_compo_ref$protocole)) {
-    # identifications des taxons observés localement pour pouvoir les colorer et les identifier sur l'histogramme final de la référence
-    taxons_locaux = df_compo_site %>%
-      filter(protocole == p) %>%
-      pull(!!sym(col))
-    
-    # recuperation des sessions de ref
-    dt_protoc = df_compo_ref %>%
-      filter(protocole == p) %>%
-      mutate(
-        echelle = case_when(
-          !!sym(col) %in% taxons_locaux ~ "observé sur le site",
-          TRUE ~ "pas observé sur le site"
-        )
-      ) %>%
-      select(!!sym(col), !!sym(pourc), echelle) %>%
-      unique()
-    
-    #nb_session_ref = df_compo_ref %>% pull(nb_session) %>% unique()
-    
-    
-    
+  if (length(dt_protoc$taxon) > 0) {
     histo_compo =
-      ggplot(dt_protoc, aes(
-        x = reorder(!!sym(col), !!sym(pourc)),
-        y = !!sym(pourc),
-        fill = echelle
-      )) +
-      geom_bar(stat = "identity", position = "dodge", fill = "#11C2B5FF") +
+      ggplot(dt_protoc, aes(x = reorder(!!sym(col), !!sym(pourc)), y = !!sym(pourc), fill = echelle)) +
+      geom_bar(stat = "identity", position = "dodge") +
       coord_flip() +
       theme_minimal() +
-      labs(x = "", y = "", title = "Référence") +
-      # labs( x = paste0("Animaux observés"), y = indic,title = paste0( site, " - ","Protocole ", p," : ",  nb_session_ref," session(s) de référence" )) +
-      # scale_fill_manual(values = c("observé sur le site" = "#F76E5EFF",
-      #   "pas observé sur le site" = "#11C2B5FF"))  +
-      scale_y_continuous(limits = c(0, 100))
+      labs(x = paste0("Animaux observés"), 
+           y = indic, 
+           title = paste0( site, " - ", "Protocole ", p, " : ", nb_session_local, " session(s) réalisées localement")
+           ) +
+      scale_fill_manual(values = c("local" = "#F76E5EFF",
+                                   "ref" = "#11C2B5FF"))
     
   }
   
   else {
-    histo_compo = paste0("Il n'y a pas de référentiel pour le protocole '", p, "' sur le site.")
-    
+    histo_compo = paste0("Il n'y a pas de sessions pour le protocole '", p, "' sur le site.")
+
   }
   
   
@@ -951,156 +1059,104 @@ func_histo_compo_ref = function(df_compo_ref,
 
 
 
+#   func_histo_compo_local_ref(df_compo_site = df_compo_VM_ref_local, p = "Opération escargots", col = "taxon", pourc = "freq_session_taxon", site = "VM")
+ 
+#   func_histo_compo_local_ref(df_compo_site = df_compo_VM_ref_local, p = "En quête de vers", col = "taxon", pourc = "freq_session_taxon", site = "VM")
 
-func_histo_compo_ref(
-  df_compo_ref = df_compo_VA_ref,
-  df_compo_site = df_compo_VA,
-  p = "Opération escargots",
-  col = "taxon",
-  pourc = "freq_session_taxon",
-  site = "referentiel de VA",
-  indic = "Pourcentage de sessions pour lesquelles le taxon est observé"
-)
+#   func_histo_compo_local_ref(df_compo_site = df_compo_VM_ref_local, p = "Noctambules", col = "Regroupement2b", pourc = "freq_session_2b", site = "VM")
+
+#   func_histo_compo_local_ref(df_compo_site = df_compo_VM_ref_local, p = "Aspifaune", col = "Regroupement2b", pourc = "freq_session_2b", site = "VM")
 
 
-func_histo_compo_ref(
-  df_compo_ref = df_compo_VA_ref,
-  df_compo_site = df_compo_VA_2b,
-  p = "Noctambules",
-  col = "Regroupement2b",
-  pourc = "freq_session_2b",
-  site = "referentiel de VA",
-  indic = "Pourcentage de sessions pour lesquelles le taxon est observé"
-)
+  func_histo_compo_local_ref(df_compo_site_ref = df_compo_VM_ref, taxons_locaux = unique(df_compo_VM$taxon), p = "Opération escargots", col = "taxon", pourc = "freq_session_taxon", site = "VA")
+  
+  func_histo_compo_local_ref(df_compo_site_ref = df_compo_VA_ref, taxons_locaux = unique(df_compo_VA$taxon), p = "En quête de vers", col = "taxon", pourc = "freq_session_taxon", site = "VA")
+  
+  func_histo_compo_local_ref(df_compo_site_ref = df_compo_VA_ref,  taxons_locaux = unique(df_compo_VA$Regroupement2b), p = "Noctambules", col = "Regroupement2b", pourc = "freq_session_2b", site = "VA")
 
-
-
-freq_ref_VA_Aspifaune = func_histo_compo_ref(
-  df_compo_ref = df_compo_VA_ref,
-  df_compo_site = df_compo_VA_2b,
-  p = "Aspifaune",
-  col = "Regroupement2b",
-  pourc = "freq_session_2b",
-  site = "referentiel de VA",
-  indic = "Pourcentage de sessions pour lesquelles le taxon est observé"
-)
-
-func_histo_compo_ref(
-  df_compo_ref = df_compo_VA_ref,
-  df_compo_site = df_compo_VA_2b,
-  p = "En quête de vers",
-  col = "taxon",
-  pourc = "freq_session_taxon",
-  site = "referentiel de VA",
-  indic = "Pourcentage de sessions pour lesquelles le taxon est observé"
-)
-
+  func_histo_compo_local_ref(df_compo_site_ref = df_compo_VM_ref,  taxons_locaux = unique(df_compo_VM$Regroupement2b), p = "Aspifaune", col = "Regroupement2b", pourc = "freq_session_2b", site = "VM")
 
 
   
 ```
 
+### donut
 
 ```{r}
 
-histo_compo_VA_Aspifaune + freq_ref_VA_Aspifaune 
+#' @param df_compo_site df local considéré
+#' @param pourc colonne pourcentage considéré : "pourc_taxon" ou "pourc_regroup"
+#' @param p protocole considéré
+#' @param category colonne taxonomique considérée : "taxon" ou "Regroupement2b"
+#' @param site données utilisées = échelle étudiée
+#'
+#' @returns plot donut représentant la répartition des taxons
 
-```
-
-
-
-
-### freq combi
-```{r}
-func_histo_compo_ref = function(df_compo_ref,
-                                df_compo_site,
-                                p = NULL,
-                                col = "taxon",
-                                pourc = "freq_session_taxon",
-                                site,
-                                indic = "Pourcentage de sessions pour lesquelles le taxon est observé") {
-   
-   if (length(df_compo_site[[p]]) > 0) {
+func_donut_compo_commu = function(df_compo_site, pourc = "pourc_taxon", p , category = "taxon", site) {
+      
+      data_site = df_compo_site %>% filter(protocole == p) %>% rename(fraction = !!sym(pourc))  %>% select(!!sym(category), fraction, protocole) %>% unique() %>% arrange(fraction)
   
+  if (length(data_site$protocole) > 0) {
+           
+  # Compute the cumulative percentages (top of each rectangle)
+  data_site$ymax = cumsum(data_site$fraction)
   
-    # récuperation de tous les taxons observés dans le référentiel
-  taxons_ref = df_compo_ref %>% 
-    filter(protocole == p)  %>% 
-    select(!!sym(col)) %>%
-    unique()
+  # Compute the bottom of each rectangle
+  data_site$ymin = c(0, head(data_site$ymax, n=-1))
   
-      # identifications des taxons observés localement pour pouvoir les colorer et les identifier sur l'histogramme final de la référence
-    taxons_locaux = df_compo_site %>%
-      filter(protocole == p) %>%
-      pull(!!sym(col))
+  # Compute label position
+  data_site$labelPosition <- (data_site$ymax + data_site$ymin) / 2
   
-  # filtre sur le protocole considere
-  temp_site = df_compo_site %>% 
-    filter(protocole == p) 
+  # Compute a good label
+  data_site = data_site %>% 
+  mutate(label = paste0(!!sym(category), "\n", fraction, " %"))
   
-  # ajout des taxons non observes localement
-  dt_protoc =  temp_site %>%
-    mutate(echelle = "local") %>%
-    # bind_rows(taxons_ref %>% filter(!.data[[col]] %in% temp_site[[col]])) %>%
-    # mutate(!!sym(pourc) := replace_na(.data[[pourc]], 0)) %>%
-    mutate(ordre = row_number())
+  # Make the plot
+  plot = ggplot(data_site, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=!!sym(category))) +
+  geom_rect() +
+  geom_label( x=4.1, aes(y=labelPosition, label=label), size=3) +
+  coord_polar(theta="y") +
+  xlim(c(2, 4)) +
+  theme_void() +
+  theme(legend.position = "none") +
+    labs(title = paste0(site, " - ", p, " : ", unique(df_compo_site$nb_session), " sessions"))
   
-    # recuperation des sessions de ref
-    dt_protoc_ref = df_compo_ref %>%
-      filter(protocole == p) %>%
-      select(!!sym(col), !!sym(pourc)) %>%
-      unique() %>%
-      left_join(dt_protoc %>% select(Regroupement2b, ordre, echelle)) %>% 
-      arrange(desc(freq_session_2b)) %>%
-      mutate(ordre = case_when(is.na(echelle) ~ row_number() + length(unique(dt_protoc[[col]])),
-                               TRUE ~ ordre))
-  
-    # bind avec les taxons manquants sur le site par rapport au référentiel
-    dt_protoc_site = dt_protoc %>%
-      bind_rows(dt_protoc_ref %>% select(!!sym(col), ordre) %>% filter(! .data[[col]] %in% dt_protoc[[col]])) %>%
-      mutate(!!sym(pourc) := replace_na(.data[[pourc]], 0))
-    
-  # figure
-    histo_freq_local =
-      ggplot(dt_protoc_site, aes(x = reorder(!!sym(col), -ordre), y = !!sym(pourc))) +
-      geom_bar(stat = "identity", fill = "#F76E5EFF", width = 0.6) +
-      coord_flip() +
-      theme_minimal() +
-      labs(x = paste0("Animaux observés"), 
-           y = indic, 
-           title = paste0("Site", " : ", unique(dt_protoc$nb_session), " session(s)")
-           # title = paste0( site, " - ", "Protocole ", p, " : ", unique(dt_protoc$nb_session), " session(s)")
-           ) +
-      theme(legend.position = "none")+
-      scale_y_continuous(limits = c(0, 100))
-    
-    histo_freq_ref =
-      ggplot(dt_protoc_ref, aes(
-        x = reorder(!!sym(col), -ordre),
-        y = !!sym(pourc),
-        fill = echelle
-      )) +
-      geom_bar(stat = "identity", position = "dodge", fill = "#11C2B5FF", width = 0.6) +
-      coord_flip() +
-      theme_minimal() +
-      labs(x = "", y = "", title = "Référence") +
-      scale_y_continuous(limits = c(0, 100))
-    
-  histo_combi = histo_freq_local + histo_freq_ref  
-
   }
-  
   else {
-    histo_combi = paste0("Il n'y a pas de sessions pour le protocole '", p, "' sur le site.")
-
+    plot = paste0("Il n'y a pas de sessions à l'échelle spatiale considérée.")
   }
-  
-  return(histo_combi)
+
+  return(plot)
+
 }
+
+
+# # donut_VA_aspifaune_regroup = 
+#   func_donut_compo_commu(df_compo_site = df_compo_VA, pourc = "pourc_regroup", p = "Aspifaune", category = "Regroupement2b", site = "VA")
+# # donut_VA_noctambules_regroup = 
+#   func_donut_compo_commu(df_compo_site = df_compo_VA, pourc = "pourc_regroup", p = "Noctambules", category = "Regroupement2b", site = "VA")
+# # donut_VA_escargots_taxon = 
+#   func_donut_compo_commu(df_compo_site = df_compo_VA, pourc = "pourc_taxon", p = "Opération escargots", category = "taxon", site = "VA")
+# # donut_VA_vers_taxon = 
+#   func_donut_compo_commu(df_compo_site = df_compo_VA, pourc = "pourc_taxon", p = "En quête de vers", category = "taxon", site = "VA")
+
+
+
+# donut_VM_aspifaune_regroup = 
+  func_donut_compo_commu(df_compo_site = df_compo_VM, pourc = "pourc_regroup", p = "Aspifaune", category = "Regroupement2b", site = "VM")
+# donut_VM_noctambules_regroup = 
+  func_donut_compo_commu(df_compo_site = df_compo_VM, pourc = "pourc_regroup", p = "Noctambules", category = "Regroupement2b", site = "VM")
+# donut_VM_escargots_taxon = 
+  func_donut_compo_commu(df_compo_site = df_compo_VM, pourc = "pourc_taxon", p = "Opération escargots", category = "taxon", site = "VM")
+# donut_VM_vers_taxon = 
+  func_donut_compo_commu(df_compo_site = df_compo_VM, pourc = "pourc_taxon", p = "En quête de vers", category = "taxon", site = "VM")
+
+
+  func_donut_compo_commu(df_compo_site = df_compo_VM_ref, pourc = "pourc_regroup", p = "Aspifaune", category = "Regroupement2b", site = "VM ref")
+
 ```
 
-
-## V2 : abondance médiane par protocole
+## abondance médiane par protocole
 
 ```{r}
 # 
@@ -1164,20 +1220,72 @@ DT::datatable(df_nb_tax_VM_ref_local)
 
 ```
 
+### boxplot
+
+```{r}
+#| column: screen-inset-shaded
+#| layout-nrow: 1
+
+
+# Graphes
+labels_df_VA <- df_nb_tax_VA_ref_local |>
+  group_by(protocole, echelle) |>
+  summarise(
+    nb_session = first(nb_session),
+    y = max(nb_indiv, na.rm = TRUE) * 1.1,
+    .groups = "drop"
+  )
+
+ggplot(df_nb_tax_VA_ref_local, aes(x = protocole, y = nb_indiv, fill = echelle)) +
+  geom_boxplot() +
+  theme_minimal() +
+  geom_text(
+    data = labels_df_VA,
+    aes(y = y, label = paste0("n = ", nb_session)),
+    position = position_dodge(width = 0.75),
+    vjust = 0) +
+  labs(title = "Abondance par session - VA")
+
+
+labels_df_VM <- df_nb_tax_VM_ref_local |>
+  group_by(protocole, echelle) |>
+  summarise(
+    nb_session = first(nb_session),
+    y = max(nb_indiv, na.rm = TRUE) * 1.1,
+    .groups = "drop"
+  )
+
+ggplot(df_nb_tax_VM_ref_local, aes(x = protocole, y = nb_indiv, fill = echelle)) +
+  geom_boxplot() +
+  theme_minimal() +
+  geom_text(
+    data = labels_df_VM,
+    aes(y = y, label = paste0("n = ", nb_session)),
+    position = position_dodge(width = 0.75),
+    vjust = 0)+
+  labs(title = "Abondance par session - VM")
+
+
+```
 
 ### représentation en score
 
-Je classe les sessions du référentiel par abondance croissante. A partir de ce classement, je normalise leur rang pour calculer des positions : entre 0 et 100% des sessions du référentiel (la session XX se situe à 66% = elle est au dessus de 66% des sessions du référentiel). Je récupère l'id des sessions locales qui auront été classées dans les sessions du référentiel comme elles en font partie et je calcule la médiane de leur abondance. Je place ensuite cette médiane sur le gradient de 0 à 100 : la valeur médiane du site est supérieure à combien de pourcent de sessions du référentiel ? La fonction graphique permet de visualiser la réponse à cette question. On a également besoin de l'information du nombre de sessions sur le site qui ont servi à calculer cette valeur.
+Je classe les sessions du référentiel par abondance croissante. A partir de ce classement, je normalise leur rang pour calculer des positions : entre 0 et 100% des sessions du référentiel (la session XX se situe à 66% = elle est au dessus de 66% des sessions du référentiel). Je récupère l'id des sessions locales qui auront été classées dans les sessions du référentiel comme elles en font partie et je calcule la médiane de leur abondance. Je place ensuite cette médiane sur le gradient de 0 à 100 : la valeur médiane du site est supérieure à combien de pourcent de sessions du référentiel ? La fonction graphique permet de visualiser la réponse à cette question.
 
 ```{r calcul gradient abondance}
-
+# df_nb_tax_VA_ref
+# df_nb_tax_VM_ref
+# 
+# dt_nb_tax_ref = df_nb_tax_VM_ref
+# dt_nb_tax_local = df_nb_tax_VM
+# site = "VM"
 
 fun_abondance_gradient = function(dt_nb_tax_ref, dt_nb_tax_local) {
   # attribuer un numéro aux sessions de référence --> les sessions locales sont inclues dans les sessions de référence, elles ont donc aussi un numéro ce qui permet de les placer
   
     # médiane des sessions locales
   mediane_locale = dt_nb_tax_local %>%
-    group_by(protocole, nb_session) %>%
+    group_by(protocole) %>%
     reframe(mediane = median(nb_indiv)) %>%
     ungroup()
   
@@ -1194,8 +1302,7 @@ fun_abondance_gradient = function(dt_nb_tax_ref, dt_nb_tax_local) {
     # gestion des sessions ayant la mêm abondance --> le même pourcentage
     group_by(protocole, nb_indiv) %>%
     mutate(norm = max(norm)) %>%
-    ungroup() %>%
-    select(-nb_session)
+    ungroup()
   
   
   # je positionne les médianes sur l'échelle de 0 à 100 de l'abondance des sessions pour chaque protocole
@@ -1205,7 +1312,6 @@ fun_abondance_gradient = function(dt_nb_tax_ref, dt_nb_tax_local) {
     filter(nb_indiv <= mediane) %>%
     group_by(protocole) %>%
     filter(norm == max(norm)) %>%
-    ungroup() %>%
     select(protocole, mediane, norm, nb_session) %>%
     unique()
   
@@ -1236,13 +1342,11 @@ fun_graphe_abondance_gradient = function(dt_nb_tax_ref, dt_nb_tax_local, site) {
   n_steps <- 100  # finesse du dégradé
   
   temp_grad <- temp |>
-    group_by(protocole) %>%
     rowwise() |> # travaille ligne par ligne
     mutate(y_seq = list(seq(0, 100, length.out = n_steps))) |>
     unnest(y_seq) |>
     mutate(yend = lead(y_seq), value = y_seq / max(temp$norm)) |>
-    filter(!is.na(yend)) %>%
-    ungroup()
+    filter(!is.na(yend))
   
   
   # placer la médiane et l'écart type sur un graphe pour les sessions locales
@@ -1260,9 +1364,9 @@ fun_graphe_abondance_gradient = function(dt_nb_tax_ref, dt_nb_tax_local, site) {
     geom_text(data = temp_grad, aes(
       x = protocole,
       y = 110,
-      label = paste0(nb_session, " session(s) \n locale(s)")
+      label = paste0("n = ", nb_session, " sessions \n dans le référentiel")
     )) +
-    labs(y = "pourcentage de sessions du référentiel", title = paste0("Score d'abondance du site ", site)) +
+    labs(y = "pourcentage de sessions du référentiel", title = paste0("Abondance médiane obtenue sur le site ", site)) +
     theme_minimal() +
     theme(legend.position = "none") 
   
@@ -1276,59 +1380,13 @@ fun_graphe_abondance_gradient(dt_nb_tax_ref = df_nb_tax_VA_ref, dt_nb_tax_local 
 
 ```
 
-### abondance médiane qubs
-
-Je fais une moyenne des scores obtenus pour les différents protocoles
-
-```{r}
-
-fun_score_unique = function(df_nb_tax_ref, df_nb_tax_local) {
-  temp = fun_abondance_gradient(dt_nb_tax_ref = df_nb_tax_ref, dt_nb_tax_local = df_nb_tax_local)
-  
-  dt_agreg = temp %>%
-    mutate(score_agrege = mean(norm),
-           nb_session_tot = sum(nb_session)) %>%
-    select(score_agrege, nb_session_tot) %>%
-    unique()
-  
-  return(dt_agreg)
-  
-}
-
-
-dt_score_unique_VM = fun_score_unique(df_nb_tax_ref = df_nb_tax_VM_ref, df_nb_tax_local = df_nb_tax_VM )
-dt_score_unique_VA= fun_score_unique(df_nb_tax_ref = df_nb_tax_VA_ref, df_nb_tax_local = df_nb_tax_VA )
-
-print(dt_score_unique_VA)
-
-
-
-```
-### phrase automatisée
-
-A partir du tableau précédent, pour le diagramme radar, on distingue la situation où le score unique se trouve au dessus des 50% de sessions du référentiel et en dessous : 
-
--   X > 50 % : L'abondance en animaux du sol étudié est supérieure à celles de X % des sessions de référence.
--   X <= 50 % : L'abondance en animaux du sol étudié est inférieure à celles de 100 - X % des sessions de référence.
-
 
 ## V3 : indicateurs de pression 
 
-Tous ces indicateurs consistent à calculer une moyenne pour le  site et replacer cette moyenne dans un histogramme de répartition des valeurs de référence. 
-
 #### score de naturalité
-
-On considère la naturalité du site à travers la présence d'élements : "espace peu ou pas entretenu (friche, espace naturel)", "zone avec des ronces", "zone avec des orties". 
-On détecte la présence ou l'absence de ces éléments. Ces présences s'aditionnent pour former un score allant de 0 à 3. 
-Une spécifité consiste à considérer l'élement "espace peu ou pas entretenu (friche, espace naturel)" comme un élément fort en terme de gestion et d'impact sur la biodiversité. Sa détection confère automatiquement le score de naturalité le plus élevé au site, soit 3.
-
-Cette fonctionpermet de calculer le score de naturalité de chaque site du df considéré.
-Si des sites présente des changements en termes de gestion conduisant à des scores de naturalité différents, alors ces valeurs figurent dans la table finale et ne sont pas agrégées.
-
 ```{r}
 fun_naturalite = function(table){
   
-  # calcul du score en détectant les éléments de la colonne 'site_compositions'
   score_naturalite <- table %>%
   select(site_id, site_compositions, protocole) %>%
   distinct() %>%
@@ -1339,7 +1397,7 @@ fun_naturalite = function(table){
       str_detect(site_compositions, "zone avec des orties"),
     
     score_nat = case_when(
-      str_detect(site_compositions, "espace peu ou pas entretenu \\(friche, espace naturel\\)") ~ 3, # priorisation de cet élément
+      str_detect(site_compositions, "espace peu ou pas entretenu \\(friche, espace naturel\\)") ~ 3,
       nb_elements >= 3 ~ 3,
       nb_elements == 2 ~ 2,
       nb_elements == 1 ~ 1,
@@ -1356,15 +1414,69 @@ fun_naturalite = function(table){
 
 # score_naturalite_tot = fun_naturalite(dt_ref_national) # données de ref nationales
 score_naturalite_VA = fun_naturalite(dt_VA)
-score_naturalite_VA_ref = fun_naturalite(table = dt_ref_VA)
+score_naturalite_VA_ref = fun_naturalite(dt_ref_VA)
 ```
 
 
 
+**graphe non agrégé**
 
-**graphique**
-Graphique qui permet de produire l'histogramme de répartition des sites de référence et de placer le site par rapport à ces valeurs.
-On considère la moyenne arrondie à la valeur supérieure des scores de naturalité obtenus sur le site SOLIDEO. 
+```{r}
+
+fun_graph_score_nat = function(dt_site, dt_ref, titre ) {
+  
+  score_naturalite_local = fun_naturalite(dt_site)
+  score_naturalite_ref = fun_naturalite(dt_ref)
+  
+  nb_site_max =  score_naturalite_ref %>%
+    group_by(score_nat) %>%
+    reframe(nb_site = n_distinct(site_id)) %>%
+    ungroup() %>%
+    filter(nb_site == max(nb_site)) %>%
+    pull(nb_site)
+  
+  # je cree une colonne pour afficher les points correspondant aux sites en dessous de l'histo
+  score_naturalite_site = score_naturalite_local %>%
+    group_by(score_nat) %>%
+    mutate(ordre = -row_number() * nb_site_max / 10) %>%
+    ungroup()
+  
+  
+  graph_nat = ggplot() +
+    geom_bar(
+      data = score_naturalite_ref,
+      stat = "count",
+      aes(x = score_nat),
+      width = 0.9,
+      fill = "#11C2B5FF"
+    ) +
+    labs(y = "Nombre de sites du référentiel", x = "score de naturalité", title = titre) +
+    theme_classic() +
+    geom_point(
+      data = score_naturalite_site,
+      size = 6,
+      color = "#F76E5EFF",
+      aes(x = score_nat, y = ordre)
+    ) +
+    theme(axis.title.x = element_blank(), axis.line.x = element_blank()) +
+    geom_hline(aes(yintercept = 0))
+  
+  print(graph_nat)
+  
+}
+
+
+fun_graph_score_nat(dt_site = dt_VA, dt_ref = dt_ref_VA, titre = "VA" )
+fun_graph_score_nat(dt_site = dt_VM, dt_ref = dt_ref_VM, titre = "VM" )
+
+# fun_graph_score_nat(score_naturalite_local = score_naturalite_VM, score_naturalite_ref = score_naturalite_VM_ref)
+
+
+
+```
+**graphe agrégé**
+
+On considère la moyenne arrondie à la valeur supérieure des scores de naturalité obtenus sur le site SOLIDEO.
 ```{r}
 
 fun_graph_score_nat = function(dt_site, dt_ref, titre) {
@@ -1423,12 +1535,6 @@ fun_graph_score_nat(dt_site = dt_VM, dt_ref = dt_ref_VM, titre = "VM" )
 
 ```
 ### score de microhabitats
-On considère les microhabitats des sites à travers la présence d'élements : "compost", "souche", "tas de bois", "tas de cailloux". 
-On détecte la présence ou l'absence de ces éléments. Ces présences s'aditionnent pour former un score allant de 0 à 4. 
-
-fonction qui calcule ce score pour un df donné.
-Cette fonction permet de calculer le score de microhabitats de chaque site du df considéré.
-Si des sites présente des changements en termes de gestion conduisant à des scores de microhabitats différents, alors ces valeurs figurent dans la table finale et ne sont pas agrégées.
 
 ```{r}
 
@@ -1459,10 +1565,67 @@ score_microhabitat_VA_ref = fun_microhabitat(dt_ref_VA)
 
 
 
-**graphe microhabitats**
-Représentation graphique en histogramme de la répartition des sites de référence dans les différentes valeurs de l'indicateur
-On considère la moyenne arrondie à la valeur supérieure des scores de microhabitat obtenus sur le site SOLIDEO.
 
+```{r}
+
+fun_graph_score_microhab_nonagrege = function(dt_site, dt_ref, titre ) {
+  
+  score_microhab_local = fun_microhabitat(dt_site)
+  score_microhab_ref = fun_microhabitat(dt_ref)
+  
+  nb_site_max =  score_microhab_ref %>%
+    group_by(score_microhab) %>%
+    reframe(nb_site = n_distinct(site_id)) %>%
+    ungroup() %>%
+    filter(nb_site == max(nb_site)) %>%
+    pull(nb_site)
+  
+  # je cree une colonne pour afficher les points correspondant aux sites en dessous de l'histo
+  score_microhab_site = score_microhab_local %>%
+    group_by(score_microhab) %>%
+    mutate(ordre = -row_number() * nb_site_max / 10) %>%
+    ungroup()
+  
+  
+  graph_nat = ggplot() +
+    geom_bar(
+      data = score_microhab_ref,
+      stat = "count",
+      aes(x = score_microhab),
+      width = 0.9,
+      fill = "#11C2B5FF"
+    ) +
+    labs(y = "Nombre de sites du référentiel", x = "score de microhabitat", title = titre) +
+    theme_classic() +
+    geom_point(
+      data = score_microhab_site,
+      size = 6,
+      color = "#F76E5EFF",
+      aes(x = score_microhab, y = ordre)
+    ) +
+    theme(axis.title.x = element_blank(), axis.line.x = element_blank()) +
+    geom_hline(aes(yintercept = 0))
+  
+  print(graph_nat)
+  
+}
+
+
+fun_graph_score_microhab(dt_site = dt_VA, dt_ref = dt_ref_VA, titre = "VA" )
+fun_graph_score_microhab(dt_site = dt_VM, dt_ref = dt_ref_VM, titre = "VM" )
+
+# fun_graph_score_nat(score_microhab_local = score_microhab_VM, score_microhab_ref = score_naturalite_VM_ref)
+
+
+
+```
+
+
+
+
+**graphe agrégé**
+
+On considère la moyenne arrondie à la valeur supérieure des scores de microhabitat obtenus sur le site SOLIDEO.
 ```{r}
 
 fun_graph_score_microhab = function(dt_site, dt_ref, titre) {
@@ -1523,12 +1686,6 @@ fun_graph_score_microhab(dt_site = dt_VM, dt_ref = dt_ref_VM, titre = "VM" )
 
 
 ### score de travail du sol
-On considère le travail du sol sur le site à travers la présence d'éléments : "travail profond du sol (avec retournement)", "travail superficiel du sol (aeration sans retournement)", "paturage", "aucune de ces pratiques", "je ne sais pas". 
-On détecte la présence ou l'absence de ces éléments. Ces présences s'aditionnent pour former un score allant de 0 à 2. 
-Les éléments sont hierarchisés comme l'on considère qu'il n'ont pas le mêm impact sur la biodiversité du sol. Ainsi, le travail profond du sol décroche le score le plus élevé (2), le travail superficil du sol et paturage décrochent la valeur 1. 
-
-Cette fonction permet de calculer le score de travail du sol de chaque site du df considéré.
-Si des sites présente des changements en termes de gestion conduisant à des scores de trvail du sol différents, alors ces valeurs figurent dans la table finale et ne sont pas agrégées.
 
 ```{r}
 
@@ -1555,8 +1712,6 @@ dt_travailsol_VA = fun_score_travail_sol(table_qubs = dt_VA)
 ```
 
 
-**graphe travail du sol**
-Fonction qui affiche la répartition des sites de référence dans les différentes catégories de travail du sol. Calcule une valeur moyenne de travail du sol pour le site solideo et l'affiche par rapport aux sites de référence.
 
 ```{r}
 
@@ -1617,7 +1772,6 @@ fun_graph_travailsol(dt_site = dt_VA, dt_ref = dt_ref_VA, titre = "VA" )
 
 
 ### score d'apports en engrais
-On considère l'amendement sur le site à travers la présence d'éléments :"engrais organiques (compost, fumier)", "engrais chimiques / de synthese" de la colonne 'site_techniques_entretien'.
 
 ```{r}
 
@@ -1638,6 +1792,7 @@ fun_amendement = function(table_qubs) {
     )
   )
 
+  
 }
 
 dt_amendement_VA_ref = fun_amendement(table_qubs = dt_ref_VA)
@@ -1651,9 +1806,6 @@ dt_amendement_VA = fun_amendement(table_qubs = dt_VA)
 
 
 
-**graphique amendement**
-répartition des sessions de référence dans les valeurs d'amendement. 
-Il faut que le point pour le site prenne une couleur différente s'il n'y a que de l'amendement chimique ou que de l'amendement organique. 
 
 
 ```{r}

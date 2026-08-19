@@ -1,19 +1,21 @@
 ---
-title: "indic_gestion_qubs"
+title: "V2_maquette_qubs"
 editor: visual
+
 format:
   html:
     toc: true
     toc-location: left
-    sidebar: true
     toc-title: "Sommaire"
-    toc-depth: 2
+    toc-depth: 3
+    page-layout: full
     embed-resources: true
+
 execute:
   echo: true
-  message : false
-  warning : false
-  error : false
+  message: false
+  warning: false
+  error: false
 ---
 
 # IMPORT DE DONNEES & FORMATAGE
@@ -39,7 +41,19 @@ library(sf)
 library(vegan)
 ```
 
-## données autres
+## Jeux de données externes
+
+Import des jeux de données externes permettant la constitution des référentiels.
+
+-   Intercommunalités
+
+-   Contour de la France (Métropolitaine)
+
+-   Données taxref
+
+-   Emprise Plaine Nature
+
+-   Emprise 1001 Voisins
 
 ### Intercommunalités
 
@@ -57,101 +71,6 @@ coord_grand_paris = coord_epci %>% filter(NOM == "Métropole du Grand Paris") # 
 ```{r metropole}
 
 invisible(capture.output({france = read_sf(here::here("maps","metropole-version-simplifiee.geojson"), crs = 4326)}))
-
-```
-
-## Import des données qubs
-
-### dt_aspifaune_brut
-
-```{r}
-dt_aspifaune_brut = readRDS("data/dt_aspifaune.rds")
-```
-
-### dt_noctambules_brut
-
-```{r}
-dt_noctambules_brut = readRDS("data/dt_noctambules.rds")
-```
-
-### dt_vers_brut
-
-```{r}
-dt_vers_brut = readRDS("data/dt_vers.rds")
-```
-
-### dt_escargots_brut
-
-```{r}
-dt_escargots_brut = readRDS("data/dt_escargots.rds")
-```
-
-### dt_qubs_brut = données brutes
-
-récupération des années à partir des colonnes de dates des protocoles
-
-bind des 4 protocoles précédents avec les colonnes communes qui nous intéressent : session_id, observation_id, participation_nom, protocole, mission_id, mission_nom, participant_id, user_pseudo, site_id, site_nom, site_code_postale, site_type, site_type_autre, site_taille, site_compositions, site_compositions_autre, site_arrosages, site_produits_phyto, site_techniques_entretien, site_techniques_entretien_autre, site_anne_changement_terre, presence_organisme, url_photo_collecte, taxon, taxon_valide, abondance, taxon_ne_sait_pas, taxon_pas_dans_liste, taxon_denomination_precision, date, user_id, Regroupement2a, Regroupement2b, Regroupement3, geometry
-
-```{r import des donnees qubs de la BD MOSAIC}
- 
-#identifier les champs communs aux differents dataframe
-champs_communs <- Reduce(intersect, list(colnames(dt_aspifaune_brut),
-                                         colnames(dt_noctambules_brut),
-                                         colnames(dt_escargots_brut),
-                                         colnames(dt_vers_brut)))
-#rbind des donnees des 3 protocoles
-dt_qubs <- rbind(dt_aspifaune_brut %>% select(all_of(champs_communs)),
-                 dt_noctambules_brut %>% select(all_of(champs_communs)),
-                 dt_escargots_brut %>% select(all_of(champs_communs)),
-                 dt_vers_brut %>% select(all_of(champs_communs)))
-
-# Ajouter la taxonomie et les regroupements d'especes
-taxo <- data.table::fread(here::here("data", "thesaurus_V1V2.csv")) %>% 
-  select(`Nom français V1`, `Regroupement2a`, `Regroupement2b`, `Regroupement3`)
-colnames(taxo) <- c("taxon", "Regroupement2a", "Regroupement2b", "Regroupement3")
-
-dt_qubs_brut <- dt_qubs %>% left_join(taxo, by = "taxon")
-
-
-```
-
-### dt_qubs_tot = filtre et formatage sur les donnees brutes
-
-```{r modification de la BD qubs}
-dt_qubs_tot = dt_qubs_brut %>%
-  # rename(year = date) %>% # s'appelle déjà year
-  mutate(abondance = as.numeric(abondance)) %>%
-  #on ajoute les infos manquantes pour la colonne abondance
-  mutate(abondance = case_when(presence_organisme == 1 & is.na(abondance) ~ 1, 
-                               TRUE ~ abondance)) 
-
-
-
-```
-
-### coord_qubs_national = df qubs spatialise
-
-On récupère un point par site qubs et on produit df_qubs_spatial, une table avec les coordonnées des sessions qubs.
-
-```{r df qubs spatialise}
-coord_qubs_national <- dt_qubs_tot %>%
-  mutate(longitude = as.numeric(longitude), latitude = as.numeric(latitude)) %>% 
-  st_as_sf(coords = c("longitude", "latitude"), crs = 4326)  %>% # on passe tout en format sf, projection WGS 84
-  st_join(france, left = F) %>%
-  select(session_id,  protocole) %>%
-  unique()
-
-```
-
-### dt_protoc_oso = couverture du sol
-
-Cette table de données permet d'avoir pour chaque session de la BD qubs les types de couverture du sol dans un rayon de 1km. La BD oso est un raster public distingant 23 catégories de couverture du sol, qui sont qu'il est possible d'agglomérer pour simplifier l'information. Ainsi, ces catégories sont groupées en imperméable, agricole, semi-naturelle, abbrévié respectivement im, ag, sn.
-
-![](data/oso_diagramme_couverture.png){fig-align="center" width="50%"}
-
-```{r child avec methode de calcul de la couverture du sol}
-knitr::knit_child("maquette_V2_child_couverture_sol_qubs.qmd", quiet = TRUE) %>%
-   knitr::asis_output()
 
 ```
 
@@ -185,11 +104,112 @@ coord_1001_voisins = st_read(
 
 ```
 
-## df_qubs_VA = transects du Village des athlètes et releves
+## Import des données qubs
 
-actuellement pas de transects sur les sites SOLIDEO donc les 2 tables de données transect\_... sont vides.
+Import des données brutes des quatre protocoles qubs et creation d'une table qubs regroupant les colonnes communes. \### dt_aspifaune_brut
+
+```{r}
+dt_aspifaune_brut = readRDS("data/dt_aspifaune.rds") %>%
+    mutate(abondance = as.numeric(abondance)) 
+```
+
+### dt_noctambules_brut
+
+```{r}
+dt_noctambules_brut = readRDS("data/dt_noctambules.rds") %>%
+    mutate(abondance = as.numeric(abondance)) 
+```
+
+### dt_vers_brut
+
+```{r}
+dt_vers_brut = readRDS("data/dt_vers.rds") %>%
+    mutate(abondance = as.numeric(abondance)) 
+```
+
+### dt_escargots_brut
+
+```{r}
+dt_escargots_brut = readRDS("data/dt_escargots.rds") %>%
+    mutate(abondance = as.numeric(abondance)) 
+
+colnames(dt_escargots_brut)
+```
+
+### dt_qubs_brut = données brutes
+
+récupération des années à partir des colonnes de dates des protocoles
+
+bind des 4 protocoles précédents avec les colonnes communes
+
+```{r import des donnees qubs de la BD MOSAIC}
+ 
+#identifier les champs communs aux differents dataframe
+champs_communs <- Reduce(intersect, list(colnames(dt_aspifaune_brut),
+                                         colnames(dt_noctambules_brut),
+                                         colnames(dt_escargots_brut),
+                                         colnames(dt_vers_brut)))
+#rbind des donnees des 3 protocoles
+dt_qubs <- rbind(dt_aspifaune_brut %>% select(all_of(champs_communs)),
+                 dt_noctambules_brut %>% select(all_of(champs_communs)),
+                 dt_escargots_brut %>% select(all_of(champs_communs)),
+                 dt_vers_brut %>% select(all_of(champs_communs)))
+
+# Ajouter la taxonomie et les regroupements d'especes --> BD EXTERNE
+taxo <- data.table::fread(here::here("data", "thesaurus_V1V2.csv")) %>% 
+  select(`Nom français V1`, `Regroupement2a`, `Regroupement2b`, `Regroupement3`)
+colnames(taxo) <- c("taxon", "Regroupement2a", "Regroupement2b", "Regroupement3")
+
+dt_qubs_brut <- dt_qubs %>% left_join(taxo, by = "taxon") 
+
+```
+
+### dt_qubs_tot = filtre et formatage sur les donnees brutes
+
+```{r modification de la BD qubs}
+dt_qubs_tot = dt_qubs_brut %>%
+  # rename(year = date) %>% # s'appelle déjà year
+  mutate(abondance = as.numeric(abondance)) %>%
+  #on ajoute les infos manquantes pour la colonne abondance
+  mutate(abondance = case_when(presence_organisme == 1 & is.na(abondance) ~ 1, 
+                               TRUE ~ abondance)) 
+
+DT::datatable(head(dt_qubs_tot))
+```
+
+### coord_qubs_national = df qubs spatialise
+
+On récupère un point par session qubs et on produit df_qubs_spatial, une table avec les coordonnées des sessions qubs.
+
+```{r df qubs spatialise}
+coord_qubs_national <- dt_qubs_tot %>%
+  mutate(longitude = as.numeric(longitude), latitude = as.numeric(latitude)) %>% 
+  st_as_sf(coords = c("longitude", "latitude"), crs = 4326)  %>% # on passe tout en format sf, projection WGS 84
+  st_join(france, left = F) %>%
+  select(session_id,  protocole) %>%
+  unique()
+
+```
+
+### dt_protoc_oso = couverture du sol
+
+Cette table de données permet d'avoir pour chaque session de la BD qubs les types de couverture du sol dans un rayon de 1km. La BD oso est un raster public distingant 23 catégories de couverture du sol, qui sont qu'il est possible d'agglomérer pour simplifier l'information. Ainsi, ces catégories sont groupées en imperméable, agricole, semi-naturelle, abbrévié respectivement im, ag, sn.
+
+![](image/oso_diagramme_couverture.png){fig-align="center" width="100%"}
+
+```{r child avec methode de calcul de la couverture du sol}
+knitr::knit_child("maquette_V2_child_couverture_sol_qubs.qmd", quiet = TRUE) %>%
+   knitr::asis_output()
+
+```
+
+## df_qubs_VA = sessions du Village des athlètes
 
 **Plaine Nature**
+
+Récupérations des sessions pour le site du Village des athlètes.
+
+N.B. : df_qubs_VA & df_qubs_VM sont des df temporaires pour VA et VM, ne contiennent pas les référentiels choisis pour les sessions, donc ces df ne peuvent pas servir au calcul des indicateurs nécessitant un référentiel. Utiliser à la place dt_VA & dt_VM. Simple récupération des sessions locales.
 
 ```{r jointure emprise SOLIDEO et VA}
 # df_qubs_VA = coord_qubs_national %>%
@@ -201,7 +221,7 @@ actuellement pas de transects sur les sites SOLIDEO donc les 2 tables de donnée
 
 ```
 
-Comme il n'y a pas encore de transect sur les sites SOLIDEO, ceux-ci viennent combler le manque pour faire un test.
+Comme il n'y a pas encore de session sur les sites SOLIDEO, ceux-ci viennent combler le manque pour faire un test.
 
 ```{r donnee de remplacement VA}
 df_qubs_VA = dt_qubs_tot %>% 
@@ -210,11 +230,13 @@ df_qubs_VA = dt_qubs_tot %>%
 
 ```
 
-## df_qubs_VM = transects du Village des Medias et releves
+## df_qubs_VM = sessions du Village des Medias
 
 **1001 voisins**
 
-actuellement pas de transects sur les sites SOLIDEO donc les 2 tables de données transect\_... sont vides.
+Récupérations des sessions pour le site de 1001 Voisins.
+
+N.B. : df_qubs_VA & df_qubs_VM sont des df temporaires pour VA et VM, ne contiennent pas les référentiels choisis pour les sessions, donc ces df ne peuvent pas servir au calcul des indicateurs nécessitant un référentiel. Utiliser à la place dt_VA & dt_VM. Simple récupération des sessions locales.
 
 ```{r jointure emprise SOLIDEO et VM}
 # df_qubs_VM = coord_qubs_national %>%
@@ -225,7 +247,7 @@ actuellement pas de transects sur les sites SOLIDEO donc les 2 tables de donnée
 
 ```
 
-Comme il n'y a pas encore de transect sur les sites SOLIDEO, ceux-ci viennent combler le manque pour faire un test.
+Comme il n'y a pas encore de session sur les sites SOLIDEO, ceux-ci viennent combler le manque pour faire un test.
 
 ```{r donnee de remplacement VM}
 
@@ -237,9 +259,39 @@ df_qubs_VM = dt_qubs_tot %>%
 
 # CALCUL DU REFERENTIEL
 
+Après avoir récupéré les données nécessaires, on calcule de façon automatisée le référentiel pour les sessions locales.
+
+Le référentiel correspond à l'ensemble des sessions "comparables" aux sessions locales. Ce sont des sessions pour lesquelles il va faire sens de comparer les valeurs des indicateurs obtenues à l'échelle des sites solideo avec la valeur des indicateurs calculés pour ces sessions.
+
+Pour construire ces référentiels il faut sélectionner les sessions adéquates. Cette sélection se base sur plusieurs critères dans le cas de qubs :
+
+-   habitats qubs
+
+-   taux d'imperméabilisation : +- 15% de celui du site considéré (VA ou VM)
+
+-   région écologique : biogéorégion
+
+-   échelle administrative locale : Métropole du Grand Paris et pour les sessions réalisées sur le site du Village des Athlètes, l'emprise de Plaine Commune est considérée comme un référentiel potentiel
+
+Ces critères sont classés par ordre d'impact sur les communautés de plantes observées.
+
+Ainsi, l'ordre de priorité des critères est celui-ci :
+
+**habitat** \> **taux d'imperméabilisation** \> **région écologique** (biogéorégion) \> **région admninistrative** (MGP \> Plaineco)
+
+En combinant ces critères on obtient plusieurs référentiels possibles et ils sont classés par ordre de priorité grâce à un score :
+
+![](image/ordre_de_priorite_referentiels.png){fig-align="center" width="70%"} *tableau 1 : critères de formation des référentiels et combinaisons possibles, ainsi que leur score de priorité.*
+
 ## 1\_ table de données pour construire les referentiels
 
-### dt_qubs_tot_valide
+Un jeu de données est nécessaire au calcul des référentiels :
+
+-   dt_ref_national : jeu de données qubs nettoyé, regroupe les sessions susceptibles de former un référentiel.
+
+-   dt_qubs_mgp : données qubs dans la metropole du grand paris
+
+### dt_ref_national : données de référence
 
 **sessions valides**
 
@@ -248,7 +300,6 @@ df_qubs_VM = dt_qubs_tot %>%
 func_sessions_valides  = function(datafr) {
   dt_tot_valide = datafr %>% filter(taxon_valide == 1)
   
-
 # sessions vides
 dt_vide = datafr %>% filter(is.na(observation_id)) %>%
   mutate(abondance = 0)
@@ -265,47 +316,9 @@ dt_qubs_tot_valide = func_sessions_valides(dt_qubs_tot)
 
 ```
 
-<!-- **dt_aspifaune_valide** -->
+**filtre sur les outliers richesse et abondance**
 
-<!-- ```{r} -->
-<!-- dt_aspifaune_valide = dt_qubs_tot_valide %>%  -->
-<!--   filter(protocole == "Aspifaune") %>%  -->
-<!--   select(session_id, observation_id) %>% -->
-<!--   left_join(dt_aspifaune_brut) -->
-
-<!-- ``` -->
-
-<!-- **dt_noctambules_valide** -->
-
-<!-- ```{r} -->
-<!-- dt_noctambules_valide = dt_qubs_tot_valide %>%  -->
-<!--   filter(protocole == "Noctambules") %>%  -->
-<!--   select(session_id, observation_id) %>% -->
-<!--   left_join(dt_noctambules_brut) -->
-
-<!-- ``` -->
-
-<!-- **dt_vers_valide** -->
-
-<!-- ```{r} -->
-<!-- dt_vers_valide = dt_qubs_tot_valide %>%  -->
-<!--   filter(protocole == "En quête de vers") %>%  -->
-<!--   select(session_id, observation_id) %>% -->
-<!--   left_join(dt_vers_brut) -->
-
-<!-- ``` -->
-
-<!-- **dt escargots_valide** -->
-
-<!-- ```{r} -->
-<!-- dt_escargots_valide = dt_qubs_tot_valide %>%  -->
-<!--   filter(protocole == "Opération escargots") %>%  -->
-<!--   select(session_id, observation_id) %>% -->
-<!--   left_join(dt_escargots_brut) -->
-<!-- ``` -->
-
-### filtre sur les outliers richesse et abondance
-**richesse en espèces & abondance**
+filtre sur les outliers de richesse en espèces par session en calculant le range interquartile et en appliquant un facteur k = 3 pour le calcul des seuils de outliers (on garde les données de richesse comprises dans l'intervalle \[ q\[1\] - k \* iqr ; q\[2\] + k \* iqr\], avec iqr = range interquartile, q\[1\] le premier quartile, q\[2\] le 3e quartile).
 
 ```{r clean richesse et abondance}
 temp = dt_qubs_tot_valide %>%
@@ -320,11 +333,11 @@ temp = dt_qubs_tot_valide %>%
          abondance_session = case_when(is.na(abondance_session) ~ 0, 
                                TRUE ~ abondance_session))
 
-ggplot(temp, aes(y = abondance_session, x = protocole)) +
-  geom_boxplot()
-
-ggplot(temp, aes(y = richesse, x = protocole)) +
-  geom_boxplot()
+# ggplot(temp, aes(y = abondance_session, x = protocole)) +
+#   geom_boxplot()
+# 
+# ggplot(temp, aes(y = richesse, x = protocole)) +
+#   geom_boxplot()
 
 
 
@@ -338,7 +351,7 @@ ggplot(temp, aes(y = richesse, x = protocole)) +
 #' @param indicateur colonne "richesse" ou "abondance_session" de temp
 #'
 
-iqr_fences <- function(x = temp, k = 3, indicateur = NULL) {
+iqr_fences <- function(x = temp, k = 1.5, indicateur = NULL) {
   
   protocoles = x %>% pull(protocole) %>% unique()
   
@@ -386,6 +399,7 @@ dt_ref_national_temp <- temp %>%
 
 ```
 
+#### Sessions de référence par protocole
 
 **dt_aspifaune_ref**
 
@@ -426,9 +440,6 @@ dt_escargots_ref = dt_ref_national_temp %>%
   left_join(dt_escargots_brut)
 ```
 
-
-### dt_ref_national : données de référence
-
 **phenologie de participation par protocole**
 
 3 périodes basé sur l'OPVT qui propose des suivis de janvier à avril :
@@ -447,46 +458,41 @@ dt_escargot_periode = dt_escargots_ref %>%
   as.data.frame() %>%
   select(session_id, observation_id, mois, protocole) %>%
   distinct()%>%
-  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
-                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
-                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "10", "11", "12") ~ "hiver",
+                    mois %in% c("4", "5", "6", "7", "8", "9" ) ~ "ete"))
 
 dt_aspifaune_periode = dt_aspifaune_ref %>%
   mutate(mois = as.character(month(date_debut))) %>%
   as.data.frame() %>%
   select(session_id, observation_id, mois, protocole) %>%
   distinct() %>%
-  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
-                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
-                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "10", "11", "12") ~ "hiver",
+                    mois %in% c("4", "5", "6", "7", "8", "9" ) ~ "ete"))
 
 dt_vers_periode = dt_vers_ref %>%
   mutate(mois = as.character(month(date_debut))) %>%
   as.data.frame() %>%
   select(session_id, observation_id, mois, protocole) %>%
   distinct() %>%
-  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
-                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
-                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "10", "11", "12") ~ "hiver",
+                    mois %in% c("4", "5", "6", "7", "8", "9" ) ~ "ete"))
 
 dt_noctambules_periode = dt_noctambules_ref %>%
   mutate(mois = as.character(month(date_debut))) %>%
   as.data.frame() %>%
   select(session_id, observation_id, mois, protocole) %>%
   distinct() %>%
-  mutate(periode = case_when(mois %in% c("1", "2", "3", "4") ~ "jan-avr",
-                    mois %in% c("5", "6", "7", "8", "9") ~ "mai_sept",
-                    mois %in% c("10", "11", "12" ) ~ "oct_dec"))
+  mutate(periode = case_when(mois %in% c("1", "2", "3", "10", "11", "12") ~ "hiver",
+                    mois %in% c("4", "5", "6", "7", "8", "9" ) ~ "ete"))
 
 ```
-
-
 
 ```{r}
 dt_ref_national = dt_vers_periode %>% 
   bind_rows(dt_escargot_periode) %>% 
   bind_rows(dt_aspifaune_periode) %>% 
-  bind_rows(dt_noctambules_periode) 
+  bind_rows(dt_noctambules_periode) %>% 
+  left_join(dt_qubs_tot)
 
 
 
@@ -496,8 +502,10 @@ dt_ref_national = dt_vers_periode %>%
  
 ```
 
-
 ### dt_qubs_mgp
+
+Sessions qubs qui se trouvent dans l'emprise de la MGP
+
 ```{r}
 
 dt_qubs_mgp = coord_qubs_national %>%
@@ -508,17 +516,19 @@ dt_qubs_mgp = coord_qubs_national %>%
 
 ```
 
+## 2\_ boucle de calcul
 
+Une boucle de calcul permet de combiner les critères saison, protocole et paysage local/couverture du sol pour former les référentiels **potentiels**.
 
+Les rangs hiérarchiques associés à chaque filtre vont du plus fin (chiffre le plus petit) au moins fin (chiffre le plus grand).
 
-## 2\_ referentiels potentiels
+![](image/ordre_de_priorite_referentiels.png){fig-align="center" width="70%"}
+
+**IMPORTANT** : Cette fonction permet d'associer un referentiel à tous les sites et toutes les sessions, **mêmes ceux qui sont filtrés au moment de la constitution de dt_ref_national**. Par la suite, dans le choix du référentiel pour les sites SOLIDEO, on calcule la taille et le poids des données dans les référentiels qui sont concernées en ne considérant que les sessions et sites de dt_ref_national.
 
 Le référentiel qubs prend en compte ces critères, ordonnés de façon hierarchique
 
--   couverture du sol à l'emplacement du point
--   saisonnalité avec couverture sol \> periode
-
-![](data/tableau_referentiels_qubs.png){fig-align="center" width="70%"}
+couverture sol \> periode
 
 Les rangs hierarchiques associés à chaque filtre vont du plus fin (1) au moins fin (chiffre le plus grand).
 
@@ -526,10 +536,10 @@ Les rangs hierarchiques associés à chaque filtre vont du plus fin (1) au moins
 dt_ref_recap = dt_ref_national %>%
   left_join(dt_protoc_oso) %>%
   left_join(dt_qubs_mgp) %>% 
-  select(protocole, session_id, observation_id, regroupement, periode, mgp ) %>%
-  mutate(combi_couvsol_saison_mgp = paste0("1", regroupement, "---", periode, "---", mgp),
-         combi_couvsol_saison = paste0("2", regroupement, "---", periode),
-         combi_couvsol = paste0("3", regroupement),
+  select(protocole, session_id, observation_id, paysage_local, periode, mgp ) %>%
+  mutate(combi_couvsol_saison_mgp = paste0("1", paysage_local, "---", periode, "---", mgp),
+         combi_couvsol_saison = paste0("2", paysage_local, "---", periode),
+         combi_couvsol = paste0("3", paysage_local),
          combi_no_ref = "4no_ref") %>%
   pivot_longer(cols = starts_with("combi"),
                names_to = "critere",
@@ -549,13 +559,26 @@ dt_ref_recap = dt_ref_national %>%
 
 ```
 
+## 3\_ Conditions et selections
 
-## 3_ dt_VA & dt_VM : df locaux et référentiels choisis
-Selection des referentiels retenus par protocole et sessions locales Le référentiel doit faire au moins 30 sessions pour être retenu le poids des données locales dans le référentiel ne doit pas excéder 50%
+On cherche à sélectionner un référentiel par (groupe de) session(s) locale(s) (rattachées au même référentiel) parmi tous les référentiels qui leur sont liés. La sélection des référentiels se base sur 3 critères :
+
+-   il faut que le poids des sessions locales rattachées à ce référentiel n'excède pas 20 % (nb de sessions locales rattachées à ce ref / nb de sessions constituant le référentiel \< 0.2)
+
+-   La taille du référentiel doit être supérieure ou égale à 30 sessions
+
+-   Tenant compte des deux critères précédent, le score de finesse du référentiel doit être minimal.
+
+Ainsi, pour un site avec plusieurs sessions, on se retrouve potentiellement avec plusieurs référentiels.
+
+A VERIFIER §§§§§§§§§§§§§§§§§ Le tableau montre les sessions réalisées sur le site, les référentiels auxquelles elles sont comparées et il reste les colonnes des 3 critères de décision (n = le nombre de sessions constituant le référentiel, finesse = score de finesse du référentiel et poids = le poids des données locales rattachées au référentiel dans le référentiel considéré).
+
+### dt_VA & dt_VM : df locaux et référentiels choisis
+
+A l'issue de cette selection on a les tables contenant les données produites sur les sites (dt_VA et dt_VM) et les référentiels choisis pour les sessions des sites.
 
 ```{r boucle calcul referentiel}
 
-#'
 #' @param dt_qubs_site df contenant les informations sur les sessions du site
 #'
 #' @returns un df contenant les informations sur les sessions locales et les référentiels choisis pour ces sessions
@@ -571,13 +594,15 @@ fun_calcul_ref_choisi = function(dt_qubs_site) {
   ungroup() %>%
   mutate(poids = nb_session_local / nb_session)
   
-
+# "red"  quid des sessions avec pas de référentiel ?
+  
+  
 dt_ref_choisi = poids_donnees %>%
   # on ne garde que les référentiels de plus de 30 sessions
   filter(nb_session > 29) %>%
   
   # on ne considère que les référentiels pour lesquels le poids des données locales ne dépassent pas 50% (en nombre de sessions)
-  filter(poids < 0.5) %>%
+  filter(poids < 0.2) %>%
   group_by(session_id, protocole) %>%
   
   # on considère les référentiels par ordre de priorité
@@ -591,6 +616,7 @@ dt_ref_choisi = poids_donnees %>%
 dt_ref_final = dt_ref_choisi %>%
   left_join(poids_donnees) %>%
   left_join(dt_ref_national) %>% 
+  left_join(dt_qubs_tot %>% select(observation_id, protocole, Regroupement2b) %>% unique()) %>%
   select(-ref_lies) %>%
   unique() 
 
@@ -601,8 +627,13 @@ dt_ref_final = dt_ref_choisi %>%
 dt_VA = fun_calcul_ref_choisi(dt_qubs_site = df_qubs_VA)
 dt_VM = fun_calcul_ref_choisi(dt_qubs_site = df_qubs_VM)
 
+DT::datatable(head(dt_VA))
 ```
-## 4_selection : dt_ref_VA & dt_ref_VM
+
+### dt_ref_VA & dt_ref_VM
+
+Constitution finale des tables dt_ref_VA et dt_ref_VM qui regroupent toutes les sessions comprises dans les référentiels associés aux sessions des 2 sites.
+
 ```{r constitution des df de reference pour les sessions locales}
 
 func_df_ref = function(dt_qubs_site) {
@@ -631,25 +662,251 @@ dt_ref_VA = func_df_ref(dt_qubs_site = df_qubs_VA)
 dt_ref_VM = func_df_ref(dt_qubs_site = df_qubs_VM)
 
 
+DT::datatable(head(dt_ref_VA))
+
+```
+
+#INDICATEURS DE PRESSION QUBS - exploration des données
+
+## habitat
+**richesse**
+```{r}
+dt_habitat = dt_aspifaune_ref %>%
+  bind_rows(dt_noctambules_ref) %>%
+  bind_rows(dt_escargots_ref) %>%
+  bind_rows(dt_vers_ref) %>%
+  group_by(session_id) %>%
+  mutate(richesse = n_distinct(taxon)) %>% 
+  ungroup() %>%
+  mutate(abondance = case_when(is.na(abondance) ~ 0, TRUE ~ abondance)) %>%
+  left_join(dt_protoc_oso %>% select(session_id, paysage_local)) %>%
+  select(protocole,
+         vegetations,
+         session_id,
+         couvertures_sol,
+         paysage_local,
+         abondance,
+         richesse) %>% #zone_cultivee site_typevegetations, residus_vegetaux,
+  unique()
+
+
+a = dt_habitat %>%
+  # mutate(strate = case_when(str_detect(vegetations, "potag") | str_detect(vegetations, "ornement")  ~ "jardine",
+  #                           str_detect(vegetations, "arbre")  |  str_detect(vegetations, "arbuste")  ~ "arbore - arbustif",
+  #                           str_detect(vegetations, "gazon") | str_detect(vegetations, "herbac")   ~ "herbacee",
+  #                           TRUE~ NA_character_)) %>%
+  mutate(
+    couv_col_simpl = case_when(
+      # couvertures_sol == "sol nu"  ~ "sol_nu",
+      # couvertures_sol == "plantes"  ~ "plantes",
+      str_detect(couvertures_sol, "residus")  ~ "residus",
+      str_detect(couvertures_sol, "plantes")  ~ "plantes",
+      str_detect(couvertures_sol, "sol nu")  ~ "sol_nu",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  mutate(combi = paste0(couv_col_simpl, " ", str_sub(paysage_local, 11))) %>%
+  mutate(combi2 = paste0(str_sub(protocole, 1, 3), " ", str_sub(paysage_local, -6, -1))) %>%
+  group_by(session_id) %>% mutate(abondance = sum(abondance)) %>%
+  ungroup() %>%
+  unique()
+
+
+a_aspifaune = a %>%
+  na.omit() %>%
+  filter(protocole == "Aspifaune") 
+  # group_by(paysage_local, couv_col_simpl) %>%
+  # mutate(nb_session = n_distinct(session_id)) %>%
+  # ungroup() %>%
+  # filter(nb_session > 9)
+
+a_noctambules = a %>%
+  na.omit() %>%
+  filter(protocole == "Noctambules")
+  # group_by(paysage_local, couv_col_simpl) %>%
+  # mutate(nb_session = n_distinct(session_id)) %>%
+  # ungroup() %>%
+  # filter(nb_session > 9)
+
+a_vers = a %>%
+  na.omit() %>%
+  filter(protocole == "En quête de vers")
+  # group_by(paysage_local, couv_col_simpl) %>%
+  # mutate(nb_session = n_distinct(session_id)) %>%
+  # ungroup() %>%
+  # filter(nb_session > 9)
+
+a_escargots = a %>%
+  na.omit() %>%
+  filter(protocole == "Opération escargots")
+  # group_by(paysage_local, couv_col_simpl) %>%
+  # mutate(nb_session = n_distinct(session_id)) %>%
+  # ungroup() %>%
+  # filter(nb_session > 9)
+#
+```
+
+**abondance**
+```{r}
+ggplot(a_aspifaune , aes(x = couv_col_simpl, y = abondance)) +
+  geom_boxplot(aes(color = couv_col_simpl)) +
+  # facet_wrap( ~ paysage_local) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(x = "", 
+         title = "aspifaune")
+
+# ggplot(a_escargots , aes(x = couv_col_simpl, y = abondance)) +
+#   geom_boxplot(aes(color = couv_col_simpl)) +
+#   facet_wrap( ~ paysage_local) +
+#   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+#   labs(x = "")
+
+ggplot(a_noctambules , aes(x = couv_col_simpl, y = abondance)) +
+  geom_boxplot(aes(color = couv_col_simpl)) +
+  # facet_wrap( ~ paysage_local) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(x = "", 
+       title = "noctambules")
+
+ggplot(a_vers , aes(x = couv_col_simpl, y = abondance)) +
+  geom_boxplot(aes(color = couv_col_simpl)) +
+  # facet_wrap( ~ paysage_local) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(x = "", 
+       title = "vers")
+```
+
+```{r}
+ggplot(a_aspifaune , aes(x = couv_col_simpl, y = richesse)) +
+  geom_violin(aes(color = couv_col_simpl)) +
+  # facet_wrap( ~ paysage_local) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(x = "", 
+         title = "aspifaune")
+
+# ggplot(a_escargots , aes(x = couv_col_simpl, y = abondance)) +
+#   geom_boxplot(aes(color = couv_col_simpl)) +
+#   facet_wrap( ~ paysage_local) +
+#   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+#   labs(x = "")
+
+ggplot(a_noctambules , aes(x = couv_col_simpl, y = richesse)) +
+  geom_violin(aes(color = couv_col_simpl)) +
+  # facet_wrap( ~ paysage_local) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(x = "", 
+       title = "noctambules")
+
+ggplot(a_vers , aes(x = couv_col_simpl, y = richesse)) +
+  geom_violin(aes(color = couv_col_simpl)) +
+  # facet_wrap( ~ paysage_local) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(x = "", 
+       title = "vers")
+
+
+ggplot(a , aes(x = couv_col_simpl, y = richesse)) +
+  geom_violin(aes(color = couv_col_simpl)) +
+  # facet_wrap( ~ paysage_local) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(x = "", 
+       title = "vers")
+```
+
+```{r}
+# ggplot(a  , aes(x = paysage_local, y = richesse)) +
+#   geom_boxplot() +
+#   facet_wrap( ~ protocole) +
+#   theme(axis.text.x = element_text(angle = 20, hjust = 1)) +
+#   labs(x = "") + coord_flip()
+# 
+# ggplot(a , aes(x = paysage_local, y = abondance)) +
+#   geom_boxplot() +
+#   facet_wrap( ~ protocole) +
+#   theme(axis.text.x = element_text(angle = 20, hjust = 1)) +
+#   labs(x = "") + coord_flip()
+# 
+# ggplot(a %>% filter(!is.na(paysage_local)), aes(x = paysage_local)) +
+#   geom_bar(stat = "count") +
+#   facet_wrap( ~ protocole) +
+#   theme(axis.text.x = element_text(angle = 20, hjust = 1)) +
+#   labs(x = "") + coord_flip()
+# 
+# 
+# 
+#  ggplot(a %>% na.omit(), aes(x = combi)) +
+#   geom_bar(stat = "count", aes(fill = paysage_local, color = couv_col_simpl)) +
+#   facet_wrap( ~ protocole) +
+#   theme_minimal()+
+#   theme(axis.text.x = element_text(angle = 50, hjust = 1)) +
+#   scale_color_manual(values = c("plantes" = "darkgreen",
+#                                 "residus" = "brown",
+#                                 "sol_nu" = "black")) +
+#   scale_fill_manual(values = c("dominance_agricole" = "beige",
+#                                 "dominance_impermeable" = "lightgrey",
+#                                 "dominance_foret" = "lightgreen")) +
+#   labs(title = "sessions de référence")
+# 
+# 
+
+
 ```
 
 
 
-#INDICATEURS DE PRESSION QUBS - exploration des données
+#### test ambiance
 
-## Gestion 
+```{r}
+dt_ambiance = dt_habitat %>%
+  mutate(strate = case_when(str_detect(vegetations, "potag") | str_detect(vegetations, "ornement")  ~ "jardine",
+                            str_detect(vegetations, "arbre")  |  str_detect(vegetations, "arbuste")  ~ "arbore - arbustif",
+                            str_detect(vegetations, "gazon") | str_detect(vegetations, "herbac")   ~ "herbacee",
+                            TRUE~ NA_character_)) %>%
+  mutate(
+    couv_col_simpl = case_when(
+      str_detect(couvertures_sol, "residus")  ~ "residus",
+      str_detect(couvertures_sol, "plantes")  ~ "plantes",
+      str_detect(couvertures_sol, "sol nu")  ~ "sol_nu",
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  mutate(combi = paste0(couv_col_simpl, " ", strate)) %>%
+  group_by(session_id) %>% 
+  mutate(abondance = sum(abondance)) %>%
+  ungroup() %>%
+  unique()# %>%
+  # mutate(ambiance = case_when(str_detect(vegetations, "potag") | str_detect(vegetations, "ornement")  ~ "jardin potager",
+  #                             str_detect(paysage_local, "impermeable")   ~ "jardin urbain", 
+  #                           (str_detect(vegetations, "arbre")  |  str_detect(vegetations, "arbuste")) & str_detect(paysage_local, "foret") ~ "foret",
+  #                           str_detect(vegetations, "gazon") | str_detect(vegetations, "herbac")    ~ "herbacee", 
+  #                           str_detect(paysage_local, "agricole") ~ "agricole",
+  #                           TRUE~ NA_character_))
+
+ggplot(dt_ambiance, aes(x = couv_col_simpl)) +
+  geom_bar(stat = "count")
+
+ggplot(dt_ambiance, aes(x = paysage_local)) +
+  geom_bar(stat = "count")
+
+# ggplot(dt_ambiance, aes(x = ambiance)) +
+#   geom_bar(stat = "count")
+
+```
+
+
+
+## Gestion
 
 Creation d'une table qubs regroupant les données de gestion des protocoles
+
 ```{r}
 dt_qubs_gestion = dt_aspifaune_ref %>%
   bind_rows(dt_noctambules_ref) %>%
   bind_rows(dt_escargots_ref) %>%
   bind_rows(dt_vers_ref) %>%
-  select(-observation_id, -participant_id, -participation_nom, -participant_nom, - mission_id, - latitude, -longitude, -site_code_postale, -date_debut, -heure_debut, -starts_with("url"), -taxon, -taxon_valide, -abondance, -commentaires_collecte, -heure_pose_gobelet, -heure_releve, -starts_with("abri"), - categorie_taxon, -autres_especes, - heure_collecte, -profondeur, -incomptable, -mission_nom, -site_id, -starts_with("taxon")) %>% 
+  select(-observation_id, -participant_id, -participation_nom, -participant_nom, - mission_id, - latitude, -longitude, -site_code_postale, -date_debut, -heure_debut, -starts_with("url"), -taxon, -taxon_valide, -abondance, -commentaires_collecte, -heure_pose_gobelet, -heure_releve, -starts_with("abri"), - categorie_taxon, -autres_especes, - heure_collecte, -profondeur, -incomptable, -mission_nom,  -starts_with("taxon")) %>% 
   unique()
 ```
-
-
 
 Regrouper les données selon de nouvelles catégories de pression.
 
@@ -659,15 +916,83 @@ Regrouper les données selon de nouvelles catégories de pression.
 colnames(dt_qubs_gestion)
 ```
 
+
+
+### composition du site
+
+#### score de naturalité
+```{r}
+
+score_naturalite <- dt_ref_national %>%
+  select(site_id, site_compositions, protocole) %>%
+  distinct() %>%
+  mutate(
+    nb_elements = 
+      str_detect(site_compositions, "espace peu ou pas entretenu \\(friche, espace naturel\\)") +
+      str_detect(site_compositions, "zone avec des ronces") +
+      str_detect(site_compositions, "zone avec des orties"),
+    
+    score_nat = case_when(
+      str_detect(site_compositions, "espace peu ou pas entretenu \\(friche, espace naturel\\)") ~ 3,
+      nb_elements >= 3 ~ 3,
+      nb_elements == 2 ~ 2,
+      nb_elements == 1 ~ 1,
+      TRUE ~ 0
+    )
+  ) %>%
+  select(-nb_elements)
+
+
+ggplot(score_naturalite, aes(x = score_nat, fill = protocole)) +
+  geom_bar(stat = "count", width = 0.5) +
+  facet_wrap(vars(protocole)) +
+  theme(legend.position = "none") +
+  theme_minimal() +
+  labs(x = "score de naturalité",
+       y = "nb de sites")
+
+
+
+```
+
+
+
+#### score de microhabitats
+```{r}
+
+score_microhabitat <- dt_ref_national %>%
+  select(site_id, site_compositions, protocole) %>%
+  distinct() %>%
+  mutate(
+    score_microhab = 
+      str_detect(site_compositions, "compost") +
+      str_detect(site_compositions, "souche") +
+      str_detect(site_compositions, "tas de bois")+
+      str_detect(site_compositions, "tas de cailloux"),
+  ) 
+
+
+ggplot(score_microhabitat, aes(x = score_microhab, fill = protocole)) +
+  geom_bar(stat = "count", width = 0.5) +
+  facet_wrap(vars(protocole)) +
+  theme(legend.position = "none") +
+  theme_minimal() +
+  labs(x = "score de microhabitats",
+       y = "nb de sites")
+
+
+
+```
+
 ### travail superficiel et travail du sol
 
-j'ai enlevé l'information fauche et paturage --> comment gerer - à intégrer ailleurs
+j'ai enlevé l'information fauche et paturage --\> comment gerer - à intégrer ailleurs
 
 Création d'une colonne 'amendement' et d'une colonne 'travail_sol' à partir des données de la colonne 'site_techniques_entretien'
 
 ```{r}
 dt_techniques_entretien = dt_qubs_gestion %>%
-  select(session_id, site_techniques_entretien, protocole) %>%
+  select(site_id, site_techniques_entretien, protocole, year) %>%
   unique() %>%
   mutate(
     amendement = str_extract(site_techniques_entretien, fixed("engrais organiques (compost, fumier)")), # la virgule dans la chaine de charactere est compliquee à gérer
@@ -676,57 +1001,112 @@ dt_techniques_entretien = dt_qubs_gestion %>%
   mutate(amend = str_split(site_techniques_entretien, ", ")) %>%
   unnest(amend) %>%
   pivot_longer(cols = c(amendement, amend),
-               values_to = "travail_superficiel") %>%
-  select(session_id, travail_superficiel, protocole) %>%
+               values_to = "entretien") %>%
+  select(site_id, entretien, protocole, year) %>%
   unique() %>%
   na.omit() %>%
-  filter(travail_superficiel != "") %>%
+  filter(entretien != "") %>%
   # colonne travail du sol
-  mutate(travail_sol = case_when(travail_superficiel %in% c("aucune de ces pratiques", 
+  mutate(modif_physique_sol = case_when(entretien %in% c("aucune de ces pratiques", 
                                                    "je ne sais pas", 
                                                    "travail superficiel du sol (aeration sans retournement)",
                                                    "travail profond du sol (avec retournement)", 
-                                                   "autre") ~ travail_superficiel, 
+                                                   "fauche ou tonte tardive",
+                                                   "paillis vegetal",
+                                                   "paturage",
+                                                   "autre") ~ entretien, 
                                  TRUE ~ NA),
-         travail_superficiel = case_when(travail_superficiel %in% c("aucune de ces pratiques", 
+         modif_chimique_sol = case_when(entretien %in% c("aucune de ces pratiques", 
                                                    "je ne sais pas", 
-                                                   "travail superficiel du sol (aeration sans retournement)",
-                                                   "travail profond du sol (avec retournement)", 
-                                                   "autre" ) ~ NA, 
-                                 TRUE ~ travail_superficiel)) # creation de 2 colonnes que l'on subdivise en 2 df par la suite
+                                                   "engrais organiques (compost, fumier)",
+                                                   "engrais chimiques \\/ de synthese", 
+                                                   "autre" ) ~ entretien, 
+                                 TRUE ~ NA)) # creation de 2 colonnes que l'on subdivise en 2 df par la suite
 
 
 
-dt_travail_superficiel = dt_techniques_entretien %>% select(-travail_sol) %>% na.omit() %>% unique()
-dt_travail_sol = dt_techniques_entretien %>% select(-travail_superficiel) %>% na.omit() %>% unique()
+dt_modif_physique_sol = dt_techniques_entretien %>%
+  select(-modif_chimique_sol, -entretien) %>%
+  unique() %>% 
+  group_by(year, site_id) %>%
+  mutate(nb_info = n_distinct(modif_physique_sol)) %>% 
+  ungroup() %>%
+  filter(!(is.na(modif_physique_sol) & nb_info > 1)) %>% 
+  select(-nb_info)
+
+
+dt_modif_chimique_sol = dt_techniques_entretien %>%
+  select(-modif_physique_sol, -entretien) %>%
+  unique() %>% 
+  group_by(year, site_id) %>%
+  mutate(nb_info = n_distinct(modif_chimique_sol)) %>% 
+  ungroup() %>%
+  filter(!(is.na(modif_chimique_sol) & nb_info > 1)) %>% 
+  select(-nb_info)
+
+
 ```
 
 
+
 ```{r}
-# quantité de données d'travail_superficiel 
-ggplot(dt_travail_superficiel, aes(fill = travail_superficiel, x = protocole)) +
+# quantité de données de travail_superficiel 
+ggplot(dt_modif_physique_sol, aes(fill = modif_physique_sol, x = protocole)) +
   geom_bar(stat = "count")+
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 20, hjust=1)) +
-  labs(title = "travail superficiel") 
+  labs(title = "modifications physiques du sol", 
+       y = "nb de sites") 
 
   # quantité de données d'amendement 
-ggplot(dt_travail_sol, aes(fill = travail_sol, x = protocole)) +
+ggplot(dt_modif_chimique_sol, aes(fill = modif_chimique_sol, x = protocole)) +
   geom_bar(stat = "count")+#, position = "dodge"
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 20, hjust=1)) +
-  labs(title = "travail du sol") 
+  labs(title = "travail du sol", 
+       y = "nb de sites") 
 
 
 
 ```
 
-### phyto
 
+```{r}
+
+score_travail_physique_sol = dt_modif_physique_sol %>%
+  group_by(site_id) %>%
+  mutate(score_travail_phy = case_when(n_distinct(modif_physique_sol) == 1 & is.na(modif_physique_sol) ~ NA,
+                                    modif_physique_sol == "je ne sais pas"  ~ NA,
+                                    modif_physique_sol == "aucune de ces pratiques"  ~ 0,
+                                    TRUE ~ n_distinct(modif_physique_sol))) %>%
+  mutate(score_travail_phy = as.character(score_travail_phy)) %>%
+  ggplot(aes(x = score_travail_phy)) +
+  geom_bar(stat="count", width = 0.5) +
+  theme_minimal() +
+  labs(y = "nb de sites",
+       x = "score travail sol")
+  
+score_travail_chimique_sol = dt_modif_chimique_sol %>%
+  group_by(site_id) %>%
+  mutate(score_travail_chi = case_when(n_distinct(modif_chimique_sol) == 1 & is.na(modif_chimique_sol) ~ NA,
+                                    modif_chimique_sol == "je ne sais pas"  ~ NA,
+                                    modif_chimique_sol == "aucune de ces pratiques"  ~ 0,
+                                    TRUE ~ n_distinct(modif_chimique_sol))) %>%
+  mutate(score_travail_chi = as.character(score_travail_chi)) %>%
+  ggplot(aes(x = score_travail_chi)) +
+  geom_bar(stat="count", width = 0.5) +
+  theme_minimal() +
+  labs(y = "nb de sites",
+       x = "score travail chimique sol")
+```
+
+
+
+### phyto
 
 ```{r}
 dt_phyto = dt_qubs_gestion %>%
-  select(session_id, site_produits_phyto, protocole) %>%
+  select(site_id, site_produits_phyto, protocole) %>%
   unique() %>%
   mutate(phyto = str_split(site_produits_phyto, ", ")) %>%
   unnest(phyto) 
@@ -735,7 +1115,7 @@ dt_phyto = dt_qubs_gestion %>%
 ```
 
 ```{r}
-  # quantité de données d'amendement 
+
 ggplot(dt_phyto, aes(fill = phyto, x = protocole)) +
   geom_bar(stat = "count")+#, position = "dodge"
   theme_minimal() +
@@ -743,6 +1123,34 @@ ggplot(dt_phyto, aes(fill = phyto, x = protocole)) +
   labs(title = "phyto") 
 
 ```
+
+**score**
+
+```{r}
+
+score_phyto = dt_ref_national %>%
+  select(protocole, site_id, site_produits_phyto) %>%
+  unique() %>%
+  mutate(score_phyto = case_when(site_produits_phyto %in% c(NA, "je ne sais pas") ~ NA,
+                                 str_detect(site_produits_phyto, "je ne sais pas") ~ NA,
+                                 str_detect(site_produits_phyto, "aucun de ces traitements") & str_count(site_produits_phyto, ",") == 0 ~ 0,
+                                 str_detect(site_produits_phyto, "aucun de ces traitements") & str_count(site_produits_phyto, ",") != 0 ~ 1,
+                                 TRUE ~ as.numeric(str_count(site_produits_phyto, ",")) + 1
+                                 ))
+
+
+ggplot(score_phyto, aes(x = score_phyto, fill = protocole)) +
+  geom_bar(stat = "count", width = 0.5) +
+  facet_wrap(vars(protocole)) +
+  theme(legend.position = "none") +
+  theme_minimal() +
+  labs(x = "nb de pduits phyto appliqués",
+       y = "nb de sites") +
+  theme(legend.position = "none")
+  
+
+```
+
 
 
 
@@ -757,6 +1165,3 @@ dt_descri_site = dt_qubs_gestion %>%
   unnest(phyto) 
 
 ```
-
-
-
