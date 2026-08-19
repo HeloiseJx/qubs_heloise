@@ -1468,7 +1468,7 @@ On considère la moyenne arrondie à la valeur supérieure des scores de microha
 fun_graph_score_microhab = function(dt_site, dt_ref, titre) {
   
   score_microhabitat_local = fun_microhabitat(dt_site) %>%
-    mutate(score_micro = ceiling(mean(score_microhab))) %>% # on calcule une moyenne des scores de naturalite obtenu sur le site et on arrondit à l'entier supérieur, ce qui permet d'objectifier la valeur et d'avoir quelque chose représentatif des relevés du site SOLIDEO
+    mutate(score_micro = ceiling(mean(score_microhab))) %>% # on calcule une moyenne des scores de microhabitats obtenus sur le site et on arrondit à l'entier supérieur, ce qui permet d'objectifier la valeur et d'avoir quelque chose représentatif des relevés du site SOLIDEO
     select(-score_microhab) %>%
     rename(score_microhab = score_micro) %>%
     slice_head(n = 1) # je récupère une unique ligne qui me permet d'avoir la valeur moyenne de score nat une seule fois dan s mon df pour le graphe suivant
@@ -1564,7 +1564,7 @@ fun_graph_travailsol = function(dt_site, dt_ref, titre) {
   
   dt_travailsol_local = fun_score_travail_sol(dt_site) %>%
     na.omit() %>%
-    mutate(score_sol = ceiling(mean(score_travail_sol))) %>% # on calcule une moyenne des scores de naturalite obtenu sur le site et on arrondit à l'entier supérieur, ce qui permet d'objectifier la valeur et d'avoir quelque chose représentatif des relevés du site SOLIDEO
+    mutate(score_sol = ceiling(mean(score_travail_sol))) %>% # on calcule une moyenne des scores de travail du sol obtenus sur le site et on arrondit à l'entier supérieur, ce qui permet d'objectifier la valeur et d'avoir quelque chose représentatif des relevés du site SOLIDEO
     select(-score_travail_sol) %>%
     rename(score_travail_sol = score_sol) %>%
     slice_head(n = 1) # je récupère une unique ligne qui me permet d'avoir la valeur moyenne du score une seule fois dans mon df pour le graphe suivant
@@ -1662,7 +1662,7 @@ fun_graph_amendement = function(dt_site, dt_ref, titre) {
   
   dt_amendement_local = fun_amendement(dt_site) %>%
     na.omit() %>%
-    mutate(score_sol = ceiling(mean(score_amendement))) %>% # on calcule une moyenne des scores de naturalite obtenu sur le site et on arrondit à l'entier supérieur, ce qui permet d'objectifier la valeur et d'avoir quelque chose représentatif des relevés du site SOLIDEO
+    mutate(score_sol = ceiling(mean(score_amendement))) %>% # on calcule une moyenne des scores d'amendement obtenus sur le site et on arrondit à l'entier supérieur, ce qui permet d'objectifier la valeur et d'avoir quelque chose représentatif des relevés du site SOLIDEO
     select(-score_amendement) %>%
     rename(score_amendement = score_sol) %>%
     slice_head(n = 1) # je récupère une unique ligne qui me permet d'avoir la valeur moyenne du score une seule fois dans mon df pour le graphe suivant
